@@ -1,0 +1,1936 @@
+annotations:
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: 'Internet: PROV-SRV1 + IX 192.0.2.192/26'
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 200.0
+    y1: -320.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: ISP-A AS 64601
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -200.0
+    y1: -300.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: ISP-B AS 64602
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 400.0
+    y1: -300.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: Veridian AS 65010 (HQ-EDGE1, HQ-EDGE2)
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 100.0
+    y1: -170.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: EDGE1-ISP1 198.51.100.64/31
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -250.0
+    y1: -170.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: EDGE2-ISP2 203.0.113.64/31
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 400.0
+    y1: -170.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: ISP1-ISP2 198.51.100.66/31
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 100.0
+    y1: -270.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: DMZ 10.10.60.0/24 (HSRP 60 VIP .1)
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 230.0
+    y1: 10.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: HQ-CORE1 stub (campus)
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 200.0
+    y1: 100.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: User LAN 10.10.10.0/24
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 200.0
+    y1: 200.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: Veridian DC (VRF MGMT) 10.50.50.0/24
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 650.0
+    y1: 260.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: Stub-DC 10.10.255.130/31 (global), 10.10.254.6/31 (MGMT)
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 250.0
+    y1: 150.0
+    z_index: 0
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname PROV-SRV1
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip address add 192.0.2.200/26 dev eth0
+          ip -6 address add 2001:db8:f001:200::200/64 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 192.0.2.193
+          ip -6 route add default via 2001:db8:f001:200::1
+          echo web-ok > /tmp/index.html
+          httpd -p 80 -h /tmp
+          ip address add 192.0.2.10/32 dev eth0
+          echo IyEvYmluL3NoCiMgUHJvdmlkZXItc2lkZSB0ZXN0IHRyYWZmaWMgYWdhaW5zdCBWZXJpZGlhbidzIGVkZ2UuIFJ1biBhcyB0aGUgY29uc29sZSB1c2VyLgojIHVzYWdlOiBob3N0aWxlLnNoIGZsb29kIHwgcHJvYmUgfCBzcG9vZiB8IHdlYiB8IGFsbApUPTE5OC41MS4xMDAuNjUKY2FzZSAiJDEiIGluCiAgZmxvb2QpIGVjaG8gIklDTVAgZmxvb2QgdG8gJFQgKDQwIHMpIjsgcGluZyAtcSAtaSAwLjAxIC1zIDEwMDAgLXcgNDAgJFQgOzsKICBwcm9iZSkgZm9yIHAgaW4gMjIgMjMgODAgMTc5IDQ0MzsgZG8gbmMgLXogLXcgMiAkVCAkcDsgZWNobyAidGNwLyRwIHJjPSQ/IjsgZG9uZSA7OwogIHNwb29mKSBlY2hvICJzcG9vZmVkIHNvdXJjZSAxOTIuMC4yLjEwIjsgcGluZyAtYyA1IC1JIDE5Mi4wLjIuMTAgJFQgOzsKICB3ZWIpICAgd2dldCAtcSAtTyAtIC1UIDUgaHR0cDovLzE5Mi4wLjIuMTMwLyAmJiBlY2hvICJ3ZWIgcmVxdWVzdCBvayIgOzsKICBhbGwpICAgIiQwIiBwcm9iZTsgIiQwIiBzcG9vZjsgIiQwIiB3ZWI7ICIkMCIgZmxvb2QgOzsKICAqKSAgICAgZWNobyAidXNhZ2U6IGhvc3RpbGUuc2ggZmxvb2R8cHJvYmV8c3Bvb2Z8d2VifGFsbCIgOzsKZXNhYwo= | base64 -d > /usr/local/bin/hostile.sh
+          chmod 755 /usr/local/bin/hostile.sh
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: PROV-SRV1
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 100
+    y: -350
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: IX
+    node_definition: unmanaged_switch
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 100
+    y: -250
+    interfaces:
+      - id: i0
+        label: port0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i1
+        label: port1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i2
+        label: port2
+        mac_address: null
+        type: physical
+        slot: 2
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          hostname PROV-ISP1
+          logging buffered 64000
+          no logging console
+          no aaa new-model
+          no ip domain lookup
+          ip domain name veridian.example
+          ip cef
+          login on-success log
+          ipv6 unicast-routing
+          ipv6 cef
+          spanning-tree mode rapid-pvst
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          interface Loopback0
+           ip address 198.51.100.1 255.255.255.255
+           ipv6 address 2001:DB8:F001::1/128
+          interface Loopback1
+           ip address 198.51.100.10 255.255.255.248
+          interface Ethernet0/0
+           description to HQ-EDGE1 Ethernet0/0
+           ip address 198.51.100.64 255.255.255.254
+           ipv6 address 2001:DB8:F001:FFFF::64/127
+          interface Ethernet0/1
+           description to PROV-ISP2 Ethernet0/1
+           ip address 198.51.100.66 255.255.255.254
+           ipv6 address 2001:DB8:F001:FFFF::66/127
+          interface Ethernet0/2
+           description IX
+           ip address 192.0.2.193 255.255.255.192
+           ipv6 address 2001:DB8:F001:200::1/64
+           ipv6 nd ra suppress all
+          interface Ethernet0/3
+           no ip address
+           shutdown
+          router bgp 64601
+           bgp router-id 198.51.100.1
+           bgp log-neighbor-changes
+           no bgp default ipv4-unicast
+           neighbor 2001:DB8:F001:FFFF::65 remote-as 65010
+           neighbor 2001:DB8:F001:FFFF::65 password ISPA-64601
+           neighbor 2001:DB8:F001:FFFF::67 remote-as 64602
+           neighbor 2001:DB8:F001:FFFF::67 password ISP-INTERCONNECT
+           neighbor 198.51.100.65 remote-as 65010
+           neighbor 198.51.100.65 password ISPA-64601
+           neighbor 198.51.100.67 remote-as 64602
+           neighbor 198.51.100.67 password ISP-INTERCONNECT
+           address-family ipv4
+            network 198.51.100.0 mask 255.255.255.128
+            network 198.51.100.8 mask 255.255.255.248
+            neighbor 198.51.100.65 activate
+            neighbor 198.51.100.65 soft-reconfiguration inbound
+            neighbor 198.51.100.65 route-map FROM-VERIDIAN in
+            neighbor 198.51.100.65 route-map TO-VERIDIAN out
+            neighbor 198.51.100.67 activate
+           exit-address-family
+           address-family ipv6
+            network 2001:DB8:F001::/48
+            neighbor 2001:DB8:F001:FFFF::65 activate
+            neighbor 2001:DB8:F001:FFFF::65 default-originate
+            neighbor 2001:DB8:F001:FFFF::65 soft-reconfiguration inbound
+            neighbor 2001:DB8:F001:FFFF::65 route-map FROM-VERIDIAN6 in
+            neighbor 2001:DB8:F001:FFFF::65 route-map TO-VERIDIAN6 out
+            neighbor 2001:DB8:F001:FFFF::67 activate
+           exit-address-family
+          ip forward-protocol nd
+          ip forward-protocol udp
+          ip http server
+          ip http secure-server
+          ip route 198.51.100.0 255.255.255.128 Null0
+          ip prefix-list TO-VERIDIAN seq 5 permit 198.51.100.0/25
+          ip prefix-list TO-VERIDIAN seq 10 permit 198.51.100.8/29
+          no logging btrace
+          ipv6 route 2001:DB8:F001::/48 Null0
+          ipv6 prefix-list FROM-VERIDIAN6 seq 5 permit 2001:DB8:10::/48
+          ipv6 prefix-list TO-VERIDIAN6 seq 5 permit 2001:DB8:F001::/48
+          route-map FROM-VERIDIAN permit 10
+           match ip address prefix-list FROM-VERIDIAN
+          route-map FROM-VERIDIAN6 permit 10
+           match ipv6 address prefix-list FROM-VERIDIAN6
+          route-map TO-VERIDIAN6 permit 10
+           match ipv6 address prefix-list TO-VERIDIAN6
+          route-map TO-VERIDIAN permit 10
+           match ip address prefix-list TO-VERIDIAN
+          control-plane
+          line con 0
+           exec-timeout 0 0
+           privilege level 15
+           logging synchronous
+          line aux 0
+          line vty 0 4
+           exec-timeout 0 0
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: PROV-ISP1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -100
+    y: -250
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          hostname PROV-ISP2
+          logging buffered 64000
+          no logging console
+          no aaa new-model
+          no ip domain lookup
+          ip domain name veridian.example
+          ip cef
+          login on-success log
+          ipv6 unicast-routing
+          ipv6 cef
+          spanning-tree mode rapid-pvst
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          interface Loopback0
+           ip address 203.0.113.1 255.255.255.255
+           ipv6 address 2001:DB8:F002::1/128
+          interface Loopback1
+           ip address 203.0.113.10 255.255.255.248
+          interface Ethernet0/0
+           description to HQ-EDGE2 Ethernet0/0
+           ip address 203.0.113.64 255.255.255.254
+           ipv6 address 2001:DB8:F002:FFFF::64/127
+          interface Ethernet0/1
+           description to PROV-ISP1 Ethernet0/1
+           ip address 198.51.100.67 255.255.255.254
+           ipv6 address 2001:DB8:F001:FFFF::67/127
+          interface Ethernet0/2
+           description IX
+           ip address 192.0.2.194 255.255.255.192
+           ipv6 address 2001:DB8:F001:200::2/64
+           ipv6 nd ra suppress all
+          interface Ethernet0/3
+           no ip address
+           shutdown
+          router bgp 64602
+           bgp router-id 203.0.113.1
+           bgp log-neighbor-changes
+           no bgp default ipv4-unicast
+           neighbor 2001:DB8:F001:FFFF::66 remote-as 64601
+           neighbor 2001:DB8:F001:FFFF::66 password ISP-INTERCONNECT
+           neighbor 2001:DB8:F002:FFFF::65 remote-as 65010
+           neighbor 2001:DB8:F002:FFFF::65 password ISPB-64602
+           neighbor 198.51.100.66 remote-as 64601
+           neighbor 198.51.100.66 password ISP-INTERCONNECT
+           neighbor 203.0.113.65 remote-as 65010
+           neighbor 203.0.113.65 password ISPB-64602
+           address-family ipv4
+            network 203.0.113.0 mask 255.255.255.128
+            network 203.0.113.8 mask 255.255.255.248
+            neighbor 198.51.100.66 activate
+            neighbor 203.0.113.65 activate
+            neighbor 203.0.113.65 soft-reconfiguration inbound
+            neighbor 203.0.113.65 route-map FROM-VERIDIAN in
+            neighbor 203.0.113.65 route-map TO-VERIDIAN out
+           exit-address-family
+           address-family ipv6
+            network 2001:DB8:F002::/48
+            neighbor 2001:DB8:F001:FFFF::66 activate
+            neighbor 2001:DB8:F002:FFFF::65 activate
+            neighbor 2001:DB8:F002:FFFF::65 default-originate
+            neighbor 2001:DB8:F002:FFFF::65 soft-reconfiguration inbound
+            neighbor 2001:DB8:F002:FFFF::65 route-map FROM-VERIDIAN6 in
+            neighbor 2001:DB8:F002:FFFF::65 route-map TO-VERIDIAN6 out
+           exit-address-family
+          ip forward-protocol nd
+          ip forward-protocol udp
+          ip http server
+          ip http secure-server
+          ip route 203.0.113.0 255.255.255.128 Null0
+          ip prefix-list TO-VERIDIAN seq 5 permit 203.0.113.0/25
+          ip prefix-list TO-VERIDIAN seq 10 permit 203.0.113.8/29
+          ip prefix-list TO-VERIDIAN seq 15 permit 198.51.100.8/29
+          no logging btrace
+          ipv6 route 2001:DB8:F002::/48 Null0
+          ipv6 prefix-list FROM-VERIDIAN6 seq 5 permit 2001:DB8:10::/48
+          ipv6 prefix-list TO-VERIDIAN6 seq 5 permit 2001:DB8:F002::/48
+          route-map FROM-VERIDIAN permit 10
+           match ip address prefix-list FROM-VERIDIAN
+          route-map FROM-VERIDIAN6 permit 10
+           match ipv6 address prefix-list FROM-VERIDIAN6
+          route-map TO-VERIDIAN6 permit 10
+           match ipv6 address prefix-list TO-VERIDIAN6
+          route-map TO-VERIDIAN permit 10
+           match ip address prefix-list TO-VERIDIAN
+          control-plane
+          line con 0
+           exec-timeout 0 0
+           privilege level 15
+           logging synchronous
+          line aux 0
+          line vty 0 4
+           exec-timeout 0 0
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: PROV-ISP2
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 300
+    y: -250
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          hostname HQ-EDGE1
+          logging buffered 64000
+          no logging console
+          no ip domain lookup
+          ip domain name veridian.example
+          ip cef
+          login on-success log
+          ipv6 unicast-routing
+          ipv6 cef
+          spanning-tree mode rapid-pvst
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          vrf definition MGMT
+           address-family ipv4
+           exit-address-family
+          track 10 ip sla 10 reachability
+           delay down 5 up 30
+          interface Loopback0
+           ip address 10.255.10.31 255.255.255.255
+           ip ospf 1 area 0
+           ipv6 address 2001:DB8:FFFF:10::31/128
+           ospfv3 1 ipv6 area 0
+          interface Ethernet0/0
+           description to PROV-ISP1 Ethernet0/0
+           ip address 198.51.100.65 255.255.255.254
+           ip nat outside
+           ipv6 address 2001:DB8:F001:FFFF::65/127
+          interface Ethernet0/1
+           description to HQ-CORE1 Ethernet0/3
+           ip address 10.10.255.65 255.255.255.254
+           ip nat inside
+           ip ospf network point-to-point
+           ip ospf dead-interval 4
+           ip ospf hello-interval 1
+           ip ospf 1 area 0
+           ip ospf cost 10
+           ipv6 address 2001:DB8:10:FFFF::65/127
+           ospfv3 network point-to-point
+           ospfv3 hello-interval 1
+           ospfv3 dead-interval 4
+           ospfv3 cost 10
+           ospfv3 1 ipv6 area 0
+          interface Ethernet0/1.99
+           description MGMT VRF to HQ-CORE1 Ethernet0/3
+           encapsulation dot1q 99
+           vrf forwarding MGMT
+           ip address 10.10.254.5 255.255.255.254
+           ip ospf 99 area 0
+           ip ospf network point-to-point
+           ip ospf cost 10
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+          interface Ethernet0/2
+           description DMZ
+           ip address 10.10.60.2 255.255.255.0
+           ip nat inside
+           standby 60 ip 10.10.60.1
+           standby 60 priority 110
+           standby 60 preempt
+           standby 60 track 10 decrement 20
+           ip ospf 1 area 0
+           ipv6 address 2001:DB8:10:60::2/64
+           ipv6 nd prefix 2001:DB8:10:60::/64 2592000 604800 no-autoconfig
+           ipv6 nd router-preference High
+           ospfv3 1 ipv6 area 0
+          interface Ethernet0/3
+           description to HQ-EDGE2 Ethernet0/3
+           ip address 10.10.255.68 255.255.255.254
+           ip nat inside
+           ip ospf network point-to-point
+           ip ospf dead-interval 4
+           ip ospf hello-interval 1
+           ip ospf 1 area 0
+           ip ospf cost 10
+           ipv6 address 2001:DB8:10:FFFF::68/127
+           ospfv3 network point-to-point
+           ospfv3 hello-interval 1
+           ospfv3 dead-interval 4
+           ospfv3 cost 10
+           ospfv3 1 ipv6 area 0
+          router ospfv3 1
+           router-id 10.255.10.31
+           address-family ipv6 unicast
+            passive-interface Ethernet0/2
+            default-information originate metric 10
+           exit-address-family
+          router ospf 99 vrf MGMT
+           router-id 10.10.254.5
+           passive-interface default
+           no passive-interface Ethernet0/1.99
+          router ospf 1
+           router-id 10.255.10.31
+           passive-interface Ethernet0/2
+           default-information originate metric 10
+          router bgp 65010
+           bgp router-id 10.255.10.31
+           bgp log-neighbor-changes
+           neighbor 10.255.10.32 remote-as 65010
+           neighbor 10.255.10.32 update-source Loopback0
+           neighbor 2001:DB8:F001:FFFF::64 remote-as 64601
+           neighbor 2001:DB8:F001:FFFF::64 password ISPA-64601
+           neighbor 2001:DB8:FFFF:10::32 remote-as 65010
+           neighbor 2001:DB8:FFFF:10::32 update-source Loopback0
+           neighbor 198.51.100.64 remote-as 64601
+           neighbor 198.51.100.64 password ISPA-64601
+           address-family ipv4
+            network 192.0.2.0 mask 255.255.255.192
+            network 192.0.2.128 mask 255.255.255.192
+            neighbor 10.255.10.32 activate
+            neighbor 10.255.10.32 next-hop-self
+            no neighbor 2001:DB8:F001:FFFF::64 activate
+            no neighbor 2001:DB8:FFFF:10::32 activate
+            neighbor 198.51.100.64 activate
+            neighbor 198.51.100.64 route-map ISPA-IN in
+            neighbor 198.51.100.64 route-map ISPA-OUT out
+           exit-address-family
+           address-family ipv6
+            network 2001:DB8:10::/48
+            neighbor 2001:DB8:F001:FFFF::64 activate
+            neighbor 2001:DB8:F001:FFFF::64 route-map ISPA-IN-V6 in
+            neighbor 2001:DB8:F001:FFFF::64 route-map ISPA-OUT-V6 out
+            neighbor 2001:DB8:FFFF:10::32 activate
+            neighbor 2001:DB8:FFFF:10::32 next-hop-self
+           exit-address-family
+          ip forward-protocol nd
+          ip forward-protocol udp
+          ip http server
+          ip http secure-server
+          ip nat pool POOL-A 192.0.2.1 192.0.2.1 netmask 255.255.255.192
+          ip nat inside source static 10.10.60.150 192.0.2.130
+          ip nat inside source list NAT-INSIDE pool POOL-A overload
+          ip route 0.0.0.0 0.0.0.0 198.51.100.64 track 10
+          ip route 192.0.2.0 255.255.255.192 Null0
+          ip route 192.0.2.128 255.255.255.192 Null0
+          ip route 198.51.100.1 255.255.255.255 Ethernet0/0 198.51.100.64
+          ip route 198.51.100.1 255.255.255.255 Null0 250
+          ip access-list standard NAT-INSIDE
+           10 permit 10.10.0.0 0.0.255.255
+          ip prefix-list ISPA-IN seq 5 permit 198.51.100.0/25
+          ip prefix-list ISPA-IN seq 10 permit 198.51.100.8/29
+          ip prefix-list VERIDIAN-OUT seq 5 permit 192.0.2.0/26
+          ip prefix-list VERIDIAN-OUT seq 10 permit 192.0.2.128/26
+          ip sla 10
+           icmp-echo 198.51.100.1 source-interface Ethernet0/0
+            frequency 5
+          ip sla schedule 10 life forever start-time now
+          no logging btrace
+          ipv6 route 2001:DB8:10::/48 Null0
+          ipv6 prefix-list V6-OUT seq 5 permit 2001:DB8:10::/48
+          route-map ISPA-IN permit 10
+           match ip address prefix-list ISPA-IN
+          route-map ISPA-OUT permit 10
+           match ip address prefix-list VERIDIAN-OUT
+          route-map ISPA-IN-V6 permit 10
+           set local-preference 150
+          route-map ISPA-OUT-V6 permit 10
+           match ipv6 address prefix-list V6-OUT
+          control-plane
+          ip access-list standard MGMT-HOSTS
+           10 permit 10.10.99.0 0.0.0.255
+           20 permit 10.50.50.0 0.0.0.255
+           40 deny any log
+          ipv6 access-list NO-VTY6
+           deny ipv6 any any log
+          aaa new-model
+          aaa authentication login CON none
+          aaa authentication enable default enable none
+          radius server DC-AAA1
+           address ipv4 10.50.50.52 auth-port 1812 acct-port 1813
+           key RADKEY123
+          aaa group server radius RADGRP
+           server name DC-AAA1
+           ip vrf forwarding MGMT
+           ip radius source-interface Ethernet0/1.99
+          radius-server dead-criteria time 5 tries 2
+          radius-server deadtime 1
+          aaa authentication login VTY group RADGRP local
+          aaa authorization exec VTY group RADGRP local
+          aaa accounting exec VTY start-stop group RADGRP
+          logging host 10.50.50.51 vrf MGMT
+          logging trap informational
+          logging source-interface Ethernet0/1.99 vrf MGMT
+          snmp-server group NMSGROUP v3 priv access MGMT-HOSTS
+          snmp-server user nmsuser NMSGROUP v3 auth sha AUTHPASS123 priv aes 128 PRIVPASS123
+          ntp authentication-key 1 hmac-sha2-256 NTPKEY123
+          ntp authenticate
+          ntp trusted-key 1
+          ntp server vrf MGMT 10.50.50.1 key 1
+          line con 0
+           exec-timeout 0 0
+           privilege level 15
+           logging synchronous
+           login authentication CON
+          line aux 0
+          line vty 0 4
+           login authentication VTY
+           authorization exec VTY
+           accounting exec VTY
+           exec-timeout 10 0
+           transport input ssh
+           access-class MGMT-HOSTS in vrf-also
+           ipv6 access-class NO-VTY6 in
+          event manager applet ISPA-EVIDENCE
+           event track 10 state down
+           action 0.1 cli command "enable"
+           action 1.0 cli command "show clock | append unix:ispa-evidence.txt"
+           action 2.0 cli command "show ip route 0.0.0.0 | append unix:ispa-evidence.txt"
+           action 3.0 cli command "show track 10 | append unix:ispa-evidence.txt"
+           action 4.0 cli command "show ip sla statistics 10 | append unix:ispa-evidence.txt"
+           action 5.0 cli command "show ip bgp summary | append unix:ispa-evidence.txt"
+           action 6.0 syslog msg "ISP-A evidence captured"
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: HQ-EDGE1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -100
+    y: -100
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          hostname HQ-EDGE2
+          logging buffered 64000
+          no logging console
+          no ip domain lookup
+          ip domain name veridian.example
+          ip cef
+          login on-success log
+          ipv6 unicast-routing
+          ipv6 cef
+          spanning-tree mode rapid-pvst
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          vrf definition MGMT
+           address-family ipv4
+           exit-address-family
+          track 20 ip sla 20 reachability
+           delay down 5 up 30
+          interface Loopback0
+           ip address 10.255.10.32 255.255.255.255
+           ip ospf 1 area 0
+           ipv6 address 2001:DB8:FFFF:10::32/128
+           ospfv3 1 ipv6 area 0
+          interface Ethernet0/0
+           description to PROV-ISP2 Ethernet0/0
+           ip address 203.0.113.65 255.255.255.254
+           ip nat outside
+           ipv6 address 2001:DB8:F002:FFFF::65/127
+          interface Ethernet0/1
+           description to HQ-CORE1 Ethernet1/2
+           ip address 10.10.255.67 255.255.255.254
+           ip nat inside
+           ip ospf network point-to-point
+           ip ospf dead-interval 4
+           ip ospf hello-interval 1
+           ip ospf 1 area 0
+           ip ospf cost 10
+           ipv6 address 2001:DB8:10:FFFF::67/127
+           ospfv3 network point-to-point
+           ospfv3 hello-interval 1
+           ospfv3 dead-interval 4
+           ospfv3 cost 10
+           ospfv3 1 ipv6 area 0
+          interface Ethernet0/1.99
+           description MGMT VRF to HQ-CORE1 Ethernet1/2
+           encapsulation dot1q 99
+           vrf forwarding MGMT
+           ip address 10.10.254.9 255.255.255.254
+           ip ospf 99 area 0
+           ip ospf network point-to-point
+           ip ospf cost 10
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+          interface Ethernet0/2
+           description DMZ
+           ip address 10.10.60.3 255.255.255.0
+           ip nat inside
+           standby 60 ip 10.10.60.1
+           standby 60 preempt
+           ip ospf 1 area 0
+           ipv6 address 2001:DB8:10:60::3/64
+           ipv6 nd prefix 2001:DB8:10:60::/64 2592000 604800 no-autoconfig
+           ospfv3 1 ipv6 area 0
+          interface Ethernet0/3
+           description to HQ-EDGE1 Ethernet0/3
+           ip address 10.10.255.69 255.255.255.254
+           ip nat inside
+           ip ospf network point-to-point
+           ip ospf dead-interval 4
+           ip ospf hello-interval 1
+           ip ospf 1 area 0
+           ip ospf cost 10
+           ipv6 address 2001:DB8:10:FFFF::69/127
+           ospfv3 network point-to-point
+           ospfv3 hello-interval 1
+           ospfv3 dead-interval 4
+           ospfv3 cost 10
+           ospfv3 1 ipv6 area 0
+          router ospfv3 1
+           router-id 10.255.10.32
+           address-family ipv6 unicast
+            passive-interface Ethernet0/2
+            default-information originate metric 30
+           exit-address-family
+          router ospf 99 vrf MGMT
+           router-id 10.10.254.9
+           passive-interface default
+           no passive-interface Ethernet0/1.99
+          router ospf 1
+           router-id 10.255.10.32
+           passive-interface Ethernet0/2
+           default-information originate metric 30
+          router bgp 65010
+           bgp router-id 10.255.10.32
+           bgp log-neighbor-changes
+           neighbor 10.255.10.31 remote-as 65010
+           neighbor 10.255.10.31 update-source Loopback0
+           neighbor 2001:DB8:F002:FFFF::64 remote-as 64602
+           neighbor 2001:DB8:F002:FFFF::64 password ISPB-64602
+           neighbor 2001:DB8:FFFF:10::31 remote-as 65010
+           neighbor 2001:DB8:FFFF:10::31 update-source Loopback0
+           neighbor 203.0.113.64 remote-as 64602
+           neighbor 203.0.113.64 password ISPB-64602
+           address-family ipv4
+            network 192.0.2.64 mask 255.255.255.192
+            network 192.0.2.128 mask 255.255.255.192
+            neighbor 10.255.10.31 activate
+            neighbor 10.255.10.31 next-hop-self
+            no neighbor 2001:DB8:F002:FFFF::64 activate
+            no neighbor 2001:DB8:FFFF:10::31 activate
+            neighbor 203.0.113.64 activate
+            neighbor 203.0.113.64 route-map ISPB-IN in
+            neighbor 203.0.113.64 route-map ISPB-OUT out
+           exit-address-family
+           address-family ipv6
+            network 2001:DB8:10::/48
+            neighbor 2001:DB8:F002:FFFF::64 activate
+            neighbor 2001:DB8:F002:FFFF::64 route-map ISPB-OUT-V6 out
+            neighbor 2001:DB8:FFFF:10::31 activate
+            neighbor 2001:DB8:FFFF:10::31 next-hop-self
+           exit-address-family
+          ip forward-protocol nd
+          ip forward-protocol udp
+          ip http server
+          ip http secure-server
+          ip nat pool POOL-B 192.0.2.65 192.0.2.65 netmask 255.255.255.192
+          ip nat inside source static 10.10.60.150 192.0.2.130
+          ip nat inside source list NAT-INSIDE pool POOL-B overload
+          ip route 0.0.0.0 0.0.0.0 203.0.113.64 track 20
+          ip route 192.0.2.64 255.255.255.192 Null0
+          ip route 192.0.2.128 255.255.255.192 Null0
+          ip route 203.0.113.1 255.255.255.255 Ethernet0/0 203.0.113.64
+          ip route 203.0.113.1 255.255.255.255 Null0 250
+          ip access-list standard NAT-INSIDE
+           10 permit 10.10.0.0 0.0.255.255
+          ip prefix-list DMZ-OUT seq 5 permit 192.0.2.128/26
+          ip prefix-list ISPB-IN seq 5 permit 203.0.113.0/25
+          ip prefix-list ISPB-IN seq 10 permit 203.0.113.8/29
+          ip prefix-list ISPB-IN seq 15 permit 198.51.100.8/29
+          ip prefix-list POOL-B-OUT seq 5 permit 192.0.2.64/26
+          ip prefix-list SUPPLIER-A seq 5 permit 198.51.100.8/29
+          ip sla 20
+           icmp-echo 203.0.113.1 source-interface Ethernet0/0
+            frequency 5
+          ip sla schedule 20 life forever start-time now
+          no logging btrace
+          ipv6 route 2001:DB8:10::/48 Null0
+          ipv6 prefix-list V6-OUT seq 5 permit 2001:DB8:10::/48
+          route-map ISPB-IN permit 10
+           match ip address prefix-list SUPPLIER-A
+           set local-preference 200
+          route-map ISPB-IN permit 20
+           match ip address prefix-list ISPB-IN
+          route-map ISPB-OUT permit 10
+           match ip address prefix-list DMZ-OUT
+           set as-path prepend 65010 65010
+          route-map ISPB-OUT permit 20
+           match ip address prefix-list POOL-B-OUT
+          route-map ISPB-OUT-V6 permit 10
+           match ipv6 address prefix-list V6-OUT
+           set as-path prepend 65010 65010
+          control-plane
+          ip access-list standard MGMT-HOSTS
+           10 permit 10.10.99.0 0.0.0.255
+           20 permit 10.50.50.0 0.0.0.255
+           40 deny any log
+          ipv6 access-list NO-VTY6
+           deny ipv6 any any log
+          aaa new-model
+          aaa authentication login CON none
+          aaa authentication enable default enable none
+          radius server DC-AAA1
+           address ipv4 10.50.50.52 auth-port 1812 acct-port 1813
+           key RADKEY123
+          aaa group server radius RADGRP
+           server name DC-AAA1
+           ip vrf forwarding MGMT
+           ip radius source-interface Ethernet0/1.99
+          radius-server dead-criteria time 5 tries 2
+          radius-server deadtime 1
+          aaa authentication login VTY group RADGRP local
+          aaa authorization exec VTY group RADGRP local
+          aaa accounting exec VTY start-stop group RADGRP
+          logging host 10.50.50.51 vrf MGMT
+          logging trap informational
+          logging source-interface Ethernet0/1.99 vrf MGMT
+          snmp-server group NMSGROUP v3 auth access MGMT-HOSTS
+          snmp-server user nmsuser NMSGROUP v3 auth sha AUTHPASS123
+          ntp authentication-key 1 hmac-sha2-256 NTPKEY123
+          ntp authenticate
+          ntp trusted-key 1
+          ntp server vrf MGMT 10.50.50.1 key 1
+          line con 0
+           exec-timeout 0 0
+           privilege level 15
+           logging synchronous
+           login authentication CON
+          line aux 0
+          line vty 0 4
+           login authentication VTY
+           authorization exec VTY
+           accounting exec VTY
+           exec-timeout 10 0
+           transport input ssh
+           access-class MGMT-HOSTS in vrf-also
+           ipv6 access-class NO-VTY6 in
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: HQ-EDGE2
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 300
+    y: -100
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: DMZ
+    node_definition: unmanaged_switch
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 100
+    y: -33
+    interfaces:
+      - id: i0
+        label: port0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i1
+        label: port1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i2
+        label: port2
+        mac_address: null
+        type: physical
+        slot: 2
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname HQ-SRV1
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip address add 10.10.60.150/24 dev eth0
+          ip -6 address add 2001:db8:10:60::150/64 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.10.60.1
+          echo web-ok > /tmp/index.html
+          httpd -p 80 -h /tmp
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n7
+    image_definition: null
+    label: HQ-SRV1
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 101
+    y: 23
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          hostname HQ-CORE1
+          logging buffered 64000
+          no logging console
+          no aaa new-model
+          no ip domain lookup
+          ip domain name veridian.example
+          ip cef
+          login on-success log
+          ipv6 unicast-routing
+          ipv6 cef
+          spanning-tree mode rapid-pvst
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          vrf definition MGMT
+           address-family ipv4
+           exit-address-family
+          interface Loopback0
+           ip address 10.255.10.1 255.255.255.255
+           ip ospf 1 area 0
+           ipv6 address 2001:DB8:FFFF:10::1/128
+           ospfv3 1 ipv6 area 0
+          interface Loopback20
+           ip address 10.10.20.2 255.255.255.0
+           ip ospf network point-to-point
+           ip ospf 1 area 0
+          interface Loopback50
+           ip address 10.10.50.2 255.255.255.0
+           ip ospf network point-to-point
+           ip ospf 1 area 0
+          interface Ethernet0/0
+           no ip address
+           shutdown
+          interface Ethernet0/1
+           no ip address
+           shutdown
+          interface Ethernet0/2
+           no ip address
+           shutdown
+          interface Ethernet0/3
+           description to HQ-EDGE1 Ethernet0/1
+           ip address 10.10.255.64 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf dead-interval 4
+           ip ospf hello-interval 1
+           ip ospf 1 area 0
+           ip ospf cost 10
+           ipv6 address 2001:DB8:10:FFFF::64/127
+           ospfv3 network point-to-point
+           ospfv3 hello-interval 1
+           ospfv3 dead-interval 4
+           ospfv3 cost 10
+           ospfv3 1 ipv6 area 0
+          interface Ethernet1/0
+           no ip address
+           shutdown
+          interface Ethernet1/1
+           description to DC-RTR1 Ethernet0/0
+           ip address 10.10.255.130 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf dead-interval 4
+           ip ospf hello-interval 1
+           ip ospf 1 area 50
+           ip ospf cost 10
+          interface Ethernet1/2
+           description to HQ-EDGE2 Ethernet0/1
+           ip address 10.10.255.66 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf dead-interval 4
+           ip ospf hello-interval 1
+           ip ospf 1 area 0
+           ip ospf cost 10
+           ipv6 address 2001:DB8:10:FFFF::66/127
+           ospfv3 network point-to-point
+           ospfv3 hello-interval 1
+           ospfv3 dead-interval 4
+           ospfv3 cost 10
+           ospfv3 1 ipv6 area 0
+          interface Ethernet1/3
+           description User LAN
+           ip address 10.10.10.1 255.255.255.0
+           ip ospf 1 area 0
+           ipv6 address 2001:DB8:10:10::1/64
+           ipv6 nd prefix 2001:DB8:10:10::/64 2592000 604800 no-autoconfig
+           ospfv3 1 ipv6 area 0
+          interface Ethernet0/3.99
+           description MGMT VRF to HQ-EDGE1 Ethernet0/1
+           encapsulation dot1q 99
+           vrf forwarding MGMT
+           ip address 10.10.254.4 255.255.255.254
+           ip ospf 99 area 0
+           ip ospf network point-to-point
+           ip ospf cost 10
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+          interface Ethernet1/2.99
+           description MGMT VRF to HQ-EDGE2 Ethernet0/1
+           encapsulation dot1q 99
+           vrf forwarding MGMT
+           ip address 10.10.254.8 255.255.255.254
+           ip ospf 99 area 0
+           ip ospf network point-to-point
+           ip ospf cost 10
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+          interface Ethernet1/1.99
+           description MGMT VRF to DC-RTR1 Ethernet0/0
+           encapsulation dot1q 99
+           vrf forwarding MGMT
+           ip address 10.10.254.6 255.255.255.254
+           ip ospf 99 area 0
+           ip ospf network point-to-point
+           ip ospf cost 10
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+          router ospfv3 1
+           router-id 10.255.10.1
+           address-family ipv6 unicast
+            passive-interface Ethernet1/3
+           exit-address-family
+          router ospf 1
+           router-id 10.255.10.1
+           passive-interface Ethernet1/3
+          router ospf 99 vrf MGMT
+           router-id 10.10.254.2
+           passive-interface default
+           no passive-interface Ethernet0/3.99
+           no passive-interface Ethernet1/2.99
+           no passive-interface Ethernet1/1.99
+          ip forward-protocol nd
+          ip forward-protocol udp
+          ip http server
+          ip http secure-server
+          no logging btrace
+          control-plane
+          line con 0
+           exec-timeout 0 0
+           privilege level 15
+           logging synchronous
+          line aux 0
+          line vty 0 4
+           exec-timeout 0 0
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n8
+    image_definition: null
+    label: HQ-CORE1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 100
+    y: 120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+      - id: i7
+        label: Ethernet1/2
+        mac_address: null
+        type: physical
+        slot: 6
+      - id: i8
+        label: Ethernet1/3
+        mac_address: null
+        type: physical
+        slot: 7
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname HQ-PC1
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip address add 10.10.10.101/24 dev eth0
+          ip -6 address add 2001:db8:10:10::101/64 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.10.10.1
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n9
+    image_definition: null
+    label: HQ-PC1
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 100
+    y: 240
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname DC-RTR1
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vrf definition MGMT
+           address-family ipv4
+           exit-address-family
+          ip routing
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          interface Loopback0
+           ip address 10.255.50.1 255.255.255.255
+           ip ospf 1 area 50
+          interface Ethernet0/0
+           description HQ-CORE1 Ethernet1/1
+           ip address 10.10.255.131 255.255.255.254
+           ip ospf 1 area 50
+           ip ospf network point-to-point
+           ip ospf cost 10
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           no shutdown
+          interface Ethernet0/0.99
+           description MGMT VRF to HQ-CORE1
+           encapsulation dot1q 99
+           vrf forwarding MGMT
+           ip address 10.10.254.7 255.255.255.254
+           ip ospf 99 area 0
+           ip ospf network point-to-point
+           ip ospf cost 10
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+          interface Ethernet0/1
+           description DC services segment
+           vrf forwarding MGMT
+           ip address 10.50.50.1 255.255.255.0
+           ip ospf 99 area 0
+           no shutdown
+          router ospf 1
+           router-id 10.255.50.1
+           passive-interface default
+           no passive-interface Ethernet0/0
+          router ospf 99 vrf MGMT
+           router-id 10.50.50.1
+           passive-interface default
+           no passive-interface Ethernet0/0.99
+          ip access-list standard MGMT-HOSTS
+           10 permit 10.10.99.0 0.0.0.255
+           20 permit 10.50.50.0 0.0.0.255
+           40 deny any log
+          ipv6 access-list NO-VTY6
+           deny ipv6 any any log
+          aaa new-model
+          aaa authentication login CON none
+          aaa authentication enable default enable none
+          radius server DC-AAA1
+           address ipv4 10.50.50.52 auth-port 1812 acct-port 1813
+           key RADKEY123
+          aaa group server radius RADGRP
+           server name DC-AAA1
+           ip vrf forwarding MGMT
+           ip radius source-interface Ethernet0/1
+          radius-server dead-criteria time 5 tries 2
+          radius-server deadtime 1
+          aaa authentication login VTY group RADGRP local
+          aaa authorization exec VTY group RADGRP local
+          aaa accounting exec VTY start-stop group RADGRP
+          logging host 10.50.50.51 vrf MGMT
+          logging trap informational
+          logging source-interface Ethernet0/1 vrf MGMT
+          snmp-server group NMSGROUP v3 priv access MGMT-HOSTS
+          snmp-server user nmsuser NMSGROUP v3 auth sha AUTHPASS123 priv aes 128 PRIVPASS123
+          ntp authentication-key 1 hmac-sha2-256 NTPKEY123
+          ntp authenticate
+          ntp trusted-key 1
+          ntp master 3
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+           login authentication CON
+          line vty 0 4
+           login authentication VTY
+           authorization exec VTY
+           accounting exec VTY
+           exec-timeout 10 0
+           transport input ssh
+           access-class MGMT-HOSTS in vrf-also
+           ipv6 access-class NO-VTY6 in
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n10
+    image_definition: null
+    label: DC-RTR1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 450
+    y: 120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n11
+    image_definition: null
+    label: DC-SW
+    node_definition: unmanaged_switch
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 450
+    y: 210
+    interfaces:
+      - id: i0
+        label: port0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i1
+        label: port1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i2
+        label: port2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i3
+        label: port3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i4
+        label: port4
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i5
+        label: port5
+        mac_address: null
+        type: physical
+        slot: 5
+      - id: i6
+        label: port6
+        mac_address: null
+        type: physical
+        slot: 6
+      - id: i7
+        label: port7
+        mac_address: null
+        type: physical
+        slot: 7
+  - boot_disk_size: null
+    configuration:
+      - name: boot.sh
+        content: |-
+          ip address add 10.50.50.51/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.50.50.1
+          echo "READY" >/dev/console
+          exit 0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n12
+    image_definition: null
+    label: DC-SYSLOG1
+    node_definition: syslog
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 350
+    y: 320
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i1
+        label: eth1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i2
+        label: eth2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i3
+        label: eth3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: radiusd.conf
+        content: |-
+          log {
+              destination = stdout
+              auth = yes
+              auth_badpass = yes
+              auth_goodpass = no
+          }
+          security {
+              require_message_authenticator = no
+              limit_proxy_state = false
+          }
+          client lab {
+              ipaddr = 10.0.0.0/8
+              secret = RADKEY123
+              require_message_authenticator = no
+              nas_type = cisco
+          }
+          modules {
+              files {
+                  filename = /etc/freeradius/3.0/mods-config/files/authorize
+              }
+              pap {
+              }
+              linelog acctlog {
+                  filename = /dev/stdout
+                  format = "ACCT %{Acct-Status-Type} user=%{User-Name} nas=%{NAS-IP-Address} session=%{Acct-Session-Id}"
+              }
+          }
+          server default {
+              listen {
+                  type = auth
+                  ipaddr = *
+                  port = 1812
+              }
+              listen {
+                  type = acct
+                  ipaddr = *
+                  port = 1813
+              }
+              authorize {
+                  files
+                  pap
+              }
+              authenticate {
+                  pap
+              }
+              accounting {
+                  acctlog
+              }
+          }
+      - name: users
+        content: |-
+          netadmin Cleartext-Password := "netpass"
+                  Service-Type = NAS-Prompt-User,
+                  Cisco-AVPair = "shell:priv-lvl=15"
+          netops Cleartext-Password := "opspass"
+                  Service-Type = NAS-Prompt-User,
+                  Cisco-AVPair = "shell:priv-lvl=1"
+      - name: boot.sh
+        content: |-
+          ip address add 10.50.50.52/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.50.50.1
+          echo "READY" >/dev/console
+          exit 0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n13
+    image_definition: null
+    label: DC-AAA1
+    node_definition: radius
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 450
+    y: 320
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i1
+        label: eth1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i2
+        label: eth2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i3
+        label: eth3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: boot.sh
+        content: |-
+          ip address add 10.50.50.60/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.50.50.1
+          echo "READY" >/dev/console
+          exit 0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n14
+    image_definition: null
+    label: DC-NMS1
+    node_definition: net-tools
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 550
+    y: 320
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i1
+        label: eth1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i2
+        label: eth2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i3
+        label: eth3
+        mac_address: null
+        type: physical
+        slot: 3
+links:
+  - id: l0
+    n1: n4
+    n2: n2
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: HQ-EDGE1-Ethernet0/0<->PROV-ISP1-Ethernet0/0
+  - id: l1
+    n1: n4
+    n2: n8
+    i1: i2
+    i2: i4
+    conditioning: {}
+    label: HQ-EDGE1-Ethernet0/1<->HQ-CORE1-Ethernet0/3
+  - id: l2
+    n1: n4
+    n2: n6
+    i1: i3
+    i2: i0
+    conditioning: {}
+    label: HQ-EDGE1-Ethernet0/2<->DMZ-port0
+  - id: l3
+    n1: n4
+    n2: n5
+    i1: i4
+    i2: i4
+    conditioning: {}
+    label: HQ-EDGE1-Ethernet0/3<->HQ-EDGE2-Ethernet0/3
+  - id: l4
+    n1: n5
+    n2: n3
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: HQ-EDGE2-Ethernet0/0<->PROV-ISP2-Ethernet0/0
+  - id: l5
+    n1: n5
+    n2: n8
+    i1: i2
+    i2: i7
+    conditioning: {}
+    label: HQ-EDGE2-Ethernet0/1<->HQ-CORE1-Ethernet1/2
+  - id: l6
+    n1: n5
+    n2: n6
+    i1: i3
+    i2: i1
+    conditioning: {}
+    label: HQ-EDGE2-Ethernet0/2<->DMZ-port1
+  - id: l7
+    n1: n2
+    n2: n3
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: PROV-ISP1-Ethernet0/1<->PROV-ISP2-Ethernet0/1
+  - id: l8
+    n1: n2
+    n2: n1
+    i1: i3
+    i2: i0
+    conditioning: {}
+    label: PROV-ISP1-Ethernet0/2<->IX-port0
+  - id: l9
+    n1: n3
+    n2: n1
+    i1: i3
+    i2: i1
+    conditioning: {}
+    label: PROV-ISP2-Ethernet0/2<->IX-port1
+  - id: l10
+    n1: n0
+    n2: n1
+    i1: i0
+    i2: i2
+    conditioning: {}
+    label: PROV-SRV1-eth0<->IX-port2
+  - id: l11
+    n1: n7
+    n2: n6
+    i1: i0
+    i2: i2
+    conditioning: {}
+    label: HQ-SRV1-eth0<->DMZ-port2
+  - id: l12
+    n1: n8
+    n2: n9
+    i1: i8
+    i2: i0
+    conditioning: {}
+    label: HQ-CORE1-Ethernet1/3<->HQ-PC1-eth0
+  - id: l13
+    n1: n8
+    n2: n10
+    i1: i6
+    i2: i1
+    conditioning: {}
+    label: HQ-CORE1-Ethernet1/1<->DC-RTR1-Ethernet0/0
+  - id: l14
+    n1: n10
+    n2: n11
+    i1: i2
+    i2: i0
+    conditioning: {}
+    label: DC-RTR1-Ethernet0/1<->DC-SW-port0
+  - id: l15
+    n1: n12
+    n2: n11
+    i1: i0
+    i2: i1
+    conditioning: {}
+    label: DC-SYSLOG1-eth0<->DC-SW-port1
+  - id: l16
+    n1: n13
+    n2: n11
+    i1: i0
+    i2: i2
+    conditioning: {}
+    label: DC-AAA1-eth0<->DC-SW-port2
+  - id: l17
+    n1: n14
+    n2: n11
+    i1: i0
+    i2: i3
+    conditioning: {}
+    label: DC-NMS1-eth0<->DC-SW-port3
+lab:
+  description: Veridian protects its Internet edge (ingress policy, control plane,
+    flow export). See LAB.md
+  notes: ''
+  title: ENCOR LAB-042 Protecting the Edge
+  node_staging:
+    enabled: false
+    start_remaining: true
+    abort_on_failure: false
+  version: 0.3.1

@@ -1,0 +1,564 @@
+annotations:
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: 'FND switch chain A — VLAN 10 10.0.10.0/24, VLAN 20 10.0.20.0/24,
+      VLAN 99 (mgmt) 10.0.99.0/24: SWn = .n'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -420.0
+    y1: -120.0
+    z_index: 1
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW1
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vtp domain VERIDIAN
+          vtp mode transparent
+          vlan 10
+           name USERS
+          vlan 20
+           name OPS
+          vlan 99
+           name MGMT
+          vlan 999
+           name NATIVE
+          !
+          interface Ethernet0/0
+           description SW2 Et0/0
+           switchport trunk encapsulation dot1q
+           switchport trunk native vlan 999
+           switchport trunk allowed vlan 10,20,99
+           switchport mode trunk
+           switchport nonegotiate
+          interface Ethernet0/1
+           shutdown
+          interface Ethernet0/2
+           shutdown
+          interface Ethernet0/3
+           shutdown
+          interface Ethernet1/0
+           description PC1
+           switchport mode access
+           switchport access vlan 10
+           spanning-tree portfast
+          interface Ethernet1/1
+           description PC2
+           switchport mode access
+           switchport access vlan 20
+           spanning-tree portfast
+          interface Ethernet1/2
+           shutdown
+          interface Ethernet1/3
+           shutdown
+          interface Vlan99
+           ip address 10.0.99.1 255.255.255.0
+           no shutdown
+          !
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: SW1
+    node_definition: ioll2-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -300
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+      - id: i7
+        label: Ethernet1/2
+        mac_address: null
+        type: physical
+        slot: 6
+      - id: i8
+        label: Ethernet1/3
+        mac_address: null
+        type: physical
+        slot: 7
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW2
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vtp domain VERIDIAN
+          vtp mode transparent
+          vlan 10
+           name USERS
+          vlan 20
+           name OPS
+          vlan 99
+           name MGMT
+          vlan 999
+           name NATIVE
+          !
+          interface Ethernet0/0
+           description SW1 Et0/0
+           switchport trunk encapsulation dot1q
+           switchport trunk native vlan 999
+           switchport trunk allowed vlan 10,99
+           switchport mode trunk
+           switchport nonegotiate
+          interface Ethernet0/1
+           description SW3 Et0/0
+           switchport trunk encapsulation dot1q
+           switchport trunk native vlan 999
+           switchport trunk allowed vlan 10,20,99
+           switchport mode trunk
+           switchport nonegotiate
+          interface Ethernet0/2
+           shutdown
+          interface Ethernet0/3
+           shutdown
+          interface Ethernet1/0
+           shutdown
+          interface Ethernet1/1
+           shutdown
+          interface Ethernet1/2
+           shutdown
+          interface Ethernet1/3
+           shutdown
+          interface Vlan99
+           ip address 10.0.99.2 255.255.255.0
+           no shutdown
+          !
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: SW2
+    node_definition: ioll2-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 0
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+      - id: i7
+        label: Ethernet1/2
+        mac_address: null
+        type: physical
+        slot: 6
+      - id: i8
+        label: Ethernet1/3
+        mac_address: null
+        type: physical
+        slot: 7
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW3
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vtp domain VERIDIAN
+          vtp mode transparent
+          vlan 10
+           name USERS
+          vlan 99
+           name MGMT
+          vlan 999
+           name NATIVE
+          !
+          interface Ethernet0/0
+           description SW2 Et0/1
+           switchport trunk encapsulation dot1q
+           switchport trunk native vlan 999
+           switchport trunk allowed vlan 10,20,99
+           switchport mode trunk
+           switchport nonegotiate
+          interface Ethernet0/1
+           shutdown
+          interface Ethernet0/2
+           shutdown
+          interface Ethernet0/3
+           shutdown
+          interface Ethernet1/0
+           description PC3
+           switchport mode access
+           switchport access vlan 10
+           spanning-tree portfast
+          interface Ethernet1/1
+           description PC4
+           switchport mode access
+           switchport access vlan 20
+           spanning-tree portfast
+          interface Ethernet1/2
+           shutdown
+          interface Ethernet1/3
+           shutdown
+          interface Vlan99
+           ip address 10.0.99.3 255.255.255.0
+           no shutdown
+          !
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: SW3
+    node_definition: ioll2-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 300
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+      - id: i7
+        label: Ethernet1/2
+        mac_address: null
+        type: physical
+        slot: 6
+      - id: i8
+        label: Ethernet1/3
+        mac_address: null
+        type: physical
+        slot: 7
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname PC1
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip link set dev eth0 up
+          ip address add 10.0.10.101/24 dev eth0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: PC1
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -400
+    y: 200
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname PC2
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip link set dev eth0 up
+          ip address add 10.0.20.102/24 dev eth0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: PC2
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -200
+    y: 200
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname PC3
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip link set dev eth0 up
+          ip address add 10.0.10.103/24 dev eth0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: PC3
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 200
+    y: 200
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname PC4
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip link set dev eth0 up
+          ip address add 10.0.20.104/24 dev eth0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: PC4
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 400
+    y: 200
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+links:
+  - id: l0
+    n1: n0
+    n2: n1
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: SW1-Ethernet0/0<->SW2-Ethernet0/0
+  - id: l1
+    n1: n1
+    n2: n2
+    i1: i2
+    i2: i1
+    conditioning: {}
+    label: SW2-Ethernet0/1<->SW3-Ethernet0/0
+  - id: l2
+    n1: n0
+    n2: n3
+    i1: i5
+    i2: i0
+    conditioning: {}
+    label: SW1-Ethernet1/0<->PC1-eth0
+  - id: l3
+    n1: n0
+    n2: n4
+    i1: i6
+    i2: i0
+    conditioning: {}
+    label: SW1-Ethernet1/1<->PC2-eth0
+  - id: l4
+    n1: n2
+    n2: n5
+    i1: i5
+    i2: i0
+    conditioning: {}
+    label: SW3-Ethernet1/0<->PC3-eth0
+  - id: l5
+    n1: n2
+    n2: n6
+    i1: i6
+    i2: i0
+    conditioning: {}
+    label: SW3-Ethernet1/1<->PC4-eth0
+lab:
+  description: After the VTP pilot rollback, VLAN 20 hosts at the two ends of the
+    bench cannot reach each other. See LAB.md
+  notes: ''
+  title: ENCOR LAB-003 Where Did VLAN 20 Go
+  node_staging:
+    enabled: false
+    start_remaining: true
+    abort_on_failure: false
+  version: 0.3.1

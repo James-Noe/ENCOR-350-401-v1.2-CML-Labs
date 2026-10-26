@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 646 204" width="646" height="204" role="img">
+<title>LAB-064 topology</title>
+<rect width="646" height="204" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M100.2,66.0V84.0"/>
+<path d="M461.4,66.0V84.0"/>
+<path d="M100.2,138.0V156.0"/>
+<path d="M276.6,138.0V156.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="180.0" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-ACC1</text>
+<text x="255.6" y="25.5" textLength="184.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Cisco IOL-L2 switch)</text>
+<text x="37.2" y="43.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Vlan10 10.90.10.1/24</text>
+<text x="230.4" y="43.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Vlan20 10.90.20.1/24</text>
+<text x="79.2" y="61.5" textLength="243.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 (trunk, native VLAN 999)</text>
+<text x="423.6" y="61.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 (access VLAN 10)</text>
+<text x="79.2" y="97.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">ens2</text>
+<text x="432.0" y="97.5" textLength="201.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">PC3 eth0 10.90.10.103/24</text>
+<text x="37.2" y="115.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-MGMT1</text>
+<text x="121.2" y="115.5" textLength="210.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Ubuntu 24.04, KVM host)</text>
+<text x="79.2" y="133.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">ens3</text>
+<text x="255.6" y="133.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">ens4</text>
+<text x="37.2" y="169.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">PC1 eth0</text>
+<text x="238.8" y="169.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">PC2 eth0</text>
+<text x="37.2" y="187.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.90.10.101/24</text>
+<text x="238.8" y="187.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.90.20.102/24</text>
+</g></svg>

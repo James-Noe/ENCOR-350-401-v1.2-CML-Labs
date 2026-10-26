@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1116 96" width="1116" height="96" role="img">
+<title>LAB-051 topology</title>
+<rect width="1116" height="96" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M255.6,21.0H264.0"/>
+<path d="M264.0,21.0H272.4"/>
+<path d="M306.0,21.0H314.4"/>
+<path d="M314.4,21.0H322.8"/>
+<path d="M322.8,21.0H327.0"/>
+<path d="M440.4,37.0H448.8M440.4,41.0H448.8"/>
+<path d="M448.8,37.0H457.2M448.8,41.0H457.2"/>
+<path d="M457.2,37.0H465.6M457.2,41.0H465.6"/>
+<path d="M465.6,37.0H474.0M465.6,41.0H474.0"/>
+<path d="M524.4,37.0H532.8M524.4,41.0H532.8"/>
+<path d="M532.8,37.0H541.2M532.8,41.0H541.2"/>
+<path d="M541.2,37.0H549.6M541.2,41.0H549.6"/>
+<path d="M549.6,37.0H558.0M549.6,41.0H558.0"/>
+<path d="M717.6,39.0H726.0"/>
+<path d="M726.0,39.0H734.4"/>
+<path d="M734.4,39.0H742.8"/>
+<path d="M742.8,39.0H751.2"/>
+<path d="M910.8,39.0H919.2"/>
+<path d="M919.2,39.0H927.6"/>
+<path d="M927.6,39.0H936.0"/>
+<path d="M936.0,39.0H944.4"/>
+<path d="M255.6,57.0H264.0"/>
+<path d="M264.0,57.0H272.4"/>
+<path d="M306.0,57.0H314.4"/>
+<path d="M314.4,57.0H322.8"/>
+<path d="M322.8,57.0H327.0"/>
+<path d="M537.0,48.0V66.0"/>
+<path d="M915.0,48.0V66.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="20.4" y="25.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-PC1</text>
+<text x="79.2" y="25.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (CORP) 10.60.10.101</text>
+<text x="272.4" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="322.8" y="43.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-BDR1</text>
+<text x="390.0" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="482.4" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">link</text>
+<text x="566.4" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 </text>
+<text x="608.4" y="43.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-FUS1</text>
+<text x="667.2" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="759.6" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 </text>
+<text x="801.6" y="43.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-RTR1</text>
+<text x="860.4" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/3</text>
+<text x="952.8" y="43.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-DNS1</text>
+<text x="20.4" y="61.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-PC2</text>
+<text x="79.2" y="61.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (IOT)</text>
+<text x="146.4" y="61.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.20.102</text>
+<text x="272.4" y="61.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="381.6" y="61.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">AS 65060</text>
+<text x="474.0" y="61.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(Aster</text>
+<text x="549.6" y="61.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Veridian)</text>
+<text x="658.8" y="61.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">AS 65010</text>
+<text x="768.0" y="61.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.50.255.0/31</text>
+<text x="952.8" y="61.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.50.51.53</text>
+<text x="902.4" y="79.5" textLength="201.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Loopback52 10.50.52.1/24</text>
+</g></svg>

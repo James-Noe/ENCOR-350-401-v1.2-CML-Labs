@@ -1,0 +1,430 @@
+annotations:
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: 'Branch bench: VLAN 10 10.0.10.0/24 (R1 .1, SW1 .2, PC1 .100)'
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -250.0
+    y1: 80.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: R1-R2 10.0.12.0/31; Lo0 10.255.0.1 / 10.255.0.2
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 50.0
+    y1: -220.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: PC1 = the auditor laptop
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -250.0
+    y1: 200.0
+    z_index: 0
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R1
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable password cisco
+          username admin privilege 15 password 0 Cisco123!
+          crypto key generate rsa modulus 2048
+          ip ssh server algorithm encryption aes128-cbc aes256-ctr
+          ip ssh server algorithm mac hmac-sha1 hmac-sha2-256
+          ip ssh server algorithm kex diffie-hellman-group14-sha1 diffie-hellman-group14-sha256 ecdh-sha2-nistp256
+          ip ssh server algorithm hostkey ssh-rsa rsa-sha2-256
+          ip http server
+          interface Loopback0
+           ip address 10.255.0.1 255.255.255.255
+          interface Ethernet0/0
+           ip address 10.0.10.1 255.255.255.0
+           no shutdown
+          interface Ethernet0/1
+           ip address 10.0.12.0 255.255.255.254
+           no shutdown
+          interface Ethernet0/2
+           no ip address
+          interface Ethernet0/3
+           no ip address
+          ip route 10.255.0.2 255.255.255.255 10.0.12.1
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 2
+           login local
+           transport input ssh
+          line vty 3 4
+           password cisco
+           login
+           transport input telnet
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: R1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -100
+    y: -150
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R2
+          service password-encryption
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 password 7 072C285F4D0648574453
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          no ip http server
+          no ip http secure-server
+          interface Loopback0
+           ip address 10.255.0.2 255.255.255.255
+          interface Ethernet0/0
+           ip address 10.0.12.1 255.255.255.254
+           no shutdown
+          interface Ethernet0/1
+           no ip address
+          interface Ethernet0/2
+           no ip address
+          interface Ethernet0/3
+           no ip address
+          ip route 10.0.10.0 255.255.255.0 10.0.12.0
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           exec-timeout 0 0
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: R2
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 200
+    y: -150
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW1
+          no ip routing
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          vtp mode transparent
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          ip http server
+          vlan 10
+           name USERS
+          interface Ethernet0/0
+           switchport mode access
+           switchport access vlan 10
+           spanning-tree portfast
+           no shutdown
+          interface Ethernet1/0
+           switchport mode access
+           switchport access vlan 10
+           spanning-tree portfast
+           no shutdown
+          interface Vlan10
+           ip address 10.0.10.2 255.255.255.0
+           no shutdown
+          ip default-gateway 10.0.10.1
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 2
+           login local
+           transport input ssh
+          line vty 3 4
+           password cisco
+           login
+           transport input ssh telnet
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: SW1
+    node_definition: ioll2-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -100
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+      - id: i7
+        label: Ethernet1/2
+        mac_address: null
+        type: physical
+        slot: 6
+      - id: i8
+        label: Ethernet1/3
+        mac_address: null
+        type: physical
+        slot: 7
+      - id: i9
+        label: Ethernet2/0
+        mac_address: null
+        type: physical
+        slot: 8
+      - id: i10
+        label: Ethernet2/1
+        mac_address: null
+        type: physical
+        slot: 9
+      - id: i11
+        label: Ethernet2/2
+        mac_address: null
+        type: physical
+        slot: 10
+      - id: i12
+        label: Ethernet2/3
+        mac_address: null
+        type: physical
+        slot: 11
+      - id: i13
+        label: Ethernet3/0
+        mac_address: null
+        type: physical
+        slot: 12
+      - id: i14
+        label: Ethernet3/1
+        mac_address: null
+        type: physical
+        slot: 13
+      - id: i15
+        label: Ethernet3/2
+        mac_address: null
+        type: physical
+        slot: 14
+      - id: i16
+        label: Ethernet3/3
+        mac_address: null
+        type: physical
+        slot: 15
+  - boot_disk_size: null
+    configuration:
+      - name: boot.sh
+        content: |-
+          hostname PC1
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip address add 10.0.10.100/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.0.10.1
+          echo "READY" >/dev/console
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: PC1
+    node_definition: net-tools
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -100
+    y: 150
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+links:
+  - id: l0
+    n1: n2
+    n2: n0
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: SW1-Ethernet0/0<->R1-Ethernet0/0
+  - id: l1
+    n1: n0
+    n2: n1
+    i1: i2
+    i2: i1
+    conditioning: {}
+    label: R1-Ethernet0/1<->R2-Ethernet0/0
+  - id: l2
+    n1: n3
+    n2: n2
+    i1: i0
+    i2: i5
+    conditioning: {}
+    label: PC1-eth0<->SW1-Ethernet1/0
+lab:
+  description: A branch bench fails an external audit of device access (R1, R2, SW1).
+    See LAB.md
+  notes: ''
+  title: ENCOR LAB-032 Audit Finding Device Access
+  node_staging:
+    enabled: false
+    start_remaining: true
+    abort_on_failure: false
+  version: 0.3.1

@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 956 294" width="956" height="294" role="img">
+<title>MS-4 topology</title>
+<rect width="956" height="294" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M255.6,19.0H264.0M255.6,23.0H264.0"/>
+<path d="M264.0,19.0H272.4M264.0,23.0H272.4"/>
+<path d="M272.4,19.0H280.8M272.4,23.0H280.8"/>
+<path d="M280.8,19.0H289.2M280.8,23.0H289.2"/>
+<path d="M289.2,19.0H297.6M289.2,23.0H297.6"/>
+<path d="M297.6,19.0H306.0M297.6,23.0H306.0"/>
+<path d="M306.0,19.0H314.4M306.0,23.0H314.4"/>
+<path d="M314.4,19.0H322.8M314.4,23.0H322.8"/>
+<path d="M66.6,48.0V66.0"/>
+<path d="M66.6,66.0V84.0"/>
+<path d="M369.0,66.0V84.0"/>
+<path d="M154.8,111.0H163.2"/>
+<path d="M163.2,111.0H171.6"/>
+<path d="M171.6,111.0H180.0"/>
+<path d="M180.0,111.0H188.4"/>
+<path d="M188.4,111.0H196.8"/>
+<path d="M196.8,111.0H205.2"/>
+<path d="M205.2,111.0H213.6"/>
+<path d="M213.6,111.0H222.0"/>
+<path d="M222.0,111.0H230.4"/>
+<path d="M230.4,111.0H238.8"/>
+<path d="M238.8,111.0H247.2"/>
+<path d="M247.2,111.0H255.6"/>
+<path d="M255.6,111.0H264.0"/>
+<path d="M264.0,111.0H272.4"/>
+<path d="M272.4,111.0H280.8"/>
+<path d="M280.8,111.0H289.2"/>
+<path d="M289.2,111.0H297.6"/>
+<path d="M297.6,111.0H306.0"/>
+<path d="M306.0,111.0H314.4"/>
+<path d="M66.6,120.0V138.0"/>
+<path d="M369.0,120.0V138.0"/>
+<path d="M154.8,163.0H163.2M154.8,167.0H163.2"/>
+<path d="M163.2,163.0H171.6M163.2,167.0H171.6"/>
+<path d="M171.6,163.0H180.0M171.6,167.0H180.0"/>
+<path d="M180.0,163.0H188.4M180.0,167.0H188.4"/>
+<path d="M280.8,163.0H289.2M280.8,167.0H289.2"/>
+<path d="M289.2,163.0H297.6M289.2,167.0H297.6"/>
+<path d="M297.6,163.0H306.0M297.6,167.0H306.0"/>
+<path d="M306.0,163.0H314.4M306.0,167.0H314.4"/>
+<path d="M66.6,174.0V192.0"/>
+<path d="M121.2,183.0H129.6"/>
+<path d="M129.6,183.0H133.8"/>
+<path d="M132.8,179.0L138.0,183.0L132.8,187.0" fill="#475569"/>
+<path d="M369.0,174.0V192.0"/>
+<path d="M423.6,183.0H432.0"/>
+<path d="M432.0,183.0H436.2"/>
+<path d="M435.2,179.0L440.4,183.0L435.2,187.0" fill="#475569"/>
+<path d="M66.6,192.0V210.0"/>
+<path d="M121.2,201.0H129.6"/>
+<path d="M129.6,201.0H133.8"/>
+<path d="M132.8,197.0L138.0,201.0L132.8,205.0" fill="#475569"/>
+<path d="M112.8,217.0H121.2M112.8,221.0H121.2"/>
+<path d="M121.2,217.0H129.6M121.2,221.0H129.6"/>
+<path d="M272.4,217.0H280.8M272.4,221.0H280.8"/>
+<path d="M280.8,217.0H289.2M280.8,221.0H289.2"/>
+<path d="M474.0,219.0H482.4"/>
+<path d="M482.4,219.0H486.6"/>
+<path d="M485.6,215.0L490.8,219.0L485.6,223.0" fill="#475569"/>
+<path d="M154.8,255.0H163.2"/>
+<path d="M163.2,255.0H167.4"/>
+<path d="M166.4,251.0L171.6,255.0L166.4,259.0" fill="#475569"/>
+<path d="M415.2,255.0H423.6"/>
+<path d="M423.6,255.0H427.8"/>
+<path d="M426.8,251.0L432.0,255.0L426.8,259.0" fill="#475569"/>
+<path d="M524.4,255.0H532.8"/>
+<path d="M532.8,255.0H537.0"/>
+<path d="M536.0,251.0L541.2,255.0L536.0,259.0" fill="#475569"/>
+<path d="M171.6,273.0H180.0"/>
+<path d="M180.0,273.0H184.2"/>
+<path d="M183.2,269.0L188.4,273.0L183.2,277.0" fill="#475569"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="37.2" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PROV-ISP1</text>
+<text x="112.8" y="25.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (AS 64601) e0/1</text>
+<text x="331.2" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 </text>
+<text x="373.2" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PROV-ISP2</text>
+<text x="448.8" y="25.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (AS 64602)</text>
+<text x="37.2" y="43.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Lo0 198.51.100.1</text>
+<text x="339.6" y="43.5" textLength="420.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Lo0 203.0.113.1, Lo2 203.0.113.50 (partner server)</text>
+<text x="79.2" y="61.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="339.6" y="61.5" textLength="310.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Lo200 192.0.2.200 (the Internet host)</text>
+<text x="381.6" y="79.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="37.2" y="97.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-EDGE1</text>
+<text x="104.4" y="97.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="322.8" y="97.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-EDGE2</text>
+<text x="390.0" y="97.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> Gi1</text>
+<text x="37.2" y="115.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-EDGE1</text>
+<text x="104.4" y="115.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/3</text>
+<text x="322.8" y="115.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-EDGE2</text>
+<text x="390.0" y="115.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> Gi3</text>
+<text x="79.2" y="133.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="381.6" y="133.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gi2</text>
+<text x="37.2" y="151.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE1</text>
+<text x="104.4" y="151.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/3</text>
+<text x="331.2" y="151.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE2</text>
+<text x="398.4" y="151.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/3</text>
+<text x="37.2" y="169.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE1</text>
+<text x="104.4" y="169.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="196.8" y="169.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">core link</text>
+<text x="322.8" y="169.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE2</text>
+<text x="390.0" y="169.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="79.2" y="187.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="146.4" y="187.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-DIST1</text>
+<text x="213.6" y="187.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e1/0</text>
+<text x="381.6" y="187.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="448.8" y="187.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-DIST2</text>
+<text x="516.0" y="187.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e1/1</text>
+<text x="79.2" y="205.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="146.4" y="205.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-DIST2</text>
+<text x="213.6" y="205.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e1/0</text>
+<text x="37.2" y="223.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-DIST1</text>
+<text x="138.0" y="223.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Po1 (e0/0-e0/1)</text>
+<text x="297.6" y="223.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-DIST2</text>
+<text x="364.8" y="223.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> ; both e0/2</text>
+<text x="499.2" y="223.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-ACC1</text>
+<text x="558.0" y="223.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0, e0/1</text>
+<text x="37.2" y="241.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-ACC1</text>
+<text x="96.0" y="241.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">: e1/0 </text>
+<text x="154.8" y="241.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-PC1</text>
+<text x="205.2" y="241.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (VLAN 10), e0/3 </text>
+<text x="348.0" y="241.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-PC2</text>
+<text x="398.4" y="241.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (VLAN 20), e1/1 </text>
+<text x="541.2" y="241.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-PC3</text>
+<text x="591.6" y="241.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (VLAN 50)</text>
+<text x="37.2" y="259.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE1</text>
+<text x="104.4" y="259.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e1/1</text>
+<text x="180.0" y="259.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-RTR1</text>
+<text x="238.8" y="259.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0 ; </text>
+<text x="306.0" y="259.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-RTR1</text>
+<text x="364.8" y="259.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/1</text>
+<text x="440.4" y="259.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">DC switch</text>
+<text x="549.6" y="259.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-AAA1</text>
+<text x="608.4" y="259.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">, </text>
+<text x="625.2" y="259.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-SYSLOG1</text>
+<text x="709.2" y="259.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">, </text>
+<text x="726.0" y="259.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-NMS1</text>
+<text x="784.8" y="259.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">, </text>
+<text x="801.6" y="259.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-MGMT1</text>
+<text x="885.6" y="259.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (ens2)</text>
+<text x="37.2" y="277.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-MGMT1</text>
+<text x="121.2" y="277.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> ens3</text>
+<text x="196.8" y="277.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">NAT</text>
+<text x="222.0" y="277.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> connector</text>
+</g></svg>

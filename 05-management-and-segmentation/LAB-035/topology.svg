@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 822 168" width="822" height="168" role="img">
+<title>LAB-035 topology</title>
+<rect width="822" height="168" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M180.0,39.0H188.4"/>
+<path d="M188.4,39.0H196.8"/>
+<path d="M196.8,39.0H205.2"/>
+<path d="M205.2,39.0H213.6"/>
+<path d="M213.6,39.0H222.0"/>
+<path d="M222.0,39.0H230.4"/>
+<path d="M230.4,39.0H238.8"/>
+<path d="M238.8,39.0H247.2"/>
+<path d="M247.2,39.0H255.6"/>
+<path d="M255.6,39.0H264.0"/>
+<path d="M83.4,66.0V84.0"/>
+<path d="M511.8,66.0V84.0"/>
+<path d="M83.4,84.0V102.0"/>
+<path d="M465.6,102.0L457.2,120.0"/>
+<path d="M583.2,102.0L591.6,120.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="37.2" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="54.0" y="25.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.0.1)</text>
+<text x="37.2" y="43.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 10.0.1.1/31</text>
+<text x="272.4" y="43.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 10.0.1.0/31</text>
+<text x="423.6" y="43.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-RTR1</text>
+<text x="482.4" y="43.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.50.1)</text>
+<text x="37.2" y="61.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 10.0.10.1/24</text>
+<text x="432.0" y="61.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 10.50.50.1/24</text>
+<text x="37.2" y="97.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="96.0" y="97.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">VLAN 10</text>
+<text x="465.6" y="97.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-SW</text>
+<text x="507.6" y="97.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (unmanaged)</text>
+<text x="62.4" y="115.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">SW1</text>
+<text x="87.6" y="115.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (10.0.10.2/24)</text>
+<text x="322.8" y="133.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-SYSLOG1</text>
+<text x="406.8" y="133.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 10.50.50.51</text>
+<text x="549.6" y="133.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-NMS1</text>
+<text x="608.4" y="133.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 10.50.50.60</text>
+<text x="322.8" y="151.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(UDP 514)</text>
+<text x="549.6" y="151.5" textLength="260.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(net-tools, snmp tools, tshark)</text>
+</g></svg>

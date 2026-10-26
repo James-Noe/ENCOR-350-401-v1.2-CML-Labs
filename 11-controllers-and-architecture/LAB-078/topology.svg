@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1032 150" width="1032" height="150" role="img">
+<title>LAB-078 topology</title>
+<rect width="1032" height="150" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M356.4,12.0L348.0,30.0"/>
+<path d="M465.6,21.0H474.0"/>
+<path d="M474.0,21.0H478.2"/>
+<path d="M477.2,17.0L482.4,21.0L477.2,25.0" fill="#475569"/>
+<path d="M196.8,39.0H205.2"/>
+<path d="M205.2,39.0H213.6"/>
+<path d="M213.6,39.0H222.0"/>
+<path d="M532.8,39.0H541.2"/>
+<path d="M541.2,39.0H549.6"/>
+<path d="M549.6,39.0H558.0"/>
+<path d="M532.8,48.0L541.2,66.0"/>
+<path d="M541.2,57.0H549.6"/>
+<path d="M549.6,57.0H558.0"/>
+<path d="M348.0,75.0H356.4"/>
+<path d="M356.4,75.0H364.8"/>
+<path d="M364.8,75.0H373.2"/>
+<path d="M373.2,75.0H381.6"/>
+<path d="M583.2,111.0H591.6"/>
+<path d="M591.6,111.0H600.0"/>
+<path d="M600.0,111.0H608.4"/>
+<path d="M608.4,111.0H616.8"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="12.0" y="25.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-MGMT1</text>
+<text x="96.0" y="25.5" textLength="243.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Ubuntu 24.04, console cisco</text>
+<text x="364.8" y="25.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">cisco; ens3</text>
+<text x="490.8" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">NAT</text>
+<text x="516.0" y="25.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> connector, Internet)</text>
+<text x="28.8" y="43.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">ens2 10.90.50.31/24</text>
+<text x="230.4" y="43.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-SW</text>
+<text x="289.2" y="43.5" textLength="235.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (API segment 10.90.50.0/24)</text>
+<text x="566.4" y="43.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR3</text>
+<text x="642.0" y="43.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> Gi1 10.90.50.11</text>
+<text x="566.4" y="61.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR1</text>
+<text x="642.0" y="61.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0 10.90.50.1</text>
+<text x="12.0" y="79.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR3</text>
+<text x="87.6" y="79.5" textLength="252.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (cat8000v) Gi2 10.90.255.3/31</text>
+<text x="390.0" y="79.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 10.90.255.2/31 </text>
+<text x="558.0" y="79.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR1</text>
+<text x="633.6" y="79.5" textLength="210.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Aster&#x27;s handoff router)</text>
+<text x="188.4" y="97.5" textLength="352.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(OSPF area 0 on this link; leave it alone)</text>
+<text x="12.0" y="115.5" textLength="252.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Aster handoff (to be built on </text>
+<text x="264.0" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR3</text>
+<text x="339.6" y="115.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">):</text>
+<text x="373.2" y="115.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gi2.300</text>
+<text x="448.8" y="115.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.200.60.8/31</text>
+<text x="633.6" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR1</text>
+<text x="709.2" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/2.300</text>
+<text x="801.6" y="115.5" textLength="218.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.200.60.9/31 (VRF ASTER)</text>
+<text x="12.0" y="133.5" textLength="210.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Aster monitoring source: </text>
+<text x="222.0" y="133.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR1</text>
+<text x="297.6" y="133.5" textLength="504.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> Loopback300 10.60.61.10/32, range 10.60.61.0/24 (VRF ASTER)</text>
+</g></svg>

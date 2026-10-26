@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 637 114" width="637" height="114" role="img">
+<title>LAB-002 topology</title>
+<rect width="637" height="114" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M163.2,21.0H171.6"/>
+<path d="M171.6,21.0H180.0"/>
+<path d="M180.0,21.0H188.4"/>
+<path d="M188.4,21.0H196.8"/>
+<path d="M196.8,21.0H205.2"/>
+<path d="M205.2,21.0H213.6"/>
+<path d="M213.6,21.0H222.0"/>
+<path d="M222.0,21.0H230.4"/>
+<path d="M230.4,21.0H238.8"/>
+<path d="M238.8,21.0H247.2"/>
+<path d="M247.2,21.0H255.6"/>
+<path d="M255.6,21.0H264.0"/>
+<path d="M406.8,21.0H415.2"/>
+<path d="M415.2,21.0H423.6"/>
+<path d="M423.6,21.0H432.0"/>
+<path d="M432.0,21.0H440.4"/>
+<path d="M440.4,21.0H448.8"/>
+<path d="M448.8,21.0H457.2"/>
+<path d="M457.2,21.0H465.6"/>
+<path d="M465.6,21.0H474.0"/>
+<path d="M474.0,21.0H482.4"/>
+<path d="M482.4,21.0H490.8"/>
+<path d="M490.8,21.0H499.2"/>
+<path d="M499.2,21.0H507.6"/>
+<path d="M108.6,30.0V48.0"/>
+<path d="M142.2,30.0V48.0"/>
+<path d="M537.0,30.0V48.0"/>
+<path d="M570.6,30.0V48.0"/>
+<path d="M108.6,48.0V66.0"/>
+<path d="M142.2,48.0V66.0"/>
+<path d="M537.0,48.0V66.0"/>
+<path d="M570.6,48.0V66.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="79.2" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">SW1</text>
+<text x="104.4" y="25.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> Et0/0</text>
+<text x="272.4" y="25.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Et0/0 </text>
+<text x="322.8" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">SW2</text>
+<text x="348.0" y="25.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> Et0/1</text>
+<text x="516.0" y="25.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Et0/0 </text>
+<text x="566.4" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">SW3</text>
+<text x="54.0" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Et1/0</text>
+<text x="154.8" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Et1/1</text>
+<text x="482.4" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Et1/0</text>
+<text x="583.2" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Et1/1</text>
+<text x="87.6" y="79.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC1</text>
+<text x="138.0" y="79.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC2</text>
+<text x="516.0" y="79.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC3</text>
+<text x="566.4" y="79.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC4</text>
+<text x="62.4" y="97.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">VLAN 10</text>
+<text x="138.0" y="97.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">VLAN 20</text>
+<text x="490.8" y="97.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">VLAN 10</text>
+<text x="566.4" y="97.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">VLAN 20</text>
+</g></svg>

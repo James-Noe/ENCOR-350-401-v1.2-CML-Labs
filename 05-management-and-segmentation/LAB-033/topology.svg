@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 168" width="620" height="168" role="img">
+<title>LAB-033 topology</title>
+<rect width="620" height="168" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M180.0,39.0H188.4"/>
+<path d="M188.4,39.0H196.8"/>
+<path d="M196.8,39.0H205.2"/>
+<path d="M205.2,39.0H213.6"/>
+<path d="M213.6,39.0H222.0"/>
+<path d="M222.0,39.0H230.4"/>
+<path d="M230.4,39.0H238.8"/>
+<path d="M238.8,39.0H247.2"/>
+<path d="M247.2,39.0H255.6"/>
+<path d="M255.6,39.0H264.0"/>
+<path d="M264.0,39.0H272.4"/>
+<path d="M272.4,39.0H280.8"/>
+<path d="M280.8,39.0H289.2"/>
+<path d="M289.2,39.0H297.6"/>
+<path d="M297.6,39.0H306.0"/>
+<path d="M306.0,39.0H314.4"/>
+<path d="M314.4,39.0H322.8"/>
+<path d="M322.8,39.0H331.2"/>
+<path d="M331.2,39.0H339.6"/>
+<path d="M402.6,66.0V84.0"/>
+<path d="M373.2,102.0L364.8,120.0"/>
+<path d="M474.0,102.0L482.4,120.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="37.2" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="54.0" y="25.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.0.1)</text>
+<text x="356.4" y="25.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-RTR1</text>
+<text x="415.2" y="25.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.50.1)</text>
+<text x="37.2" y="43.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 10.0.1.1/31</text>
+<text x="348.0" y="43.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 10.0.1.0/31</text>
+<text x="356.4" y="61.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 10.50.50.1/24</text>
+<text x="373.2" y="97.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-SW</text>
+<text x="415.2" y="97.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (unmanaged switch)</text>
+<text x="196.8" y="133.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-AAA1</text>
+<text x="255.6" y="133.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 10.50.50.52</text>
+<text x="448.8" y="133.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-NMS1</text>
+<text x="507.6" y="133.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 10.50.50.60</text>
+<text x="196.8" y="151.5" textLength="193.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(RADIUS, UDP 1812/1813)</text>
+<text x="448.8" y="151.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(management host)</text>
+</g></svg>

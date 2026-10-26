@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 847 240" width="847" height="240" role="img">
+<title>LAB-068 topology</title>
+<rect width="847" height="240" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M314.4,21.0H322.8"/>
+<path d="M322.8,21.0H327.0"/>
+<path d="M326.0,17.0L331.2,21.0L326.0,25.0" fill="#475569"/>
+<path d="M66.6,30.0V48.0"/>
+<path d="M49.8,66.0V84.0"/>
+<path d="M163.2,66.0L171.6,84.0"/>
+<path d="M104.4,111.0H112.8"/>
+<path d="M112.8,111.0H121.2"/>
+<path d="M121.2,111.0H129.6"/>
+<path d="M129.6,111.0H138.0"/>
+<path d="M138.0,111.0H146.4"/>
+<path d="M146.4,111.0H154.8"/>
+<path d="M154.8,111.0H163.2"/>
+<path d="M255.6,111.0H264.0"/>
+<path d="M264.0,111.0H272.4"/>
+<path d="M272.4,111.0H280.8"/>
+<path d="M280.8,111.0H289.2"/>
+<path d="M474.0,111.0H482.4"/>
+<path d="M482.4,111.0H490.8"/>
+<path d="M490.8,111.0H499.2"/>
+<path d="M499.2,111.0H507.6"/>
+<path d="M692.4,111.0H700.8"/>
+<path d="M700.8,111.0H709.2"/>
+<path d="M709.2,111.0H717.6"/>
+<path d="M717.6,111.0H726.0"/>
+<path d="M411.0,120.0V138.0"/>
+<path d="M772.2,120.0V138.0"/>
+<path d="M411.0,156.0V174.0"/>
+<path d="M772.2,156.0V174.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="20.4" y="25.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-MGMT1</text>
+<text x="104.4" y="25.5" textLength="201.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (ens2 10.90.50.31; ens3</text>
+<text x="339.6" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">NAT</text>
+<text x="364.8" y="25.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> connector, Internet)</text>
+<text x="37.2" y="61.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-SW</text>
+<text x="96.0" y="61.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (unmanaged)</text>
+<text x="20.4" y="97.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 (.1)</text>
+<text x="171.6" y="97.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gi1 (.11)</text>
+<text x="20.4" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR1</text>
+<text x="171.6" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR3</text>
+<text x="297.6" y="115.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gi4 (10.90.255.6/31)</text>
+<text x="516.0" y="115.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gi1 (10.90.255.7/31)</text>
+<text x="734.4" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR4</text>
+<text x="20.4" y="133.5" textLength="352.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 (10.90.255.2/31) Gi2 (10.90.255.3/31)</text>
+<text x="398.4" y="151.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gi3</text>
+<text x="759.6" y="151.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gi2</text>
+<text x="373.2" y="187.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-PC1</text>
+<text x="734.4" y="187.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-PC2</text>
+<text x="339.6" y="205.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.90.40.101/24</text>
+<text x="709.2" y="205.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.90.40.102/24</text>
+<text x="356.4" y="223.5" textLength="109.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">gw 10.90.40.1</text>
+<text x="726.0" y="223.5" textLength="109.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">gw 10.90.40.1</text>
+</g></svg>

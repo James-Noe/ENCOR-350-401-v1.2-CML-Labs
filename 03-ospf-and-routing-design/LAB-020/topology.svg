@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 965 168" width="965" height="168" role="img">
+<title>LAB-020 topology</title>
+<rect width="965" height="168" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M112.8,21.0H121.2"/>
+<path d="M121.2,21.0H129.6"/>
+<path d="M129.6,21.0H138.0"/>
+<path d="M583.2,21.0H591.6"/>
+<path d="M591.6,21.0H600.0"/>
+<path d="M600.0,21.0H608.4"/>
+<path d="M205.2,30.0L213.6,48.0"/>
+<path d="M205.2,57.0H213.6"/>
+<path d="M213.6,57.0H222.0"/>
+<path d="M222.0,57.0H230.4"/>
+<path d="M213.6,66.0L205.2,84.0"/>
+<path d="M537.0,66.0V84.0"/>
+<path d="M167.4,84.0V102.0"/>
+<path d="M272.4,93.0H280.8"/>
+<path d="M280.8,93.0H289.2"/>
+<path d="M289.2,93.0H297.6"/>
+<path d="M297.6,93.0H306.0"/>
+<path d="M423.6,93.0H432.0"/>
+<path d="M432.0,93.0H440.4"/>
+<path d="M440.4,93.0H448.8"/>
+<path d="M448.8,93.0H457.2"/>
+<path d="M457.2,93.0H465.6"/>
+<path d="M465.6,93.0H474.0"/>
+<path d="M474.0,93.0H482.4"/>
+<path d="M482.4,93.0H490.8"/>
+<path d="M490.8,93.0H499.2"/>
+<path d="M499.2,93.0H507.6"/>
+<path d="M507.6,93.0H516.0"/>
+<path d="M516.0,93.0H524.4"/>
+<path d="M524.4,93.0H532.8"/>
+<path d="M532.8,93.0H537.0M537.0,84.0V93.0"/>
+<path d="M167.4,102.0V120.0"/>
+<path d="M163.2,129.0H171.6"/>
+<path d="M171.6,129.0H180.0"/>
+<path d="M180.0,129.0H188.4"/>
+<path d="M188.4,129.0H196.8"/>
+<path d="M314.4,129.0H322.8"/>
+<path d="M322.8,129.0H331.2"/>
+<path d="M331.2,129.0H339.6"/>
+<path d="M339.6,129.0H348.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="79.2" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC1</text>
+<text x="146.4" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="163.2" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/1</text>
+<text x="516.0" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R4</text>
+<text x="532.8" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/1</text>
+<text x="616.8" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC2</text>
+<text x="138.0" y="43.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="154.8" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="516.0" y="43.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R4</text>
+<text x="532.8" y="43.5" textLength="210.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> Lo1-Lo4 (branch subnets)</text>
+<text x="138.0" y="61.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R2</text>
+<text x="154.8" y="61.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="238.8" y="61.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">SW1</text>
+<text x="264.0" y="61.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (VLAN 123, LAN123)</text>
+<text x="516.0" y="61.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R4</text>
+<text x="532.8" y="61.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="138.0" y="79.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R3</text>
+<text x="154.8" y="79.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="205.2" y="97.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R3</text>
+<text x="222.0" y="97.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/1</text>
+<text x="314.4" y="97.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.34.0/24</text>
+<text x="96.0" y="133.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R2</text>
+<text x="112.8" y="133.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/1</text>
+<text x="205.2" y="133.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.25.0/24</text>
+<text x="356.4" y="133.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R5</text>
+<text x="373.2" y="133.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="356.4" y="151.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R5</text>
+<text x="373.2" y="151.5" textLength="579.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> Lo1-Lo4 (partner systems), Lo5 (partner lab), Lo6 (old test network)</text>
+</g></svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 763 168" width="763" height="168" role="img">
+<title>LAB-061 topology</title>
+<rect width="763" height="168" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M356.4,21.0H364.8"/>
+<path d="M364.8,21.0H373.2"/>
+<path d="M373.2,21.0H381.6"/>
+<path d="M381.6,21.0H390.0"/>
+<path d="M390.0,21.0H394.2M394.2,21.0V30.0"/>
+<path d="M394.2,30.0V48.0"/>
+<path d="M306.0,57.0H314.4"/>
+<path d="M314.4,57.0H322.8"/>
+<path d="M322.8,57.0H331.2"/>
+<path d="M331.2,57.0H339.6"/>
+<path d="M339.6,57.0H348.0"/>
+<path d="M348.0,57.0H356.4"/>
+<path d="M356.4,57.0H364.8"/>
+<path d="M364.8,57.0H373.2"/>
+<path d="M373.2,57.0H381.6"/>
+<path d="M381.6,57.0H390.0"/>
+<path d="M390.0,57.0H394.2M394.2,57.0H398.4M394.2,48.0V57.0M394.2,57.0V66.0"/>
+<path d="M398.4,57.0H406.8"/>
+<path d="M406.8,57.0H415.2"/>
+<path d="M394.2,66.0V84.0"/>
+<path d="M348.0,93.0H356.4"/>
+<path d="M356.4,93.0H364.8"/>
+<path d="M364.8,93.0H373.2"/>
+<path d="M373.2,93.0H381.6"/>
+<path d="M381.6,93.0H390.0"/>
+<path d="M390.0,93.0H394.2M394.2,84.0V93.0"/>
+<path d="M297.6,127.0H306.0M297.6,131.0H306.0"/>
+<path d="M306.0,127.0H314.4M306.0,131.0H314.4"/>
+<path d="M314.4,127.0H322.8M314.4,131.0H322.8"/>
+<path d="M322.8,127.0H331.2M322.8,131.0H331.2"/>
+<path d="M171.6,147.0H180.0"/>
+<path d="M180.0,147.0H188.4"/>
+<path d="M188.4,147.0H196.8"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="37.2" y="25.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-MGMT1</text>
+<text x="121.2" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Ubuntu)</text>
+<text x="213.6" y="25.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">ens2 10.90.50.31</text>
+<text x="37.2" y="61.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR1</text>
+<text x="112.8" y="61.5" textLength="184.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (IOL) e0/0 10.90.50.1</text>
+<text x="423.6" y="61.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-SW</text>
+<text x="482.4" y="61.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (10.90.50.0/24)</text>
+<text x="37.2" y="97.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR3</text>
+<text x="112.8" y="97.5" textLength="226.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (cat8000v) Gi1 10.90.50.11</text>
+<text x="37.2" y="133.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR1</text>
+<text x="112.8" y="133.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/2 10.90.255.2/31</text>
+<text x="348.0" y="133.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gi2 10.90.255.3/31 </text>
+<text x="507.6" y="133.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-RTR3</text>
+<text x="625.2" y="133.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(OSPF 1 area 0)</text>
+<text x="37.2" y="151.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">AUTO-MGMT1</text>
+<text x="121.2" y="151.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> ens3</text>
+<text x="205.2" y="151.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">NAT</text>
+<text x="230.4" y="151.5" textLength="344.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> connector (DHCP 192.168.255.x, internet)</text>
+</g></svg>

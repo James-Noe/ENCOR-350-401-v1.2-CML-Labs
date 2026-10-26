@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 973 222" width="973" height="222" role="img">
+<title>LAB-023 topology</title>
+<rect width="973" height="222" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M289.2,39.0H297.6"/>
+<path d="M297.6,39.0H306.0"/>
+<path d="M306.0,39.0H314.4"/>
+<path d="M314.4,39.0H322.8"/>
+<path d="M322.8,39.0H331.2"/>
+<path d="M331.2,39.0H339.6"/>
+<path d="M339.6,39.0H348.0"/>
+<path d="M348.0,39.0H356.4"/>
+<path d="M356.4,39.0H364.8"/>
+<path d="M364.8,39.0H373.2"/>
+<path d="M373.2,39.0H381.6"/>
+<path d="M381.6,39.0H390.0"/>
+<path d="M390.0,39.0H398.4"/>
+<path d="M507.6,39.0H516.0"/>
+<path d="M516.0,39.0H524.4"/>
+<path d="M524.4,39.0H532.8"/>
+<path d="M532.8,39.0H541.2"/>
+<path d="M436.2,48.0V66.0"/>
+<path d="M83.4,66.0V84.0"/>
+<path d="M285.0,66.0V84.0"/>
+<path d="M83.4,84.0V102.0"/>
+<path d="M436.2,84.0V102.0"/>
+<path d="M285.0,102.0V120.0"/>
+<path d="M238.8,129.0H247.2"/>
+<path d="M247.2,129.0H255.6"/>
+<path d="M255.6,129.0H264.0"/>
+<path d="M264.0,129.0H272.4"/>
+<path d="M83.4,156.0V174.0"/>
+<path d="M129.6,183.0H138.0"/>
+<path d="M138.0,183.0H146.4"/>
+<path d="M129.6,201.0H138.0"/>
+<path d="M138.0,201.0H146.4"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="154.8" y="25.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Provider A (</text>
+<text x="255.6" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R2</text>
+<text x="272.4" y="25.5" textLength="8.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">)</text>
+<text x="415.2" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Internet </text>
+<text x="490.8" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">LAN</text>
+<text x="516.0" y="25.5" textLength="109.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 192.0.2.0/25</text>
+<text x="154.8" y="43.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 192.0.2.2</text>
+<text x="406.8" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">INET</text>
+<text x="440.4" y="43.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> switch</text>
+<text x="549.6" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">SRV1</text>
+<text x="583.2" y="43.5" textLength="285.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 192.0.2.100 (web server, port 80)</text>
+<text x="37.2" y="61.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 198.51.100.33/29</text>
+<text x="238.8" y="61.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 10.0.23.2</text>
+<text x="398.4" y="79.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R3</text>
+<text x="415.2" y="79.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/2 192.0.2.3</text>
+<text x="238.8" y="97.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(R2-R3 direct)</text>
+<text x="37.2" y="115.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="54.0" y="115.5" textLength="184.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0 198.51.100.34/29</text>
+<text x="390.0" y="115.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Provider B (</text>
+<text x="490.8" y="115.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R3</text>
+<text x="507.6" y="115.5" textLength="8.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">)</text>
+<text x="37.2" y="133.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="54.0" y="133.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/1 203.0.113.34/29</text>
+<text x="280.8" y="133.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R3</text>
+<text x="297.6" y="133.5" textLength="663.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0 203.0.113.33/29, Loopback1 192.0.2.129/25 (provider B&#x27;s customer network)</text>
+<text x="37.2" y="151.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="54.0" y="151.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/2 10.0.10.1/24</text>
+<text x="37.2" y="187.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">LAN</text>
+<text x="62.4" y="187.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> switch</text>
+<text x="154.8" y="187.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC1</text>
+<text x="180.0" y="187.5" textLength="403.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (10.0.10.101, also 10.0.10.111 and 10.0.10.112)</text>
+<text x="154.8" y="205.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC2</text>
+<text x="180.0" y="205.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (10.0.10.102)</text>
+</g></svg>

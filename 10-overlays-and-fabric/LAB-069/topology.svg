@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 738 276" width="738" height="276" role="img">
+<title>LAB-069 topology</title>
+<rect width="738" height="276" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M268.2,30.0V48.0"/>
+<path d="M507.6,30.0L499.2,48.0"/>
+<path d="M411.0,138.0V156.0"/>
+<path d="M616.8,138.0L608.4,156.0"/>
+<path d="M411.0,156.0V174.0"/>
+<path d="M411.0,192.0V210.0"/>
+<path d="M411.0,210.0V228.0"/>
+<path d="M432.0,237.0H440.4"/>
+<path d="M440.4,237.0H448.8"/>
+<path d="M448.8,237.0H457.2"/>
+<path d="M507.6,237.0H516.0"/>
+<path d="M516.0,237.0H524.4"/>
+<path d="M524.4,237.0H532.8"/>
+<path d="M532.8,237.0H541.2"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="222.0" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-MSMR1</text>
+<text x="297.6" y="25.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.60.1)</text>
+<text x="280.8" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="339.6" y="43.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.255.0/31 (.0</text>
+<text x="516.0" y="43.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">.1)</text>
+<text x="222.0" y="61.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-SPINE1</text>
+<text x="306.0" y="61.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.60.2)</text>
+<text x="87.6" y="79.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 (.2)</text>
+<text x="222.0" y="79.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 (.4)</text>
+<text x="390.0" y="79.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/3 (.6)</text>
+<text x="37.2" y="97.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.255.2/31</text>
+<text x="180.0" y="97.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.255.4/31</text>
+<text x="356.4" y="97.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.255.6/31</text>
+<text x="87.6" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 (.3)</text>
+<text x="222.0" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 (.5)</text>
+<text x="390.0" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/3 (.7)</text>
+<text x="45.6" y="133.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-XTR1</text>
+<text x="112.8" y="133.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (.11)</text>
+<text x="196.8" y="133.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-XTR2</text>
+<text x="264.0" y="133.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (.12)</text>
+<text x="364.8" y="133.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-BDR1</text>
+<text x="432.0" y="133.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.60.21)</text>
+<text x="45.6" y="151.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 CORP</text>
+<text x="196.8" y="151.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 IOT</text>
+<text x="423.6" y="151.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 (dot1q 3001 CORP</text>
+<text x="625.2" y="151.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">3002 IOT)</text>
+<text x="54.0" y="169.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-PC1</text>
+<text x="205.2" y="169.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-PC2</text>
+<text x="423.6" y="169.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="364.8" y="187.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-FUS1</text>
+<text x="423.6" y="187.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (AS 65010)</text>
+<text x="423.6" y="205.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 10.50.255.1/31</text>
+<text x="423.6" y="223.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 10.50.255.0/31</text>
+<text x="364.8" y="241.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-RTR1</text>
+<text x="465.6" y="241.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/3</text>
+<text x="549.6" y="241.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-DNS1</text>
+<text x="608.4" y="241.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (10.50.51.53)</text>
+<text x="364.8" y="259.5" textLength="260.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Lo52 10.50.52.1/24 (not shared)</text>
+</g></svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 814 60" width="814" height="60" role="img">
+<title>LAB-032 topology</title>
+<rect width="814" height="60" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M87.6,21.0H96.0"/>
+<path d="M96.0,21.0H104.4"/>
+<path d="M104.4,21.0H112.8"/>
+<path d="M112.8,21.0H121.2"/>
+<path d="M238.8,21.0H247.2"/>
+<path d="M247.2,21.0H255.6"/>
+<path d="M255.6,21.0H264.0"/>
+<path d="M264.0,21.0H272.4"/>
+<path d="M390.0,21.0H398.4"/>
+<path d="M398.4,21.0H406.8"/>
+<path d="M406.8,21.0H415.2"/>
+<path d="M415.2,21.0H423.6"/>
+<path d="M549.6,21.0H558.0"/>
+<path d="M558.0,21.0H566.4"/>
+<path d="M566.4,21.0H574.8"/>
+<path d="M574.8,21.0H583.2"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="20.4" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R2</text>
+<text x="37.2" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="129.6" y="25.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.12.0/31</text>
+<text x="280.8" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 </text>
+<text x="322.8" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="339.6" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="432.0" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 </text>
+<text x="474.0" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">SW1</text>
+<text x="499.2" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e1/0</text>
+<text x="591.6" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">eth0 </text>
+<text x="633.6" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC1</text>
+<text x="658.8" y="25.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (auditor laptop)</text>
+<text x="20.4" y="43.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Lo0 10.255.0.2</text>
+<text x="280.8" y="43.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Lo0 10.255.0.1</text>
+<text x="457.2" y="43.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">VLAN 10 10.0.10.0/24</text>
+</g></svg>

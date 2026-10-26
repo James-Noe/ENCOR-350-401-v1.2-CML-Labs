@@ -1,0 +1,1113 @@
+annotations:
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: 'VERIDIAN DC (AS 65010): shared services 10.50.51.0/24, fusion link
+      10.50.255.0/31'
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -500.0
+    y1: -820.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: Handover dot1q 3001 CORP 10.200.60.2/31  3002 IOT 10.200.60.4/31
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -500.0
+    y1: -300.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: 'ASTER FABRIC (AS 65060): underlay 10.60.255.0/24, RLOCs 10.255.60.0/24'
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -500.0
+    y1: -100.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#333333'
+    rotation: 0
+    text_bold: false
+    text_content: VN CORP 10.60.10.0/23  VN IOT 10.60.20.0/23
+    text_font: ''
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -500.0
+    y1: 300.0
+    z_index: 0
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: hosts
+        content: '10.50.51.53 dns1.veridian.example dns1
+
+          '
+      - name: dnsmasq.conf
+        content: |-
+          no-resolv
+          addn-hosts=/etc/banner_add_hosts
+          domain=veridian.example
+          local=/veridian.example/
+          expand-hosts
+          log-queries
+          log-facility=-
+          address=/erp.veridian.example/10.50.51.53
+      - name: boot.sh
+        content: |-
+          ip address add 10.50.51.53/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.50.51.1
+          echo "READY" >/dev/console
+          exit 0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: DC-DNS1
+    node_definition: dnsmasq
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 0
+    y: -800
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i1
+        label: eth1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i2
+        label: eth2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i3
+        label: eth3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname DC-RTR1
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vrf definition MGMT
+           address-family ipv4
+           exit-address-family
+          ip routing
+          crypto key generate rsa modulus 2048
+          ip ssh version 2
+          interface Loopback0
+           ip address 10.255.50.1 255.255.255.255
+           ip ospf 1 area 50
+          interface Ethernet0/0
+           description HQ uplink (not used in F-H)
+           no ip address
+           shutdown
+          interface Ethernet0/0.99
+           description MGMT VRF uplink (not used in F-H)
+           encapsulation dot1q 99
+           vrf forwarding MGMT
+           no ip address
+           shutdown
+          interface Ethernet0/1
+           description DC services segment
+           vrf forwarding MGMT
+           ip address 10.50.50.1 255.255.255.0
+           ip ospf 99 area 0
+           no shutdown
+          interface Ethernet0/2
+           description DC-FUS1 Ethernet0/0
+           ip address 10.50.255.0 255.255.255.254
+           ip ospf 1 area 50
+           ip ospf network point-to-point
+           ip ospf cost 10
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           no shutdown
+          interface Ethernet0/3
+           description shared services segment
+           ip address 10.50.51.1 255.255.255.0
+           ip ospf 1 area 50
+           no shutdown
+          interface Loopback52
+           description reserved second shared service
+           ip address 10.50.52.1 255.255.255.0
+           ip ospf network point-to-point
+           ip ospf 1 area 50
+          router ospf 1
+           router-id 10.255.50.1
+           passive-interface default
+           no passive-interface Ethernet0/2
+          router ospf 99 vrf MGMT
+           router-id 10.50.50.1
+           passive-interface default
+          ip access-list standard MGMT-HOSTS
+           10 permit 10.10.99.0 0.0.0.255
+           20 permit 10.50.50.0 0.0.0.255
+           40 deny any log
+          ipv6 access-list NO-VTY6
+           deny ipv6 any any log
+          aaa new-model
+          aaa authentication login CON none
+          aaa authentication enable default enable none
+          radius server DC-AAA1
+           address ipv4 10.50.50.52 auth-port 1812 acct-port 1813
+           key RADKEY123
+          aaa group server radius RADGRP
+           server name DC-AAA1
+           ip vrf forwarding MGMT
+           ip radius source-interface Ethernet0/1
+          radius-server dead-criteria time 5 tries 2
+          radius-server deadtime 1
+          aaa authentication login VTY group RADGRP local
+          aaa authorization exec VTY group RADGRP local
+          aaa accounting exec VTY start-stop group RADGRP
+          logging host 10.50.50.51 vrf MGMT
+          logging trap informational
+          logging source-interface Ethernet0/1 vrf MGMT
+          snmp-server group NMSGROUP v3 priv access MGMT-HOSTS
+          snmp-server user nmsuser NMSGROUP v3 auth sha AUTHPASS123 priv aes 128 PRIVPASS123
+          ntp authentication-key 1 hmac-sha2-256 NTPKEY123
+          ntp authenticate
+          ntp trusted-key 1
+          ntp master 3
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+           login authentication CON
+          line vty 0 4
+           login authentication VTY
+           authorization exec VTY
+           accounting exec VTY
+           exec-timeout 10 0
+           transport input ssh
+           access-class MGMT-HOSTS in vrf-also
+           ipv6 access-class NO-VTY6 in
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: DC-RTR1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 0
+    y: -600
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname DC-FUS1
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vrf definition CORP
+           rd 65010:1
+           address-family ipv4
+            export map CORP-EXP
+            route-target export 65010:1
+            route-target import 65010:50
+           exit-address-family
+          vrf definition IOT
+           rd 65010:2
+           address-family ipv4
+            export map IOT-EXP
+            route-target export 65010:2
+           exit-address-family
+          vrf definition SHARED
+           rd 65010:50
+           address-family ipv4
+            export map SHARED-EXP
+            route-target export 65010:50
+            route-target import 65010:1
+            route-target import 65010:2
+           exit-address-family
+          interface Loopback0
+           ip address 10.255.50.5 255.255.255.255
+          interface Ethernet0/0
+           description DC-RTR1 Ethernet0/2
+           vrf forwarding SHARED
+           ip address 10.50.255.1 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 50 area 50
+           no shutdown
+          interface Ethernet0/1
+           description handover to FAB-BDR1 Ethernet0/0
+           no ip address
+           no shutdown
+          interface Ethernet0/1.3001
+           description CORP handover
+           encapsulation dot1q 3001
+           vrf forwarding CORP
+           ip address 10.200.60.2 255.255.255.254
+          interface Ethernet0/1.3002
+           description IOT handover
+           encapsulation dot1q 3002
+           vrf forwarding IOT
+           ip address 10.200.60.4 255.255.255.254
+          router ospf 50 vrf SHARED
+           router-id 10.255.50.5
+           passive-interface default
+           no passive-interface Ethernet0/0
+           redistribute bgp 65010 subnets route-map BGP-TO-OSPF
+          router bgp 65010
+           bgp router-id 10.255.50.5
+           bgp log-neighbor-changes
+           address-family ipv4 vrf CORP
+            neighbor 10.200.60.3 remote-as 65060
+            neighbor 10.200.60.3 activate
+           exit-address-family
+           address-family ipv4 vrf IOT
+            neighbor 10.200.60.5 remote-as 65060
+            neighbor 10.200.60.5 activate
+           exit-address-family
+           address-family ipv4 vrf SHARED
+            redistribute ospf 50 route-map OSPF-TO-BGP
+           exit-address-family
+          ip prefix-list SHARED-SERVICES seq 10 permit 10.50.51.0/24
+          ip prefix-list CORP-USERS seq 10 permit 10.60.10.0/23 le 24
+          ip prefix-list IOT-USERS seq 10 permit 10.60.20.0/23 le 24
+          route-map SHARED-EXP permit 10
+           match ip address prefix-list SHARED-SERVICES
+          route-map CORP-EXP permit 10
+           match ip address prefix-list CORP-USERS
+          route-map IOT-EXP permit 10
+           match ip address prefix-list IOT-USERS
+          route-map OSPF-TO-BGP permit 10
+           match ip address prefix-list SHARED-SERVICES
+          route-map BGP-TO-OSPF permit 10
+           match ip address prefix-list CORP-USERS
+          route-map BGP-TO-OSPF permit 20
+           match ip address prefix-list IOT-USERS
+          ip ssh version 2
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: DC-FUS1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 0
+    y: -400
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname FAB-BDR1
+          no ip domain lookup
+          ip domain name aster.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vrf definition CORP
+           rd 65060:1
+           address-family ipv4
+           exit-address-family
+          vrf definition IOT
+           rd 65060:2
+           address-family ipv4
+           exit-address-family
+          interface Loopback0
+           ip address 10.255.60.21 255.255.255.255
+           ip ospf 1 area 0
+          interface Ethernet0/0
+           description handover to DC-FUS1 Ethernet0/1
+           no ip address
+           no shutdown
+          interface Ethernet0/0.3001
+           description CORP handover
+           encapsulation dot1q 3001
+           vrf forwarding CORP
+           ip address 10.200.60.3 255.255.255.254
+          interface Ethernet0/0.3002
+           description IOT handover
+           encapsulation dot1q 3002
+           vrf forwarding IOT
+           ip address 10.200.60.5 255.255.255.254
+          interface Ethernet0/3
+           description to FAB-SPINE1 Ethernet0/3
+           ip address 10.60.255.7 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 1 area 0
+           no shutdown
+          interface Ethernet0/1
+           shutdown
+          interface Ethernet0/2
+           shutdown
+          router ospf 1
+           router-id 10.255.60.21
+           passive-interface Loopback0
+          ip route vrf CORP 10.60.10.0 255.255.254.0 Null0
+          ip route vrf IOT 10.60.20.0 255.255.254.0 Null0
+          router bgp 65060
+           bgp router-id 10.255.60.21
+           bgp log-neighbor-changes
+           address-family ipv4 vrf CORP
+            neighbor 10.200.60.2 remote-as 65010
+            network 10.60.10.0 mask 255.255.254.0
+            neighbor 10.200.60.2 activate
+           exit-address-family
+           address-family ipv4 vrf IOT
+            neighbor 10.200.60.4 remote-as 65010
+            network 10.60.20.0 mask 255.255.254.0
+            neighbor 10.200.60.4 activate
+           exit-address-family
+          ip ssh version 2
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          router lisp
+           locator-set RLOC
+            IPv4-interface Loopback0 priority 1 weight 100
+           service ipv4
+            itr map-resolver 10.255.60.1
+            proxy-etr
+            proxy-itr 10.255.60.21
+           instance-id 4097
+            service ipv4
+             eid-table vrf CORP
+           instance-id 4098
+            service ipv4
+             eid-table vrf IOT
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: FAB-BDR1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -200
+    y: -200
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname FAB-MSMR1
+          no ip domain lookup
+          ip domain name aster.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          interface Loopback0
+           ip address 10.255.60.1 255.255.255.255
+           ip ospf 1 area 0
+          interface Ethernet0/0
+           description to FAB-SPINE1 Ethernet0/0
+           ip address 10.60.255.0 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 1 area 0
+           no shutdown
+          router ospf 1
+           router-id 10.255.60.1
+           passive-interface Loopback0
+          ip ssh version 2
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          router lisp
+           service ipv4
+            map-server
+            map-resolver
+           site AST-XTR1
+            authentication-key ROUTEKEY123
+            eid-record instance-id 4097 10.60.10.0/24
+            eid-record instance-id 4098 10.60.20.0/24
+           site AST-XTR2
+            authentication-key ROUTEKEY123
+            eid-record instance-id 4097 10.60.11.0/24
+            eid-record instance-id 4098 10.60.21.0/24
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: FAB-MSMR1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 200
+    y: -200
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname FAB-SPINE1
+          no ip domain lookup
+          ip domain name aster.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          interface Loopback0
+           ip address 10.255.60.2 255.255.255.255
+           ip ospf 1 area 0
+          interface Ethernet0/0
+           description to FAB-MSMR1 Ethernet0/0
+           ip address 10.60.255.1 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 1 area 0
+           no shutdown
+          interface Ethernet0/1
+           description to FAB-XTR1 Ethernet0/0
+           ip address 10.60.255.2 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 1 area 0
+           no shutdown
+          interface Ethernet0/2
+           description to FAB-XTR2 Ethernet0/0
+           ip address 10.60.255.4 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 1 area 0
+           no shutdown
+          interface Ethernet0/3
+           description to FAB-BDR1 Ethernet0/3
+           ip address 10.60.255.6 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 1 area 0
+           no shutdown
+          router ospf 1
+           router-id 10.255.60.2
+           passive-interface Loopback0
+          ntp master 3
+          ip ssh version 2
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: FAB-SPINE1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 0
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname FAB-XTR1
+          no ip domain lookup
+          ip domain name aster.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vrf definition CORP
+           rd 65060:1
+           address-family ipv4
+           exit-address-family
+          vrf definition IOT
+           rd 65060:2
+           address-family ipv4
+           exit-address-family
+          interface Loopback0
+           ip address 10.255.60.11 255.255.255.255
+           ip ospf 1 area 0
+          interface Ethernet0/0
+           description to FAB-SPINE1 Ethernet0/1
+           ip address 10.60.255.3 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 1 area 0
+           no shutdown
+          interface Ethernet0/1
+           description PC LAN
+           vrf forwarding CORP
+           ip address 10.60.10.1 255.255.255.0
+           no shutdown
+          interface Loopback20
+           description IOT hub
+           vrf forwarding IOT
+           ip address 10.60.20.1 255.255.255.0
+          router ospf 1
+           router-id 10.255.60.11
+           passive-interface Loopback0
+          ip ssh version 2
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          router lisp
+           locator-set RLOC
+            IPv4-interface Loopback0 priority 1 weight 100
+           service ipv4
+            itr map-resolver 10.255.60.1
+            itr
+            etr map-server 10.255.60.1 key ROUTEKEY132
+            etr
+            use-petr 10.255.60.21
+           instance-id 4097
+            service ipv4
+             eid-table vrf CORP
+             database-mapping 10.60.10.0/24 locator-set RLOC
+           instance-id 4098
+            service ipv4
+             eid-table vrf IOT
+             database-mapping 10.60.20.0/24 locator-set RLOC
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: FAB-XTR1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -200
+    y: 200
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname FAB-XTR2
+          no ip domain lookup
+          ip domain name aster.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vrf definition CORP
+           rd 65060:1
+           address-family ipv4
+           exit-address-family
+          vrf definition IOT
+           rd 65060:2
+           address-family ipv4
+           exit-address-family
+          interface Loopback0
+           ip address 10.255.60.12 255.255.255.255
+           ip ospf 1 area 0
+          interface Ethernet0/0
+           description to FAB-SPINE1 Ethernet0/2
+           ip address 10.60.255.5 255.255.255.254
+           ip ospf network point-to-point
+           ip ospf hello-interval 1
+           ip ospf dead-interval 4
+           ip ospf 1 area 0
+           no shutdown
+          interface Ethernet0/1
+           description PC LAN
+           vrf forwarding IOT
+           ip address 10.60.21.1 255.255.255.0
+           no shutdown
+          interface Loopback11
+           description printer
+           vrf forwarding CORP
+           ip address 10.60.11.1 255.255.255.0
+          router ospf 1
+           router-id 10.255.60.12
+           passive-interface Loopback0
+          ip ssh version 2
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          router lisp
+           locator-set RLOC
+            IPv4-interface Loopback0 priority 1 weight 100
+           service ipv4
+            itr map-resolver 10.255.60.1
+            itr
+            etr map-server 10.255.60.1 key ROUTEKEY123
+            etr
+            use-petr 10.255.60.21
+           instance-id 4097
+            service ipv4
+             eid-table vrf CORP
+             database-mapping 10.60.11.0/24 locator-set RLOC
+           instance-id 4098
+            service ipv4
+             eid-table vrf IOT
+             database-mapping 10.60.21.0/24 locator-set RLOC
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n7
+    image_definition: null
+    label: FAB-XTR2
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 200
+    y: 200
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname FAB-PC1
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip address add 10.60.10.101/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.60.10.1
+          echo 'nameserver 10.50.51.53' > /etc/resolv.conf
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n8
+    image_definition: null
+    label: FAB-PC1
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -200
+    y: 400
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname FAB-PC2
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip address add 10.60.21.102/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.60.21.1
+          echo 'nameserver 10.50.51.53' > /etc/resolv.conf
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n9
+    image_definition: null
+    label: FAB-PC2
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 200
+    y: 400
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+links:
+  - id: l0
+    n1: n5
+    n2: n4
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: FAB-SPINE1-Ethernet0/0<->FAB-MSMR1-Ethernet0/0
+  - id: l1
+    n1: n5
+    n2: n6
+    i1: i2
+    i2: i1
+    conditioning: {}
+    label: FAB-SPINE1-Ethernet0/1<->FAB-XTR1-Ethernet0/0
+  - id: l2
+    n1: n5
+    n2: n7
+    i1: i3
+    i2: i1
+    conditioning: {}
+    label: FAB-SPINE1-Ethernet0/2<->FAB-XTR2-Ethernet0/0
+  - id: l3
+    n1: n5
+    n2: n3
+    i1: i4
+    i2: i4
+    conditioning: {}
+    label: FAB-SPINE1-Ethernet0/3<->FAB-BDR1-Ethernet0/3
+  - id: l4
+    n1: n6
+    n2: n8
+    i1: i2
+    i2: i0
+    conditioning: {}
+    label: FAB-XTR1-Ethernet0/1<->FAB-PC1-eth0
+  - id: l5
+    n1: n7
+    n2: n9
+    i1: i2
+    i2: i0
+    conditioning: {}
+    label: FAB-XTR2-Ethernet0/1<->FAB-PC2-eth0
+  - id: l6
+    n1: n2
+    n2: n3
+    i1: i2
+    i2: i1
+    conditioning: {}
+    label: DC-FUS1-Ethernet0/1<->FAB-BDR1-Ethernet0/0
+  - id: l7
+    n1: n2
+    n2: n1
+    i1: i1
+    i2: i3
+    conditioning: {}
+    label: DC-FUS1-Ethernet0/0<->DC-RTR1-Ethernet0/2
+  - id: l8
+    n1: n1
+    n2: n0
+    i1: i4
+    i2: i0
+    conditioning: {}
+    label: DC-RTR1-Ethernet0/3<->DC-DNS1-eth0
+lab:
+  description: Aster users in both networks lose the shared services after a maintenance
+    window. See LAB.md
+  notes: ''
+  title: ENCOR LAB-071 Aster Shared Services Tickets
+  node_staging:
+    enabled: false
+    start_remaining: true
+    abort_on_failure: false
+  version: 0.3.1

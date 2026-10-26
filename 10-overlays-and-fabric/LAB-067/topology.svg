@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 276" width="620" height="276" role="img">
+<title>LAB-067 topology</title>
+<rect width="620" height="276" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M268.2,30.0V48.0"/>
+<path d="M268.2,48.0V66.0"/>
+<path d="M268.2,66.0V84.0"/>
+<path d="M264.0,102.0L255.6,120.0"/>
+<path d="M390.0,102.0L398.4,120.0"/>
+<path d="M255.6,120.0L247.2,138.0"/>
+<path d="M398.4,120.0L406.8,138.0"/>
+<path d="M247.2,138.0L238.8,156.0"/>
+<path d="M406.8,138.0L415.2,156.0"/>
+<path d="M175.8,192.0V210.0"/>
+<path d="M427.8,192.0V210.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="222.0" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-MSMR1</text>
+<text x="297.6" y="25.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.60.1)</text>
+<text x="280.8" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="280.8" y="61.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.255.0/31</text>
+<text x="280.8" y="79.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 (.1)</text>
+<text x="222.0" y="97.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-SPINE1</text>
+<text x="306.0" y="97.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.60.2)</text>
+<text x="171.6" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 (.2)</text>
+<text x="406.8" y="115.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 (.4)</text>
+<text x="79.2" y="133.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.255.2/31</text>
+<text x="448.8" y="133.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.255.4/31</text>
+<text x="163.2" y="151.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 (.3)</text>
+<text x="423.6" y="151.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 (.5)</text>
+<text x="96.0" y="169.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-XTR1</text>
+<text x="163.2" y="169.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.60.11)</text>
+<text x="381.6" y="169.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-XTR2</text>
+<text x="448.8" y="169.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Lo0 10.255.60.12)</text>
+<text x="163.2" y="187.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 (VRF CORP)</text>
+<text x="406.8" y="187.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 (VRF CORP)</text>
+<text x="138.0" y="223.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-PC1</text>
+<text x="390.0" y="223.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">FAB-PC2</text>
+<text x="96.0" y="241.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.10.101/24</text>
+<text x="348.0" y="241.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.60.11.102/24</text>
+<text x="96.0" y="259.5" textLength="109.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">gw 10.60.10.1</text>
+<text x="348.0" y="259.5" textLength="109.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">gw 10.60.11.1</text>
+</g></svg>

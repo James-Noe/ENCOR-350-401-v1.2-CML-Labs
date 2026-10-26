@@ -1,0 +1,493 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R1
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          interface Loopback0
+           ip address 10.255.0.1 255.255.255.255
+          interface Ethernet0/0
+           description LAN A (SW1 Ethernet0/0)
+           ip address 10.0.10.2 255.255.255.0
+           no shutdown
+          interface Ethernet0/1
+           description to R3 Ethernet0/0
+           ip address 10.0.13.1 255.255.255.0
+           no shutdown
+          interface Ethernet0/2
+           description LAN B (SW1 Ethernet0/2)
+           ip address 10.0.20.2 255.255.255.0
+           no shutdown
+          router ospf 1
+           router-id 10.255.0.1
+           network 10.0.10.0 0.0.0.255 area 0
+           network 10.0.13.0 0.0.0.255 area 0
+           network 10.0.20.0 0.0.0.255 area 0
+           network 10.255.0.1 0.0.0.0 area 0
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: R1
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -300
+    y: -150
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R2
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          interface Loopback0
+           ip address 10.255.0.2 255.255.255.255
+          interface Ethernet0/0
+           description LAN A (SW1 Ethernet0/1)
+           ip address 10.0.10.3 255.255.255.0
+           no shutdown
+          interface Ethernet0/1
+           description to R3 Ethernet0/1
+           ip address 10.0.23.2 255.255.255.0
+           no shutdown
+          interface Ethernet0/2
+           description LAN B (SW1 Ethernet0/3)
+           ip address 10.0.20.3 255.255.255.0
+           no shutdown
+          router ospf 1
+           router-id 10.255.0.2
+           network 10.0.10.0 0.0.0.255 area 0
+           network 10.0.23.0 0.0.0.255 area 0
+           network 10.0.20.0 0.0.0.255 area 0
+           network 10.255.0.2 0.0.0.0 area 0
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: R2
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 0
+    y: -150
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R3
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          interface Loopback0
+           ip address 10.255.0.3 255.255.255.255
+          interface Loopback1
+           description the servers
+           ip address 10.0.100.1 255.255.255.0
+          interface Ethernet0/0
+           description to R1 Ethernet0/1
+           ip address 10.0.13.3 255.255.255.0
+           no shutdown
+          interface Ethernet0/1
+           description to R2 Ethernet0/1
+           ip address 10.0.23.3 255.255.255.0
+           no shutdown
+          router ospf 1
+           router-id 10.255.0.3
+           network 10.0.13.0 0.0.0.255 area 0
+           network 10.0.23.0 0.0.0.255 area 0
+           network 10.0.100.0 0.0.0.255 area 0
+           network 10.255.0.3 0.0.0.0 area 0
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: R3
+    node_definition: iol-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 300
+    y: -150
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW1
+          no ip domain lookup
+          ip domain name veridian.example
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          logging buffered 64000
+          enable secret Cisco123!
+          username admin privilege 15 secret Cisco123!
+          vtp mode transparent
+          vlan 10
+           name LAN_A
+          vlan 20
+           name LAN_B
+          no ip routing
+          spanning-tree mode rapid-pvst
+          interface Ethernet0/0
+           description R1 Ethernet0/0 (LAN A)
+           switchport access vlan 10
+           switchport mode access
+          interface Ethernet0/1
+           description R2 Ethernet0/0 (LAN A)
+           switchport access vlan 10
+           switchport mode access
+          interface Ethernet0/2
+           description R1 Ethernet0/2 (LAN B)
+           switchport access vlan 20
+           switchport mode access
+          interface Ethernet0/3
+           description R2 Ethernet0/2 (LAN B)
+           switchport access vlan 20
+           switchport mode access
+          interface Ethernet1/0
+           description PC1 eth0
+           switchport access vlan 10
+           switchport mode access
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+          interface Ethernet1/1
+           description PC2 eth0
+           switchport access vlan 20
+           switchport mode access
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+          line con 0
+           privilege level 15
+           exec-timeout 0 0
+           logging synchronous
+          line vty 0 4
+           login local
+           transport input ssh telnet
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: SW1
+    node_definition: ioll2-xe
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -150
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname PC1
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip address add 10.0.10.101/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.0.10.1
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: PC1
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: -300
+    y: 150
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          hostname PC2
+          USERNAME=cisco
+          PASSWORD=cisco
+          ip address add 10.0.20.102/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 10.0.20.1
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: PC2
+    node_definition: alpine
+    parameters: {}
+    priority: null
+    pyats:
+      username: null
+      password: null
+      enable_password: null
+    ram: null
+    tags: []
+    x: 0
+    y: 150
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        type: physical
+        slot: 0
+links:
+  - id: l0
+    n1: n0
+    n2: n3
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R1-Ethernet0/0<->SW1-Ethernet0/0
+  - id: l1
+    n1: n1
+    n2: n3
+    i1: i1
+    i2: i2
+    conditioning: {}
+    label: R2-Ethernet0/0<->SW1-Ethernet0/1
+  - id: l2
+    n1: n0
+    n2: n3
+    i1: i3
+    i2: i3
+    conditioning: {}
+    label: R1-Ethernet0/2<->SW1-Ethernet0/2
+  - id: l3
+    n1: n1
+    n2: n3
+    i1: i3
+    i2: i4
+    conditioning: {}
+    label: R2-Ethernet0/2<->SW1-Ethernet0/3
+  - id: l4
+    n1: n0
+    n2: n2
+    i1: i2
+    i2: i1
+    conditioning: {}
+    label: R1-Ethernet0/1<->R3-Ethernet0/0
+  - id: l5
+    n1: n1
+    n2: n2
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: R2-Ethernet0/1<->R3-Ethernet0/1
+  - id: l6
+    n1: n4
+    n2: n3
+    i1: i0
+    i2: i5
+    conditioning: {}
+    label: PC1-eth0<->SW1-Ethernet1/0
+  - id: l7
+    n1: n5
+    n2: n3
+    i1: i0
+    i2: i6
+    conditioning: {}
+    label: PC2-eth0<->SW1-Ethernet1/1
+lab:
+  description: 'HQ rehearses gateway redundancy on a router bench before the campus FHRP rollout. See LAB.md'
+  notes: ''
+  title: ENCOR LAB-011 First-hop redundancy on routers
+  node_staging:
+    enabled: false
+    start_remaining: true
+    abort_on_failure: false
+  version: 0.3.1

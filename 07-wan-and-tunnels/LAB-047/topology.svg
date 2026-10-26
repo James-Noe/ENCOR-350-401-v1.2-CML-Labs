@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 864 96" width="864" height="96" role="img">
+<title>LAB-047 topology</title>
+<rect width="864" height="96" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M112.8,39.0H121.2"/>
+<path d="M121.2,39.0H129.6"/>
+<path d="M163.2,39.0H171.6"/>
+<path d="M171.6,39.0H180.0"/>
+<path d="M331.2,39.0H339.6"/>
+<path d="M339.6,39.0H348.0"/>
+<path d="M348.0,39.0H356.4"/>
+<path d="M356.4,39.0H364.8"/>
+<path d="M364.8,39.0H373.2"/>
+<path d="M490.8,39.0H499.2"/>
+<path d="M499.2,39.0H507.6"/>
+<path d="M507.6,39.0H516.0"/>
+<path d="M516.0,39.0H524.4"/>
+<path d="M524.4,39.0H532.8"/>
+<path d="M684.0,39.0H692.4"/>
+<path d="M692.4,39.0H700.8"/>
+<path d="M734.4,39.0H742.8"/>
+<path d="M742.8,39.0H751.2"/>
+<path d="M335.4,75.0H339.6"/>
+<path d="M336.4,71.0L331.2,75.0L336.4,79.0" fill="#475569"/>
+<path d="M339.6,75.0H348.0"/>
+<path d="M348.0,75.0H356.4"/>
+<path d="M356.4,75.0H364.8"/>
+<path d="M364.8,75.0H373.2"/>
+<path d="M373.2,75.0H381.6"/>
+<path d="M381.6,75.0H390.0"/>
+<path d="M583.2,75.0H591.6"/>
+<path d="M591.6,75.0H600.0"/>
+<path d="M600.0,75.0H608.4"/>
+<path d="M608.4,75.0H616.8"/>
+<path d="M616.8,75.0H625.2"/>
+<path d="M625.2,75.0H633.6"/>
+<path d="M633.6,75.0H637.8"/>
+<path d="M636.8,71.0L642.0,75.0L636.8,79.0" fill="#475569"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="20.4" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC1</text>
+<text x="45.6" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (site A)</text>
+<text x="222.0" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="390.0" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R2</text>
+<text x="406.8" y="25.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (provider)</text>
+<text x="625.2" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R3</text>
+<text x="751.2" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC2</text>
+<text x="776.4" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (site B)</text>
+<text x="20.4" y="43.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.1.101</text>
+<text x="129.6" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="188.4" y="43.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.1.1 </text>
+<text x="264.0" y="43.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="280.8" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="381.6" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 </text>
+<text x="423.6" y="43.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R2</text>
+<text x="440.4" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/1</text>
+<text x="541.2" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 </text>
+<text x="583.2" y="43.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R3</text>
+<text x="600.0" y="43.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 10.0.3.1</text>
+<text x="700.8" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="759.6" y="43.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.3.101</text>
+<text x="264.0" y="61.5" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.12.0/31 .1</text>
+<text x="415.2" y="61.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">.1</text>
+<text x="448.8" y="61.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.23.0/31</text>
+<text x="566.4" y="61.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">.0</text>
+<text x="163.2" y="79.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Tunnel0 10.0.250.1</text>
+<text x="398.4" y="79.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">overlay 10.0.250.0/24</text>
+<text x="658.8" y="79.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Tunnel0 10.0.250.3</text>
+</g></svg>

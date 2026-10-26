@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 730 78" width="730" height="78" role="img">
+<title>LAB-031 topology</title>
+<rect width="730" height="78" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M96.0,21.0H104.4"/>
+<path d="M138.0,21.0H146.4"/>
+<path d="M146.4,21.0H150.6M150.6,21.0V30.0"/>
+<path d="M444.6,21.0H448.8"/>
+<path d="M448.8,21.0H457.2"/>
+<path d="M490.8,21.0H499.2"/>
+<path d="M96.0,39.0H104.4"/>
+<path d="M138.0,39.0H146.4"/>
+<path d="M146.4,39.0H150.6M150.6,30.0V39.0"/>
+<path d="M230.4,39.0H238.8"/>
+<path d="M238.8,39.0H247.2"/>
+<path d="M247.2,39.0H255.6"/>
+<path d="M255.6,39.0H264.0"/>
+<path d="M264.0,39.0H272.4"/>
+<path d="M272.4,39.0H280.8"/>
+<path d="M280.8,39.0H289.2"/>
+<path d="M289.2,39.0H297.6"/>
+<path d="M297.6,39.0H306.0"/>
+<path d="M306.0,39.0H314.4"/>
+<path d="M314.4,39.0H322.8"/>
+<path d="M322.8,39.0H331.2"/>
+<path d="M448.8,39.0H457.2"/>
+<path d="M457.2,39.0H465.6"/>
+<path d="M465.6,39.0H474.0"/>
+<path d="M474.0,39.0H482.4"/>
+<path d="M482.4,39.0H490.8"/>
+<path d="M490.8,39.0H499.2"/>
+<path d="M579.0,39.0H583.2"/>
+<path d="M583.2,39.0H591.6"/>
+<path d="M625.2,39.0H633.6"/>
+<path d="M213.6,57.0H222.0"/>
+<path d="M222.0,57.0H230.4"/>
+<path d="M230.4,57.0H238.8"/>
+<path d="M238.8,57.0H247.2"/>
+<path d="M247.2,57.0H255.6"/>
+<path d="M255.6,57.0H264.0"/>
+<path d="M264.0,57.0H272.4"/>
+<path d="M272.4,57.0H280.8"/>
+<path d="M280.8,57.0H289.2"/>
+<path d="M289.2,57.0H297.6"/>
+<path d="M297.6,57.0H306.0"/>
+<path d="M306.0,57.0H314.4"/>
+<path d="M314.4,57.0H322.8"/>
+<path d="M322.8,57.0H331.2"/>
+<path d="M331.2,57.0H339.6"/>
+<path d="M339.6,57.0H348.0"/>
+<path d="M348.0,57.0H356.4"/>
+<path d="M356.4,57.0H364.8"/>
+<path d="M364.8,57.0H373.2"/>
+<path d="M373.2,57.0H381.6"/>
+<path d="M381.6,57.0H390.0"/>
+<path d="M390.0,57.0H398.4"/>
+<path d="M398.4,57.0H406.8"/>
+<path d="M406.8,57.0H415.2"/>
+<path d="M415.2,57.0H423.6"/>
+<path d="M423.6,57.0H432.0"/>
+<path d="M432.0,57.0H440.4"/>
+<path d="M440.4,57.0H448.8"/>
+<path d="M448.8,57.0H457.2"/>
+<path d="M457.2,57.0H465.6"/>
+<path d="M465.6,57.0H474.0"/>
+<path d="M474.0,57.0H482.4"/>
+<path d="M482.4,57.0H490.8"/>
+<path d="M490.8,57.0H499.2"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="20.4" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC1</text>
+<text x="45.6" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(RED)</text>
+<text x="104.4" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="457.2" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="507.6" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC3</text>
+<text x="532.8" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(RED)</text>
+<text x="20.4" y="43.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC2</text>
+<text x="45.6" y="43.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(BLUE)</text>
+<text x="104.4" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="163.2" y="43.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="180.0" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/0</text>
+<text x="339.6" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 </text>
+<text x="381.6" y="43.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R2</text>
+<text x="398.4" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> e0/1</text>
+<text x="507.6" y="43.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 </text>
+<text x="549.6" y="43.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R3</text>
+<text x="591.6" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="642.0" y="43.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC4</text>
+<text x="667.2" y="43.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(BLUE)</text>
+<text x="171.6" y="61.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/3</text>
+<text x="507.6" y="61.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/3</text>
+</g></svg>

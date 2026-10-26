@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 553 150" width="553" height="150" role="img">
+<title>LAB-040 topology</title>
+<rect width="553" height="150" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M91.8,48.0V66.0"/>
+<path d="M352.2,48.0V66.0"/>
+<path d="M91.8,84.0V102.0"/>
+<path d="M91.8,102.0V120.0"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="62.4" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC1</text>
+<text x="87.6" y="25.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (admin, alpine)</text>
+<text x="322.8" y="25.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PC2</text>
+<text x="348.0" y="25.5" textLength="193.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (untrusted, net-tools)</text>
+<text x="62.4" y="43.5" textLength="109.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.10.10/24</text>
+<text x="322.8" y="43.5" textLength="109.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.0.20.20/24</text>
+<text x="104.4" y="61.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 10.0.10.1/24</text>
+<text x="364.8" y="61.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 10.0.20.1/24</text>
+<text x="79.2" y="79.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">[ </text>
+<text x="96.0" y="79.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R1</text>
+<text x="129.6" y="79.5" textLength="218.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">AS 65001, Lo0 10.255.0.1 ]</text>
+<text x="104.4" y="97.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 10.0.12.0/31</text>
+<text x="104.4" y="115.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 10.0.12.1/31</text>
+<text x="79.2" y="133.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">[ </text>
+<text x="96.0" y="133.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">R2</text>
+<text x="129.6" y="133.5" textLength="386.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">AS 65002, Lo0 10.255.0.2, Lo10 10.0.200.1/24 ]</text>
+</g></svg>

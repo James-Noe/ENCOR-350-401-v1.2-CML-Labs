@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 258" width="830" height="258" role="img">
+<title>LAB-075 topology</title>
+<rect width="830" height="258" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M247.2,12.0L238.8,30.0"/>
+<path d="M83.4,30.0V48.0"/>
+<path d="M255.6,57.0H264.0"/>
+<path d="M264.0,57.0H272.4"/>
+<path d="M83.4,66.0V84.0"/>
+<path d="M352.2,66.0V84.0"/>
+<path d="M415.2,91.0H423.6M415.2,95.0H423.6"/>
+<path d="M423.6,91.0H432.0M423.6,95.0H432.0"/>
+<path d="M432.0,91.0H440.4M432.0,95.0H440.4"/>
+<path d="M440.4,91.0H448.8M440.4,95.0H448.8"/>
+<path d="M608.4,91.0H616.8M608.4,95.0H616.8"/>
+<path d="M616.8,91.0H625.2M616.8,95.0H625.2"/>
+<path d="M625.2,91.0H633.6M625.2,95.0H633.6"/>
+<path d="M633.6,91.0H642.0M633.6,95.0H642.0"/>
+<path d="M734.4,93.0H742.8"/>
+<path d="M742.8,93.0H751.2"/>
+<path d="M83.4,102.0V120.0"/>
+<path d="M352.2,102.0V120.0"/>
+<path d="M289.2,129.0H297.6"/>
+<path d="M297.6,129.0H306.0"/>
+<path d="M306.0,129.0H314.4"/>
+<path d="M314.4,129.0H322.8"/>
+<path d="M322.8,129.0H331.2"/>
+<path d="M331.2,129.0H339.6"/>
+<path d="M339.6,129.0H348.0"/>
+<path d="M348.0,129.0H352.2M352.2,120.0V129.0"/>
+<path d="M100.2,138.0V156.0"/>
+<path d="M209.4,138.0V156.0"/>
+<path d="M348.0,138.0L356.4,156.0"/>
+<path d="M112.8,163.0H121.2M112.8,167.0H121.2"/>
+<path d="M121.2,163.0H129.6M121.2,167.0H129.6"/>
+<path d="M154.8,163.0H163.2M154.8,167.0H163.2"/>
+<path d="M163.2,163.0H171.6M163.2,167.0H171.6"/>
+<path d="M406.8,165.0H415.2"/>
+<path d="M415.2,165.0H423.6"/>
+<path d="M100.2,174.0V192.0"/>
+<path d="M209.4,174.0V192.0"/>
+<path d="M96.0,210.0L104.4,228.0"/>
+<path d="M196.8,210.0L188.4,228.0"/>
+<path d="M171.6,237.0H180.0"/>
+<path d="M180.0,237.0H188.4"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="20.4" y="25.5" textLength="210.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Internet host 192.0.2.200</text>
+<text x="255.6" y="25.5" textLength="184.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">2001:DB8:F001:200::200</text>
+<text x="37.2" y="61.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PROV-ISP1</text>
+<text x="112.8" y="61.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (AS 64601) e0/3</text>
+<text x="280.8" y="61.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e1/0 </text>
+<text x="322.8" y="61.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PROV-INET1</text>
+<text x="406.8" y="61.5" textLength="344.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (WAN Internet circuits 203.0.113.128/25)</text>
+<text x="96.0" y="79.5" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">198.51.100.64/31</text>
+<text x="373.2" y="79.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0 203.0.113.129/31</text>
+<text x="616.8" y="79.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 203.0.113.131/31</text>
+<text x="37.2" y="97.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-EDGE1</text>
+<text x="104.4" y="97.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (AS 65010)</text>
+<text x="339.6" y="97.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-WAN1</text>
+<text x="457.2" y="97.5" textLength="142.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">IPsec/GRE tunnels</text>
+<text x="658.8" y="97.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">BR1-RTR1</text>
+<text x="759.6" y="97.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">BR1-PC1</text>
+<text x="96.0" y="115.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="364.8" y="115.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 (and .99 MGMT)</text>
+<text x="650.4" y="115.5" textLength="168.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2 (VLAN 10 users)</text>
+<text x="37.2" y="133.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE1</text>
+<text x="104.4" y="133.5" textLength="176.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (VRRP VLAN 20/50/99)</text>
+<text x="54.0" y="151.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="222.0" y="151.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="364.8" y="151.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e1/1</text>
+<text x="37.2" y="169.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-DIST1</text>
+<text x="129.6" y="169.5" textLength="25.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Po1</text>
+<text x="180.0" y="169.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-DIST2</text>
+<text x="339.6" y="169.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-RTR1</text>
+<text x="432.0" y="169.5" textLength="277.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">DC services segment 10.50.50.0/24</text>
+<text x="54.0" y="187.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="222.0" y="187.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="448.8" y="187.5" textLength="8.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(</text>
+<text x="457.2" y="187.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-SYSLOG1</text>
+<text x="541.2" y="187.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">, </text>
+<text x="558.0" y="187.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-AAA1</text>
+<text x="616.8" y="187.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">; VRF MGMT)</text>
+<text x="79.2" y="205.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="180.0" y="205.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="104.4" y="241.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-ACC1</text>
+<text x="196.8" y="241.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-PC1</text>
+<text x="247.2" y="241.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (VLAN 10), </text>
+<text x="348.0" y="241.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-PC2</text>
+<text x="398.4" y="241.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (VLAN 20)</text>
+</g></svg>

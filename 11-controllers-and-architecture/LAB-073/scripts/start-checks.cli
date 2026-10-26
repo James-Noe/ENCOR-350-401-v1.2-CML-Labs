@@ -1,0 +1,7 @@
+@SDW-MGMT1
+ls /home/cisco/sdwan /home/cisco/sdwan/report
+python3 -c "import requests;print('requests',requests.__version__)"
+ip -4 addr show | grep inet
+curl -sk -m 20 -o /dev/null -w 'login-page %{http_code}\n' https://172.16.0.1/
+curl -sk -m 60 -c /tmp/cj -o /dev/null -w 'j_security_check %{http_code}\n' -d 'j_username=admin&j_password=EncorSdwan#2026' https://172.16.0.1/j_security_check
+curl -sk -m 60 -b /tmp/cj -w '\ntoken-len-done\n' https://172.16.0.1/dataservice/client/token | wc -c

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 78" width="830" height="78" role="img">
+<title>LAB-038 topology</title>
+<rect width="830" height="78" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M112.8,21.0H121.2"/>
+<path d="M121.2,21.0H129.6"/>
+<path d="M129.6,21.0H138.0"/>
+<path d="M247.2,21.0H255.6"/>
+<path d="M255.6,21.0H264.0"/>
+<path d="M264.0,21.0H272.4"/>
+<path d="M373.2,21.0H381.6"/>
+<path d="M381.6,21.0H390.0"/>
+<path d="M390.0,21.0H398.4"/>
+<path d="M482.4,19.0H490.8M482.4,23.0H490.8"/>
+<path d="M490.8,19.0H499.2M490.8,23.0H499.2"/>
+<path d="M499.2,19.0H507.6M499.2,23.0H507.6"/>
+<path d="M591.6,21.0H600.0"/>
+<path d="M600.0,21.0H608.4"/>
+<path d="M608.4,21.0H616.8"/>
+<path d="M734.4,21.0H742.8"/>
+<path d="M742.8,21.0H751.2"/>
+<path d="M751.2,21.0H759.6"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="20.4" y="25.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-PC1</text>
+<text x="70.8" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">/2/3</text>
+<text x="146.4" y="25.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-ACC1</text>
+<text x="205.2" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">/2/3</text>
+<text x="280.8" y="25.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-DIST1</text>
+<text x="348.0" y="25.5" textLength="16.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">/2</text>
+<text x="406.8" y="25.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE1</text>
+<text x="516.0" y="25.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE2</text>
+<text x="625.2" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e1/0 </text>
+<text x="667.2" y="25.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-RTR1</text>
+<text x="768.0" y="25.5" textLength="42.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-SW</text>
+<text x="28.8" y="43.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(users)</text>
+<text x="146.4" y="43.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(VLAN 99 mgmt)</text>
+<text x="667.2" y="43.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 10.50.50.1/24</text>
+<text x="440.4" y="61.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-SYSLOG1</text>
+<text x="524.4" y="61.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> .51</text>
+<text x="583.2" y="61.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-AAA1</text>
+<text x="642.0" y="61.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> .52</text>
+<text x="700.8" y="61.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">DC-NMS1</text>
+<text x="759.6" y="61.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> .60</text>
+</g></svg>

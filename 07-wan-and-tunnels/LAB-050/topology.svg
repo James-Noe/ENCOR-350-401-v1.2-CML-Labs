@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 906 114" width="906" height="114" role="img">
+<title>LAB-050 topology</title>
+<rect width="906" height="114" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M70.8,21.0H79.2"/>
+<path d="M79.2,21.0H87.6"/>
+<path d="M171.6,21.0H180.0"/>
+<path d="M180.0,21.0H188.4"/>
+<path d="M264.0,21.0H272.4"/>
+<path d="M272.4,21.0H280.8"/>
+<path d="M314.4,21.0H322.8"/>
+<path d="M322.8,21.0H331.2"/>
+<path d="M415.2,21.0H423.6"/>
+<path d="M423.6,21.0H432.0"/>
+<path d="M465.6,21.0H474.0"/>
+<path d="M474.0,21.0H482.4"/>
+<path d="M566.4,21.0H574.8"/>
+<path d="M574.8,21.0H583.2"/>
+<path d="M667.2,21.0H675.6"/>
+<path d="M675.6,21.0H684.0"/>
+<path d="M537.0,30.0V48.0"/>
+<path d="M688.2,30.0V48.0"/>
+<path d="M692.4,39.0H700.8"/>
+<path d="M700.8,39.0H709.2"/>
+<path d="M251.4,48.0V66.0"/>
+<path d="M528.6,48.0V66.0"/>
+<path d="M251.4,75.0H255.6M251.4,66.0V75.0"/>
+<path d="M255.6,75.0H264.0"/>
+<path d="M264.0,75.0H272.4"/>
+<path d="M272.4,75.0H280.8"/>
+<path d="M280.8,75.0H289.2"/>
+<path d="M289.2,75.0H297.6"/>
+<path d="M297.6,75.0H306.0"/>
+<path d="M499.2,75.0H507.6"/>
+<path d="M507.6,75.0H516.0"/>
+<path d="M516.0,75.0H524.4"/>
+<path d="M524.4,75.0H528.6M528.6,75.0H532.8M528.6,66.0V75.0"/>
+<path d="M532.8,75.0H541.2"/>
+<path d="M541.2,75.0H549.6"/>
+<path d="M549.6,75.0H558.0"/>
+<path d="M558.0,75.0H566.4"/>
+<path d="M650.4,75.0H658.8"/>
+<path d="M658.8,75.0H667.2"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="12.0" y="25.5" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-PC1</text>
+<text x="96.0" y="25.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-CORE1</text>
+<text x="196.8" y="25.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">HQ-WAN1</text>
+<text x="280.8" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="339.6" y="25.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PROV-PE1</text>
+<text x="432.0" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="490.8" y="25.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">BR1-RTR1</text>
+<text x="591.6" y="25.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">BR1-ACC1</text>
+<text x="692.4" y="25.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">BR1-PC1</text>
+<text x="751.2" y="25.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (users)</text>
+<text x="12.0" y="43.5" textLength="159.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.10.10.101 (stub)</text>
+<text x="196.8" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/2</text>
+<text x="247.2" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="297.6" y="43.5" textLength="151.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(provider service)</text>
+<text x="499.2" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="541.2" y="43.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1 e0/2</text>
+<text x="642.0" y="43.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="717.6" y="43.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">BR1-PC2</text>
+<text x="776.4" y="43.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (OT scanners)</text>
+<text x="314.4" y="79.5" textLength="84.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">PROV-INET1</text>
+<text x="398.4" y="79.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> (Internet)</text>
+<text x="574.8" y="79.5" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">BR2-RTR1</text>
+<text x="675.6" y="79.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" font-weight="bold">BR2-PC1</text>
+<text x="583.2" y="97.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/0</text>
+<text x="633.6" y="97.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Lo99</text>
+<text x="692.4" y="97.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">10.22.10.101</text>
+</g></svg>

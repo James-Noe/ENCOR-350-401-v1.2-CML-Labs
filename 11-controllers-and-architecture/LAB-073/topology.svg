@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 931 132" width="931" height="132" role="img">
+<title>LAB-073 topology</title>
+<rect width="931" height="132" fill="#ffffff"/>
+<g stroke="#475569" stroke-width="1.6" stroke-linecap="round" fill="none">
+<path d="M264.0,21.0H272.4"/>
+<path d="M272.4,21.0H280.8"/>
+<path d="M314.4,21.0H322.8"/>
+<path d="M322.8,21.0H331.2"/>
+<path d="M423.6,21.0H432.0"/>
+<path d="M432.0,21.0H440.4"/>
+<path d="M474.0,21.0H482.4"/>
+<path d="M482.4,21.0H490.8"/>
+<path d="M490.8,21.0H495.0M495.0,21.0V30.0"/>
+<path d="M448.8,39.0H457.2"/>
+<path d="M457.2,39.0H465.6"/>
+<path d="M465.6,39.0H474.0"/>
+<path d="M474.0,39.0H482.4"/>
+<path d="M482.4,39.0H490.8"/>
+<path d="M490.8,39.0H495.0M495.0,39.0H499.2M495.0,30.0V39.0M495.0,39.0V48.0"/>
+<path d="M499.2,39.0H507.6"/>
+<path d="M507.6,39.0H516.0"/>
+<path d="M440.4,57.0H448.8"/>
+<path d="M448.8,57.0H457.2"/>
+<path d="M457.2,57.0H465.6"/>
+<path d="M465.6,57.0H474.0"/>
+<path d="M474.0,57.0H482.4"/>
+<path d="M482.4,57.0H490.8"/>
+<path d="M490.8,57.0H495.0M495.0,48.0V57.0M495.0,57.0V66.0"/>
+<path d="M423.6,75.0H432.0"/>
+<path d="M432.0,75.0H440.4"/>
+<path d="M440.4,75.0H448.8"/>
+<path d="M448.8,75.0H457.2"/>
+<path d="M457.2,75.0H465.6"/>
+<path d="M465.6,75.0H474.0"/>
+<path d="M474.0,75.0H482.4"/>
+<path d="M482.4,75.0H490.8"/>
+<path d="M490.8,75.0H495.0M495.0,66.0V75.0M495.0,75.0V84.0"/>
+<path d="M448.8,93.0H457.2"/>
+<path d="M457.2,93.0H465.6"/>
+<path d="M465.6,93.0H474.0"/>
+<path d="M474.0,93.0H482.4"/>
+<path d="M482.4,93.0H490.8"/>
+<path d="M490.8,93.0H495.0M495.0,84.0V93.0"/>
+<path d="M146.4,111.0H154.8"/>
+<path d="M154.8,111.0H163.2"/>
+<path d="M238.8,111.0H247.2"/>
+<path d="M247.2,111.0H255.6"/>
+<path d="M306.0,111.0H314.4"/>
+<path d="M314.4,111.0H322.8"/>
+<path d="M516.0,111.0H524.4"/>
+<path d="M524.4,111.0H532.8"/>
+</g>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13.5" fill="#0f172a">
+<text x="20.4" y="25.5" textLength="235.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">External (port-forward 7443)</text>
+<text x="280.8" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">eth0</text>
+<text x="339.6" y="25.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Manager01</text>
+<text x="440.4" y="25.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">eth1</text>
+<text x="339.6" y="43.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Controller01</text>
+<text x="524.4" y="43.5" textLength="285.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">VPN0 switch (172.16.0.0/24, VPN 0)</text>
+<text x="339.6" y="61.5" textLength="92.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Validator01</text>
+<text x="339.6" y="79.5" textLength="75.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">SDW-MGMT1</text>
+<text x="339.6" y="97.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gateway e0/0</text>
+<text x="20.4" y="115.5" textLength="117.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Internet (NAT)</text>
+<text x="171.6" y="115.5" textLength="58.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gateway</text>
+<text x="264.0" y="115.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">e0/1</text>
+<text x="331.2" y="115.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">INET</text>
+<text x="406.8" y="115.5" textLength="100.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Gateway e0/2</text>
+<text x="541.2" y="115.5" textLength="33.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">MPLS</text>
+<text x="600.0" y="115.5" textLength="319.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">(the two transports an edge would use)</text>
+</g></svg>
