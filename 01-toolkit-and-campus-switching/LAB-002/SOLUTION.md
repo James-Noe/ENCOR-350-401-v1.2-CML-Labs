@@ -124,7 +124,7 @@ IOS did not auto-create VLAN 20 for the access port in transparent mode, so the 
 | 9 | trunk + nonegotiate | desirable | SW1 `TRUNK/NONEGOTIATE/TRUNK`, `Et0/0 on 802.1q trunking 1`; SW2 `ACCESS/DESIRABLE/ACCESS`, `S2:ACCESS`, same SPANTREE-7 pair logged | one-sided |
 | 10 | desirable, domain VERIDIAN | desirable, domain BENCH | both `%DTP-5-DOMAINMISMATCH: Unable to perform trunk negotiation on port Et0/0 because of VTP domain mismatch.`; SW2 `ACCESS/DESIRABLE/ACCESS` (`1 domain mismatches`); SW1, after its own bounce, `ACCESS/DESIRABLE/ACCESS`, trunk table empty | no |
 
-Builder observations for the instructor:
+Platform observations:
 - Without the bounce on both ends, the side that was not bounced keeps its previous state. In row 10 SW1 stayed `TRUNK/DESIRABLE/TRUNK` with `3 domain mismatches` until SW1 Et0/0 was bounced too, because an IOL `shutdown` does not take the peer's port down.
 - With SW2's domain still NULL (only SW1 named `VERIDIAN`), desirable/desirable trunked normally (`0 domain mismatches`).
 - With the encapsulation left at `negotiate` on **both** ends (the start state), desirable/auto **did** form a trunk, as **ISL**: SW2 `TRUNK/AUTO/TRUNK`, `TOT/TAT/TNT: ISL/NEGOTIATE/ISL`, `S6:TRUNK`. With SW2 set to dot1q and SW1 still `negotiate`, SW1 showed `Et0/0 desirable n-802.1q trunking 1`. This is why LAB.md tells students to set dot1q first.
@@ -198,7 +198,7 @@ PC2$ ping -c 3 -W 1 10.0.20.104
 
 (Alpine reports `ttl=42` on replies; this is cosmetic, see the L2-PROG report.)
 
-Note for instructors: while R2 is applied one switch at a time, the end already set to native 999 logs a short burst of `%CDP-4-NATIVE_VLAN_MISMATCH` messages until the other end matches (seen in validation: 5 messages on SW2 over ~7 s, 1 on SW1). This is expected and stops once both ends carry native 999.
+Note: while R2 is applied one switch at a time, the end already set to native 999 logs a short burst of `%CDP-4-NATIVE_VLAN_MISMATCH` messages until the other end matches (seen in one run: 5 messages on SW2 over ~7 s, 1 on SW1). This is expected and stops once both ends carry native 999.
 
 ## Failure / Recovery Behaviour
 

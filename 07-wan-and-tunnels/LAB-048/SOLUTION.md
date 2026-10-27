@@ -144,9 +144,9 @@ R6 expected content (outline): Tunnel21/22 GRE over IPsec, 10.250.21.0/24 and 10
 
 ## Verification
 
-All outputs captured on the build lab (CML 2.10.0, iol-xe 17.16.1a) unless marked (derived).
+All outputs captured in a test run (CML 2.10.0, iol-xe 17.16.1a) unless marked (derived).
 
-**Start state (W0):** BR1-PC1 to HQ-PC1 via `10.21.10.1, 100.64.21.0, 100.64.10.1, 10.10.255.96`; BR1-PC1 and BR2-PC1 to 198.51.100.200 OK (PAT, BR2 translated to 203.0.113.133); BR2-PC1 to HQ-PC1 and BR1-PC1 100% loss; HQ-PC1 to BR1-PC1 OK, to BR2-PC1 loss; HQ-WAN1 OSPF neighbour only HQ-CORE1; the re-imported lab gave the same results.
+**Start state (W0):** BR1-PC1 to HQ-PC1 via `10.21.10.1, 100.64.21.0, 100.64.10.1, 10.10.255.96`; BR1-PC1 and BR2-PC1 to 198.51.100.200 OK (PAT, BR2 translated to 203.0.113.133); BR2-PC1 to HQ-PC1 and BR1-PC1 100% loss; HQ-PC1 to BR1-PC1 OK, to BR2-PC1 loss; HQ-WAN1 OSPF neighbour only HQ-CORE1; a fresh import gave the same results.
 
 **R1 / V1 / V2 (W1):** HQ-WAN1 OSPF FULL on Tunnel21 and Tunnel22; BR1 route to 10.10.10.0/24 is OSPF inter-area via Tunnel21 (metric 120) with `10.10.0.0/16 static via 100.64.21.0` as the less-specific entry. BR2-PC1 to HQ-PC1 traceroute: `10.22.10.1, 10.250.22.1, 10.10.255.96, 10.10.10.101`; BR1-PC1 to BR2-PC1 and HQ-PC1 to BR2-PC1/10.255.22.1 OK. New `Loopback50 10.22.50.1/24` (`ip ospf 1 area 22`) on BR2: HQ-PC1 pings it at once; HQ-WAN1 shows it as `O 10.22.50.1/32` (loopback host-route behaviour, see R1), and the branch /24s are intra-area `O` there.
 

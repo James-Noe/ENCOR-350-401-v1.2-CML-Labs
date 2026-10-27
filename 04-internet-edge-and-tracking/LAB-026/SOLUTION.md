@@ -61,7 +61,7 @@ Requirement 6 (pitfall): on R1 `ip route 10.0.100.200 255.255.255.255 10.0.13.3`
 
 ## Verification
 
-Observed on the bench (values from the build session; lines below are paraphrased from build observations, not captured output, and are marked `(derived from build observations)`):
+Observed on the bench (values from a test run; lines below are paraphrased from observations, not captured output, and are marked `(derived from build observations)`):
 
 - (derived from build observations) Healthy: SLA 1 RTT 1–2 ms OK, track 1 Up, R1 default via 10.0.13.3, `show standby brief` R1 Active 90→110 when Up. With 100 ms conditioning, RTT 202–203 ms: SLA 1 (threshold 1000) and track 1 stay Up; SLA 3 returns "Over threshold" and track 3 goes Down; both clear after conditioning is removed. Track 1 after config starts Down for the `delay up 30` interval, then `%TRACK-6-STATE: 1 ip sla 1 reachability Down -> Up`.
 - (derived from build observations) SLA 2 under conditioning: `Number Of RTT Over Threshold: 10 (100%)`, return code OK, track 2 stays Up (the platform limit above).
@@ -109,7 +109,7 @@ Et0/2       10   110 P Active  local           10.0.10.3       10.0.10.1
 
 ## Failure / Recovery Behaviour
 
-- **Silent failure R1–R3** (link stop 03:14:32): track 1 Down 03:14:42 (+10 s), HSRP R1 Active -> Speak +11-13 s (R2 Active, R1 Standby 90), R1 default via R4 (AD 5). Re-check run (link stop about 16:07:00; timings vary by run with the probe phase, this is one measured run): track 3 +3 s, track 1 +8 s, tracks 2 and 4 +23 s:
+- **Silent failure R1–R3** (link stop 03:14:32): track 1 Down 03:14:42 (+10 s), HSRP R1 Active -> Speak +11-13 s (R2 Active, R1 Standby 90), R1 default via R4 (AD 5). Second run (link stop about 16:07:00; timings vary by run with the probe phase, this is one measured run): track 3 +3 s, track 1 +8 s, tracks 2 and 4 +23 s:
 
 ```
 16:07:00.585 %TRACK-6-STATE: 3 ip sla 3 state Up -> Down
@@ -125,12 +125,12 @@ R1#show standby brief
 Et0/2       10   90  P Standby 10.0.10.3       local           10.0.10.1
 ```
 
-  Predicting the order: SLA 3 and SLA 1 both probe every 5 s, so the first lost probe is 0-5 s after the failure; SLA 3 fails after its 1 s timeout, SLA 1 after its 2 s timeout, hence track 3 first (a shorter timeout, no delay) and track 1 a few seconds later (it was +10 s in the build run). SLA 2 runs every 10 s with a 2 s timeout, so the udp-jitter round needs a whole cycle or more to report failure: tracks 2 and 4 follow at +20-25 s, and track 4 (`or`) changes only when track 2 joins track 1 in Down (the 0.1 s after track 2). PC1 -> SRV1 lost 7-10 replies (7 and 10 in two runs); SRV1 -> PC1 lost about the same. Tracks 2 and 4 also Down at +20-25 s (their probes use the pinned route). **Recovery** (link start 03:18:51): SLA Up 03:18:57, track 1 Down -> Up 03:19:27 (`delay up` 30 s; in the re-check run tracks 2, 3 and 4 came Up immediately at 16:07:50 on the first good probe, track 1 only at 16:08:15 because only track 1 has `delay up 30`), HSRP R1 Active +3 s, default via R3, R3 return via R1 again.
+  Predicting the order: SLA 3 and SLA 1 both probe every 5 s, so the first lost probe is 0-5 s after the failure; SLA 3 fails after its 1 s timeout, SLA 1 after its 2 s timeout, hence track 3 first (a shorter timeout, no delay) and track 1 a few seconds later (it was +10 s in the first run). SLA 2 runs every 10 s with a 2 s timeout, so the udp-jitter round needs a whole cycle or more to report failure: tracks 2 and 4 follow at +20-25 s, and track 4 (`or`) changes only when track 2 joins track 1 in Down (the 0.1 s after track 2). PC1 -> SRV1 lost 7-10 replies (7 and 10 in two runs); SRV1 -> PC1 lost about the same. Tracks 2 and 4 also Down at +20-25 s (their probes use the pinned route). **Recovery** (link start 03:18:51): SLA Up 03:18:57, track 1 Down -> Up 03:19:27 (`delay up` 30 s; in the second run tracks 2, 3 and 4 came Up immediately at 16:07:50 on the first good probe, track 1 only at 16:08:15 because only track 1 has `delay up 30`), HSRP R1 Active +3 s, default via R3, R3 return via R1 again.
 - **Cable pull** (`shutdown` both ends): the pinned /32 falls to Null0 (AD 250), track 1 Down (return code Timeout), default via R4, R1 HSRP 90 Standby, PC1 -> SRV1 works. After restore: Up after the 30 s delay, HSRP back.
 - **Node stop R1** (`write memory` first), measured in 3 runs: a CML node stop behaves like a silent failure, not a graceful HSRP resign. PC1 -> SRV1 lost 0–11 replies (3 runs: about 4–11; a fourth run: 0 of 40; the count depends on whether the unmanaged switch floods to R2 during the hold timer); R2 logged `Standby -> Active` directly (no resign-triggered change) roughly 7–15 s after the stop command, consistent with the 10 s hold timer expiring. On R1's restart R2 goes Active -> Speak -> Standby (preempt); R3 track 1 Down, R3 return AD 250 via R4; R4 track 1 Down, track 2 Up, R4 returns via R2 only.
 - **Host-route pitfall** (R6): host route 10.0.100.200/32 via R3 on R1, silent failure: R1's own ping to SRV1 0/3. With HSRP tracking in place PC1 -> SRV1 still works (R2 is the gateway). With `no standby 10 track 1`, PC1 -> SRV1 100% loss: R1 stays active and sends into the dead link although its default moved to R4. Pinging R4 (10.0.100.4) from R1 works (default via R4).
 - ACL fallback: `deny udp any any eq 1967` on R3 e0/0 inbound makes track 2 Up -> Down (`No connection`) while track 1 stays Up; removed afterwards.
-- Restore: R1 wiped and restarted; start checks match the start state.
+- Restore: R1 wiped and restarted; start-state checks match the start state.
 
 ## Answers to Analysis Questions
 

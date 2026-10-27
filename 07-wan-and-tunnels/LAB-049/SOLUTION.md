@@ -2,9 +2,9 @@
 
 ## Summary
 
-First troubleshooting lab of the tunnel family (v1.1). Three independent faults sit behind two tickets: a headend access list that names the wrong BR2 address (key exchange, NTP and ESP never arrive), a per-branch pre-shared key that BR2 was not given (IKE_SA_INIT completes, IKE_AUTH fails authentication) and two totally stubby branch areas whose injected default loses to the branch's static default (the specifics are gone, so branch traffic leaves by the Internet or the provider line). The faults are in series for T1 (F2 gates F1, then F3 keeps T1 open although Tunnel22 is up) and F3 alone causes T2. One cause (F3) gives two symptoms: BR1 falls back to the provider line, BR2 has no backup and sends HQ traffic to the Internet.
+First troubleshooting lab of the tunnel family. Three independent faults sit behind two tickets: a headend access list that names the wrong BR2 address (key exchange, NTP and ESP never arrive), a per-branch pre-shared key that BR2 was not given (IKE_SA_INIT completes, IKE_AUTH fails authentication) and two totally stubby branch areas whose injected default loses to the branch's static default (the specifics are gone, so branch traffic leaves by the Internet or the provider line). The faults are in series for T1 (F2 gates F1, then F3 keeps T1 open although Tunnel22 is up) and F3 alone causes T2. One cause (F3) gives two symptoms: BR1 falls back to the provider line, BR2 has no backup and sends HQ traffic to the Internet.
 
-Blueprint mapping (instructor only): 2.2.b tunnel verification (T), 5.2.a access control lists (R), 3.2.b OSPF (R). Earlier-module candidates: edge-style ingress ACL (F2), OSPF area types and default injection (F3), branch PAT and NAT order (red herring), NTP (red herring).
+Blueprint mapping: 2.2.b tunnel verification (T), 5.2.a access control lists (R), 3.2.b OSPF (R). Earlier-module candidates: edge-style ingress ACL (F2), OSPF area types and default injection (F3), branch PAT and NAT order (red herring), NTP (red herring).
 
 ## Intentional Faults
 

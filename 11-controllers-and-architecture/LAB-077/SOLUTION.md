@@ -18,7 +18,7 @@ Method for the reviewer (and for a marker): (1) fix the decision question, (2) p
 
 - Cable pull versus silent failure: E2 (1 s versus 4-6 s) and E7 (3.6 s versus 31-37 s) show the same link detected at different speeds; an answer that compares E5 (cable pull, 0 % loss) with E9 (silent failure) as if equal is wrong.
 - A node stop is a chassis loss, not a supervisor switchover (LAB-013 R4); only E17 (derived) speaks about SSO/NSF.
-- E14 is probabilistic (builds: 0 transitions in 3 of 3 runs; validation: one run with a Down/Up cycle). A memo that says "the probe never reacts to loss" or "always reacts" overstates.
+- E14 is probabilistic (0 transitions in 3 of 3 runs in one series; one run with a Down/Up cycle in another). A memo that says "the probe never reacts to loss" or "always reacts" overstates.
 - E15: the Manager's control view drops in 14-19 s, the Validator view in 141-152 s, the device list is unreliable (stale). A memo should say which view was used.
 - E16: unauthenticated and post-logout requests give HTTP 200 with an HTML login page, so a script that tests only the status code is wrong; Basic auth is accepted on this Manager (measured).
 - E10/E12: fabric traffic with warm caches survives mapping-system loss for a while; the damage begins with new flows and cache expiry. E12 and E10 depend on one MSMR node in the lab.

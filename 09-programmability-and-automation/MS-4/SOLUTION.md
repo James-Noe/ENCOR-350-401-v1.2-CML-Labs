@@ -2,7 +2,7 @@
 
 ## Summary
 
-The milestone closes module 09 and the first nine modules on one network: HQ lite H4 with HQ-CORE2 (the dual-core lite), the E3 edge pair (HQ-EDGE2 is a Catalyst 8000V), the DC block with its services, and the automation host. Five change requests build the "H5 services" stage (tracked VRRPv3 with an evidence applet, the second anycast RP, core-edge MQC, an ACL change through RESTCONF, and a reviewed AI proposal) and three tickets with seven faults test the habit of using a working peer as the reference. Blueprint (instructor only): 4.6, 6.1, 6.2, 6.5, 6.6, 4.4, 5.2.b, 4.2, 4.1, 5.1.b, 3.3.d, 1.4, 3.3.c (domains 1, 3, 4, 5, 6).
+The milestone closes module 09 and the first nine modules on one network: HQ lite H4 with HQ-CORE2 (the dual-core lite), the E3 edge pair (HQ-EDGE2 is a Catalyst 8000V), the DC block with its services, and the automation host. Five change requests build the "H5 services" stage (tracked VRRPv3 with an evidence applet, the second anycast RP, core-edge MQC, an ACL change through RESTCONF, and a reviewed AI proposal) and three tickets with seven faults test the habit of using a working peer as the reference. Blueprint: 4.6, 6.1, 6.2, 6.5, 6.6, 4.4, 5.2.b, 4.2, 4.1, 5.1.b, 3.3.d, 1.4, 3.3.c (domains 1, 3, 4, 5, 6).
 
 Design decisions (all in favour of teaching ENCOR):
 - **CR1 uses `track N shutdown`, not `track N decrement` with the 30 s `preempt delay`.** With decrement the backup waits the full preempt delay before taking over from a master that is still advertising (measured: VLAN 50 master moved 31 s after the track went Down), which cannot meet "within 10 s". `shutdown` makes the group leave (INIT, priority-0 advertisement); the peer is master under 1 s later. On return the group re-enters BACKUP and preempts after the 30 s delay.
@@ -35,7 +35,7 @@ Not faults (red herrings): cat8000v interface names; the transient DMI `lock-den
 
 ## Solution Configuration
 
-Each block is a config block (no `configure terminal`), proven on the original lab and again on the re-imported lab.
+Each block is a config block (no `configure terminal`), proven on two separate imports of the lab.
 
 ### HQ-EDGE2 (TK1, TK3)
 
@@ -394,7 +394,7 @@ Notes. The earlier decrement variant (kept as a teaching contrast) moved VLAN 50
 **Q4.** The API validates the body against the model before it touches the configuration (a wrong leaf or a duplicate sequence is a 400/409 with an `error-tag`, not a half-applied line), leaves an audit trail (`%DMI-5-CONFIG_I ... by apiuser`), is repeatable and checkable by a script (the script verifies both edges), and keeps the edge ACL change off the CLI as the constraint requires.
 **Q5.** The proposal was tried on one edge only, with the flood of the right size and a stop condition (-w 25), with the evidence listed first (`show track 10` history, `%TRACK-6-STATE`, CoPP drops), and the original order was restored afterwards; the baseline run with the original policy was done first so that the difference is attributable.
 **Q6.** After a platform migration: compare every per-interface feature (NAT inside/outside, flow monitors, ACLs, service policies) with the old router or its twin; probe targets of every IP SLA (a track Down since the migration is a symptom, not a status); the management plane (syslog host and VRF, AAA ports, API enablement and access control, certificate); and a failover drill, because redundancy faults are latent.
-**Instructor debrief.** The NAT fault shows only in the drill because EDGE1 originates the default at metric 10 in normal operation, so EDGE2 never forwards user traffic. The server log is empty for one login cause because the requests never reach DC-AAA1's listening port: a RADIUS server that is not asked has nothing to log, so the evidence for F5 is on the client (`show aaa servers`). CR5's test needs TK1 fixed first: with F1 and F2 present a false failover of the proposal is a total outage instead of a measurable moving default (the student must not leave that in place).
+**Debrief.** The NAT fault shows only in the drill because EDGE1 originates the default at metric 10 in normal operation, so EDGE2 never forwards user traffic. The server log is empty for one login cause because the requests never reach DC-AAA1's listening port: a RADIUS server that is not asked has nothing to log, so the evidence for F5 is on the client (`show aaa servers`). CR5's test needs TK1 fixed first: with F1 and F2 present a false failover of the proposal is a total outage instead of a measurable moving default (the student must not leave that in place).
 
 ## Lab Info
 

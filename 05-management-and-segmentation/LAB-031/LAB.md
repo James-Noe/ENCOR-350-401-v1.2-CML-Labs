@@ -64,6 +64,6 @@ Q3. Why does `ping 10.0.3.10` (without a VRF) fail on R1 although both east PCs 
 Q4. Did BLUE's floating statics keep BLUE working in each failure test? Trace one request and its reply, and name two ways to fix what you found with skills you already have.
 Q5. What would adding a fourth site cost in VRF-lite, and which technology removes the hop-by-hop configuration?
 
-## Notes for the tester
+## Notes for failure tests
 - Cable pull = `shutdown` on both ends of the link (a CML link stop does not bring an IOL interface down). A silent failure = stopping the CML link; neighbours must notice by their timers.
 - The first console call after boot can take several seconds on a busy server.

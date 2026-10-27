@@ -2,9 +2,9 @@
 
 ## Summary
 
-Troubleshooting lab on environment EDGE E3 (15 nodes: the full edge, a stub HQ core, a lite data centre with DC-NMS1, DC-SW, IX and DMZ switches). Three independent faults, two tickets. T1 (drops every few minutes) is caused by a control-plane policing ACL with swapped source and destination (F1), made much worse and kept latent by an ordering error in HQ-EDGE2's edge ACL (F3). T2 (no flows from one edge) is a flow exporter in the right VRF that sends to the wrong UDP port (F2, v1.2: 9996 instead of the collector's 2055), so only receiver-side evidence closes it. Red herrings: BGP to ISP-A (uptime continuous), HSRP logs (consequence), OSPF (stable), the periodic ICMP bursts (a provider monitor at a modest rate).
+Troubleshooting lab on environment EDGE E3 (15 nodes: the full edge, a stub HQ core, a lite data centre with DC-NMS1, DC-SW, IX and DMZ switches). Three independent faults, two tickets. T1 (drops every few minutes) is caused by a control-plane policing ACL with swapped source and destination (F1), made much worse and kept latent by an ordering error in HQ-EDGE2's edge ACL (F3). T2 (no flows from one edge) is a flow exporter in the right VRF that sends to the wrong UDP port (F2: 9996 instead of the collector's 2055), so only receiver-side evidence closes it. Red herrings: BGP to ISP-A (uptime continuous), HSRP logs (consequence), OSPF (stable), the periodic ICMP bursts (a provider monitor at a modest rate).
 
-Blueprint mapping (instructor only): 5.2.b CoPP (F1, T), 5.2.a edge ACL (F3, T), 4.2 Flexible NetFlow (F2, T), 4.4 object tracking and 3.2.c BGP (R). Domains in LAB.md: 3, 4, 5. Earlier modules revisited: tracking and HSRP (02/04), NAT (04), management VRF (05), LAB-042 (the build of this edge).
+Blueprint mapping: 5.2.b CoPP (F1, T), 5.2.a edge ACL (F3, T), 4.2 Flexible NetFlow (F2, T), 4.4 object tracking and 3.2.c BGP (R). Domains in LAB.md: 3, 4, 5. Earlier modules revisited: tracking and HSRP (02/04), NAT (04), management VRF (05), LAB-042 (where this edge was built).
 
 ## Intentional Faults
 
@@ -19,14 +19,14 @@ Fault logic: F1 is the cause of the flapping; F3 adds severity (with it a flap m
 ## Diagnosis / Methodology
 
 1. **T1: where do the drops happen?** From HQ-PC1, `ping -c 200 -i 1 192.0.2.200` shows loss in blocks of about 50 s every 145 s. On HQ-CORE1 `show ip route 0.0.0.0` changes in step (EDGE1 metric 10 gone, EDGE2 metric 30 or nothing).
-2. **Rule out BGP/ISP-A.** `show bgp ipv4 unicast summary` on EDGE1: uptime continuous (00:20:51 at 20:10 in the build, across seven flaps), prefix counts constant. OSPF neighbours stable.
+2. **Rule out BGP/ISP-A.** `show bgp ipv4 unicast summary` on EDGE1: uptime continuous (00:20:51 at 20:10 in a test run, across seven flaps), prefix counts constant. OSPF neighbours stable.
 3. **Tracking.** `show logging | include TRACK` on EDGE1: `Up->Down` at 19:52:46, 19:55:11, 19:57:36, 20:00:01, 20:02:26, 20:04:51 (every 145 s), each `Down->Up` 50 s later; `show track 10` change count grows; HSRP goes Active->Speak->Standby with each Down (consequence, not cause). A manual `ping 198.51.100.1 source Ethernet0/0` between bursts works, so something drops the replies during bursts.
 4. **Who drops the replies?** `show policy-map control-plane` on EDGE1: CM-MONITOR `exceeded 0` and frozen counters, CM-ICMP `exceeded 2502` after the first burst and rising with each burst. The probe replies are not in CM-MONITOR: `show ip access-lists CP-MONITOR` shows the entry with source and destination swapped (and `10 permit ... (10 matches)` counting the wrong direction after the fix). Flow cache on e0/0 (or a capture) shows the bursts from 192.0.2.200.
 5. **Ruled out as the cause.** The edge ACL on EDGE1: the probe-reply line counts and nothing is denied for 198.51.100.1. The bursts (three pings at about 100 pps each, 28-byte packets (no payload), for 25 s) are policed by CM-ICMP with or without the fault: its exceeded counter keeps rising after the fix. The fault puts the probe replies into the same class, so they are dropped with the burst.
 6. **EDGE2 (found while checking the backup path, or by V2):** `show track 20` Down since boot (SLA Timeout, 0 successes); `show ip access-lists EDGE-IN-V4`: `130 deny icmp any host 203.0.113.65 echo-reply log` has matches, `140 permit ... 203.0.113.1 ...` has none. `show ip route 0.0.0.0` on EDGE2 shows no static default; the core's default comes from EDGE1 only.
 7. **T2.** On DC-NMS1 the sample with `-f "udp port 2055"` shows source 10.10.254.5 only. Eliminate the collector (EDGE1's flows arrive) and the management path (`ping vrf MGMT 10.50.50.60 source Ethernet0/1.99` and SNMP from NMS1 work). Then the 038 recall check, which passes: `show flow exporter FE-NMS` on EDGE2 shows `VRF label: MGMT`, `Source IP address: 10.10.254.9`, `Successfully sent` growing (4 at 1.5 min after boot, 14 at 4 min; 24 at 6 min in the 1a run), `show ip cef vrf MGMT 10.50.50.60` = `10.50.50.0/24 nexthop 10.10.254.8 Ethernet0/1.99`: the sender is correct, so re-entering `destination ... vrf MGMT` changes nothing. Receiver side: on DC-NMS1 a capture not limited to the collector port, `tshark -i eth0 -a duration:70 -f "host 10.10.254.9 or host 10.10.254.5"`, shows 10.10.254.9 -> UDP 9996 (CFLOW, 4 packets per 70 s) next to 10.10.254.5 -> 2055 (3 per 70 s). NMS1 answers ICMP port unreachable for both edges (nothing listens on 2055 either), so that is not a discriminator, and EDGE2's CoPP `exceeded` stays 0 in every class (the export is transit via Ethernet0/1.99, not punted). `Destination Port: 9996` on EDGE2 against 2055 on EDGE1 and the documented collector port: **F2**. Note: without the `-f` filter, `tshark` decodes 9996 as CFLOW by default and lists 10.10.254.9 too, which is why LAB.md's sample command carries `-f "udp port 2055"`.
 
-**Wrong fixes tried once each (all shown to fail a V item, CML run; times UTC). (a)-(c) are from the v1.0 build (unchanged F1/F3 configs); (d) from the v1.2 build.**
+**Wrong fixes tried once each (all shown to fail a V item, CML run; times UTC). (a)-(c) are from an earlier version of this lab with the same F1/F3 configuration; (d) from the current version.**
 
 | Wrong fix | Result | Fails |
 |---|---|---|
@@ -39,7 +39,7 @@ Fault logic: F1 is the cause of the flapping; F3 adds severity (with it a flap m
 
 ## Solution Configuration
 
-As applied (v1.2):
+As applied:
 
 ```
 HQ-EDGE1 (F1)
@@ -61,13 +61,13 @@ The exporter change is accepted live (no need to remove the exporter from the mo
 
 ## Verification
 
-Causality. The F1-only / F3-only drill and the wrong fixes (a)-(c) are carried over from v1.0 evidence (F1 and F3 configs unchanged in v1.2); the v1.2 rebuild re-proved the F3 -> F1 -> F2 order and F2:
+Causality. The F1-only / F3-only drill and the wrong fixes (a)-(c) come from an earlier version of this lab with the same F1 and F3 configuration; the current version re-proved the F3 -> F1 -> F2 order and F2:
 
-- v1.0, F3 only (20:02:44): track 20 Up at 20:03:25 (+41 s); flaps continue on the same 145 s cycle; HQ-PC1 200 s ping 12% loss (2 flaps) against 44% in the start state. F1 fixed in addition (20:06:45): no track change afterwards (CM-ICMP exceeded 52164, CM-MONITOR exceeded 0), 0% loss. F1 fixed with F3 latent (V2 fails): ISP-A cable pull, TRACK Down +7.8 s, **HQ-PC1 1 of 90 pings answered**; with F3 fixed, 0 of 90 lost.
-- v1.2, F3 fix alone (00:45:55 UTC): track 20 Down -> Up after 44 s; track 10 flaps continue on the 145 s cycle (Down 00:44:16, next 00:46:41). F1 fix at 00:46:56: no track 10 change afterwards (14 changes in total, last change 6-8 min old at 00:53 and 00:55) over two bursts; HQ-PC1 -> 192.0.2.200: 371 sent, 0 lost over 00:47-00:53.
+- Earlier version, F3 only (20:02:44): track 20 Up at 20:03:25 (+41 s); flaps continue on the same 145 s cycle; HQ-PC1 200 s ping 12% loss (2 flaps) against 44% in the start state. F1 fixed in addition (20:06:45): no track change afterwards (CM-ICMP exceeded 52164, CM-MONITOR exceeded 0), 0% loss. F1 fixed with F3 latent (V2 fails): ISP-A cable pull, TRACK Down +7.8 s, **HQ-PC1 1 of 90 pings answered**; with F3 fixed, 0 of 90 lost.
+- Current version, F3 fix alone (00:45:55 UTC): track 20 Down -> Up after 44 s; track 10 flaps continue on the 145 s cycle (Down 00:44:16, next 00:46:41). F1 fix at 00:46:56: no track 10 change afterwards (14 changes in total, last change 6-8 min old at 00:53 and 00:55) over two bursts; HQ-PC1 -> 192.0.2.200: 371 sent, 0 lost over 00:47-00:53.
 - F2: `transport udp 2055` accepted live; `show flow exporter FE-NMS` `Destination Port: 2055`; the 70 s `-f "udp port 2055"` sample lists 10.10.254.9 (at 0, 21, 36, 46 s) and 10.10.254.5 (six packets): both sources within 1 s of the change (data records every few seconds; templates at the 60 s timeout). `show track 20` still Down and CoPP exceeded 0 at that point: F2 is independent of F1 and F3. EDGE2 `Successfully sent` 102 at the end of the run.
 
-End state (v1.2, all three fixes): `hostile.sh all`: probes `rc=1` x5, spoof 100% loss, web request ok, flood 3809 sent / 39 answered (98% loss), swarm done; EDGE1 track 10 14 changes before and after, EDGE2 track 20 2 changes before and after; BGP uptimes continuing (EDGE1 00:22:24 -> 00:24:19 for ISP-A, EDGE2 ISP-B 00:22:18 -> 00:24:13); HSRP Et0/2 Active unchanged; CM-MONITOR exceeded 0, CM-ICMP exceeded 52169 -> 91612; `CP-MONITOR 10 permit icmp host 198.51.100.1 host 198.51.100.65 echo-reply (111 matches)`; EDGE2 `140 permit ... (260 matches)`, `145 deny ... echo-reply log`.
+End state (all three fixes): `hostile.sh all`: probes `rc=1` x5, spoof 100% loss, web request ok, flood 3809 sent / 39 answered (98% loss), swarm done; EDGE1 track 10 14 changes before and after, EDGE2 track 20 2 changes before and after; BGP uptimes continuing (EDGE1 00:22:24 -> 00:24:19 for ISP-A, EDGE2 ISP-B 00:22:18 -> 00:24:13); HSRP Et0/2 Active unchanged; CM-MONITOR exceeded 0, CM-ICMP exceeded 52169 -> 91612; `CP-MONITOR 10 permit icmp host 198.51.100.1 host 198.51.100.65 echo-reply (111 matches)`; EDGE2 `140 permit ... (260 matches)`, `145 deny ... echo-reply log`.
 
 Start-state evidence (fresh import of the YAML, 15 nodes BOOTED in 82 s; boot +5 min): EDGE2 exporter `VRF label: MGMT`, source 10.10.254.9, `Destination Port: 9996`, CEF in VRF MGMT via 10.10.254.8 Ethernet0/1.99, `Successfully sent` 14; track 20 Down, `130 deny` 26 matches before `140 permit`; EDGE1 track 10 4 changes, exporter port 2055; HQ-PC1 30% loss over 60 pings; DC-NMS1 `-f "udp port 2055"` sample only 10.10.254.5.
 
@@ -86,9 +86,9 @@ All drills with all three faults fixed; times from the device log (UTC, one cloc
 | same: HQ-PC1 pings lost (1/s, until the gap closes) | 19, 19, 16 | 12-25 | detection time plus convergence |
 | ISP-A `link start` -> HSRP Standby->Active on EDGE1 | 37.1, 38.0, 45.0 s (track Down->Up 36.1, 37.0, 44.0 s after the start) | 30-60 s | track delay up 30 s plus SLA period |
 | F3 fix on EDGE2 (ACL re-order) -> `show track 20` Down->Up | 44 s (one run) | 30-60 s | delay up 30 s plus SLA period |
-| Start-state T1 cycle: first Down about 3 min after boot, then every 145 s, Down 50 s | v1.0: six flaps 19:52:46 to 20:04:51; v1.2: Down 00:44:16, 00:46:41 | 140-150 s cycle | burst 25 s + sleep 120 s; Down = burst + SLA timeout + 5 s + 30 s up |
+| Start-state T1 cycle: first Down about 3 min after boot, then every 145 s, Down 50 s | earlier version: six flaps 19:52:46 to 20:04:51; current version: Down 00:44:16, 00:46:41 | 140-150 s cycle | burst 25 s + sleep 120 s; Down = burst + SLA timeout + 5 s + 30 s up |
 
-The v1.2 rebuild re-measured the drills with the F2 change in place: the values lie in the v1.0 documented ranges, so F2 does not alter any timing (the ranges are unchanged; the v1.0 runs were 11.1-12.6 s pull, 16.3-19.9 s silent, 15-19 lost).
+The drills were re-measured with F2 in place: the values lie in the ranges documented before F2 was added, so F2 does not alter any timing (the ranges are unchanged; the earlier runs were 11.1-12.6 s pull, 16.3-19.9 s silent, 15-19 lost).
 
 Stopping the CML link does not take the IOL port down; the silent-failure drills use it on purpose, the cable pulls use `shutdown` on both ends.
 

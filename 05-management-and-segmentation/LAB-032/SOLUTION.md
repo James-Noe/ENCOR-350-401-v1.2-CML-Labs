@@ -122,7 +122,7 @@ startup-config (after write memory in the same session): line vty 0 4 / exec-tim
 ```
 Type 7 decode on PC1 (a short Python type-7 decoder): `072C285F4D0648574453` decodes to `Cisco123!`. IOS `show key chain` does not decode it on this image (`key 1 -- text "072C285F4D0648574453"`).
 
-Tool caveat for testers: CLI automation (unicon) resets `exec-timeout` on `line vty 0 4` to 0 each time it connects, so `show running-config` over automation always shows `exec-timeout 0 0`; read it on a CML console, or do `write memory` in the same session as the change and read `show startup-config`. Start-state A6 is therefore shown by the day-0 text, not by a CLI read (derived).
+Tool caveat: CLI automation (such as unicon) resets `exec-timeout` on `line vty 0 4` to 0 each time it connects, so `show running-config` over automation always shows `exec-timeout 0 0`; read it on a CML console, or do `write memory` in the same session as the change and read `show startup-config`. Start-state A6 is therefore shown by the day-0 text, not by a CLI read (derived).
 
 ## Failure / Recovery Behaviour
 Lock-out drill, from PC1 against R1 with the wrong password:

@@ -120,7 +120,7 @@ The four switch lines `no ip igmp snooping vlan 20|50` are in the student start 
 
 ## Verification
 
-Captured on the re-imported lab with the solution applied and a viewer on HQ-PC2 (PC2 viewer 60-80 s intervals `0/244 (0%)`, `0/243 (0%)`; encoder 512 kb/s). Part 1b measured a 60 s window on both viewers: PC2 0/972 and 0/973 in two successive 20 s intervals (0 %), BR1-PC1 likewise 0 %.
+Captured on a fresh import with the solution applied and a viewer on HQ-PC2 (PC2 viewer 60-80 s intervals `0/244 (0%)`, `0/243 (0%)`; encoder 512 kb/s). Part 1b measured a 60 s window on both viewers: PC2 0/972 and 0/973 in two successive 20 s intervals (0 %), BR1-PC1 likewise 0 %.
 
 HQ-CORE1 `show ip pim neighbor` and `show ip pim interface` (CORE2 is DR on VLAN 20 with priority 200, CORE1 on VLAN 50):
 ```

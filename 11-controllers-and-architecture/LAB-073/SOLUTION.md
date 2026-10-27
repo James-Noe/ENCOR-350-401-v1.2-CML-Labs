@@ -136,7 +136,7 @@ Script runtime 2.7 s; `report/controllers.json` 611 bytes. (`certificate/vsmart/
 
 ## Failure / Recovery Behaviour
 
-Trigger: CML node stop of Controller01 (a silent failure of the control plane: the peers get no teardown). Recovery: CML node start. Nothing was reconfigured and no wipe was needed; the start state returned every time. Clock: one clock, `time.time()` on the build host, polling the Manager and Validator API about every 3-5 s (plus 2-3 s API latency), so each value is the first poll that showed the change and has a resolution of about 6 s.
+Trigger: CML node stop of Controller01 (a silent failure of the control plane: the peers get no teardown). Recovery: CML node start. Nothing was reconfigured and no wipe was needed; the start state returned every time. Clock: one clock, `time.time()` on the polling host, polling the Manager and Validator API about every 3-5 s (plus 2-3 s API latency), so each value is the first poll that showed the change and has a resolution of about 6 s.
 
 Observers: **M-ctl** = Manager `device/control/connections?deviceId=100.0.0.1`, no `vsmart` row up; **V-orch** = Validator `device/orchestrator/connections?deviceId=100.0.0.201`, no `vsmart` row up; **M-dev** = `reachability` of Controller01 in the Manager `device` list.
 

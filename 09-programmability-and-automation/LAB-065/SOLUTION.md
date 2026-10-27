@@ -111,7 +111,7 @@ Neighbor ID     Pri   State           Dead Time   Address         Interface
 ```
 (The RTR3 adjacency is already gone when the command runs, so one neighbour remains.)
 
-Traps tried on the build lab: `curl -k` 401; `ip http authentication local` 401; local `apijob` user 200 (wrong); DELETE + POST of Loopback101 works but the route age resets (`Last update ... 00:00:00 ago`: V5 breach); widened retries `gave up after 10 attempts`; `| redirect` with a second pipe: no file.
+Traps tried in testing: `curl -k` 401; `ip http authentication local` 401; local `apijob` user 200 (wrong); DELETE + POST of Loopback101 works but the route age resets (`Last update ... 00:00:00 ago`: V5 breach); widened retries `gave up after 10 attempts`; `| redirect` with a second pipe: no file.
 
 ## Failure / Recovery Behaviour
 
@@ -134,7 +134,7 @@ Method: DC-AAA1 `node stop` is a silent failure for RTR3 (RADIUS marked dead aft
 - **Q5** An applet that does not match never runs and logs nothing; one that runs with a bad action only logs its own `syslog` line. Only the registered-policy list, the history and a test (cable pull) show it. Monitor the monitor: a periodic synthetic event or a watchdog that checks the file or the history, an alert on the missing artefact, and a test after every change to the applet.
 - **Q6** In the task response: `isError`, `failureReason`, `progress`, `endTime`; the 202 only says the request was accepted. So the job must poll the task by `taskId` and read `isError`/`failureReason` (here "Device 10.10.20.4 unreachable", 2 devices failed). On this pod RESTCONF answered synchronously, so the HTTP status and the error body (`error-tag`, `error-message`) were the whole answer.
 
-Instructor debrief: SSH uses the named `VTY-LOGIN`/`VTY-AUTHZ` lists, RESTCONF (measured on cat8000v 17.16.1a) uses the default login list and ignored the `ip http authentication` list, while the privilege still comes from the account (a priv-1 account gets 403, LAB-061 V6); hence the same account worked over one and not the other (`show ip http server status` showing `API-LOGIN` is misleading). POST creates, so it cannot "ensure" an object exists, while PUT/PATCH converge. The break-glass accounts were refused after the fix because an Access-Reject is final: local fallback applies only when the server does not answer (measured in Failure / Recovery).
+Debrief: SSH uses the named `VTY-LOGIN`/`VTY-AUTHZ` lists, RESTCONF (measured on cat8000v 17.16.1a) uses the default login list and ignored the `ip http authentication` list, while the privilege still comes from the account (a priv-1 account gets 403, LAB-061 V6); hence the same account worked over one and not the other (`show ip http server status` showing `API-LOGIN` is misleading). POST creates, so it cannot "ensure" an object exists, while PUT/PATCH converge. The break-glass accounts were refused after the fix because an Access-Reject is final: local fallback applies only when the server does not answer (measured in Failure / Recovery).
 
 ## Lab Info
 

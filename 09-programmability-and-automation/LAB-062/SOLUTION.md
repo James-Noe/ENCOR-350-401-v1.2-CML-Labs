@@ -110,7 +110,7 @@ failures: 0          rc=0
 15:09:30 end ("lock released")
 ```
 
-RTR3 `%DMI-5-CONFIG_I: Configured from NETCONF/RESTCONF by apiuser, transaction-id 73` at 15:09:29, right when the lock ended: the blocked PATCH was applied after the release (RTR logs UTC = MGMT1 clock here). Earlier on the build lab: a lock held 25 s made one PATCH take 25 s (`timeout=30`: 204 on attempt 1); a lock held 50 s with the old timeout 30 raised an unhandled `ReadTimeout`. No `409`/`lock-denied` appeared in about 50 writes (rapid fire, 3 parallel processes x 8 PATCH, CLI changes immediately before, `shutdown`, NTP re-add), so the 409 branch is code the student reads, not output.
+RTR3 `%DMI-5-CONFIG_I: Configured from NETCONF/RESTCONF by apiuser, transaction-id 73` at 15:09:29, right when the lock ended: the blocked PATCH was applied after the release (RTR logs UTC = MGMT1 clock here). In an earlier test run, a lock held 25 s made one PATCH take 25 s (`timeout=30`: 204 on attempt 1); a lock held 50 s with the old timeout 30 raised an unhandled `ReadTimeout`. No `409`/`lock-denied` appeared in about 50 writes (rapid fire, 3 parallel processes x 8 PATCH, CLI changes immediately before, `shutdown`, NTP re-add), so the 409 branch is code the student reads, not output.
 
 R5 / V5 (`catc_inventory.py`): five devices, one "Ping Reachable"/"Partial Collection Failure", one Unreachable; `not reachable: BR1-RTR1, BR2-ACC1`; `accepted: taskId 6c0b1f7e-... url /api/v1/task/6c0b1f7e-...`; `poll: running, progress: Executing template deployment`; `poll: finished, progress: Deployment completed on 4 of 5 devices` (derived fixtures: no Catalyst Center in the pod).
 
@@ -142,7 +142,7 @@ Failure method: RTR3 **node stop** (silent failure for RTR1 and MGMT1; `write me
 |---|---|---|---|
 | `audit.py` with RTR3 stopped -> script exits | 1 run: RTR1 block PASS/FAIL printed, `ERROR ConnectionError: HTTPSConnectionPool(host='rtr3...' Max retries exceeded`, `findings: 0, errors: 1`, exit 2, 18 s | 15-30 s | ARP/connect failure on the unreachable address; single run, bound by the 30 s request timeout |
 | `node start` RTR3 -> first RESTCONF 200 (`curl -k`) | 357, 349, 344 s (polled every 10 s) | 330-400 s typical (other runs: 336 and 392 s); a loaded server can take far longer (one 903 s outlier while other labs ran), so poll | cat8000v boot plus DMI start (000, then 502, then 200) |
-| `set_desc.py` PATCH with NETCONF lock held 40 s -> exit 0 | 1 run: 41 s, 204 on attempt 3 (attempts at 0, 15, 35 s; third blocks until release) | 35-45 s for a 40 s lock | TIMEOUT 10, back-off 5 and 10 s, then blocked until release; plus 25 s lock -> 25 s block (build lab) |
+| `set_desc.py` PATCH with NETCONF lock held 40 s -> exit 0 | 1 run: 41 s, 204 on attempt 3 (attempts at 0, 15, 35 s; third blocks until release) | 35-45 s for a 40 s lock | TIMEOUT 10, back-off 5 and 10 s, then blocked until release; plus 25 s lock -> 25 s block (earlier test run) |
 
 **Certificate changes on every RTR3 reload** (also after `write memory`): the pinned `/home/cisco/trust/rtr3.pem` then fails (`curl --cacert` exit 60 / `SSLError`; `audit.py` shows `ERROR SSLError` for RTR3 and exits 2) until the PEM is fetched again. Recovery: re-fetch the certificate the router presents into `rtr3.pem` (for example `openssl s_client -connect 10.90.50.11:443 </dev/null | openssl x509 > /home/cisco/trust/rtr3.pem`), or wipe and restart MGMT1 so the bootstrap runs again. This is the point of Q1.
 

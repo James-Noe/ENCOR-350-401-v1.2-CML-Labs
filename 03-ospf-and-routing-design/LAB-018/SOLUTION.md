@@ -34,7 +34,7 @@ Intermediate steps recorded: R4 then R3 `area 1 stub` (R2 evidence); R3 `area 1 
 
 ## Verification
 
-Captured during the build (trimmed):
+Captured in a test run (trimmed):
 
 - Totally NSSA, R4: only `O*IA 0.0.0.0/0` in the OSPF RIB; type-3 0.0.0.0 advertised by R3; `show ip route 198.51.100.1` answers `% Network not in table` (exact-match show), `show ip cef 198.51.100.1` shows 0.0.0.0/0 via 10.0.34.3. PC2 traceroute: hop 3 R3, hop 4 R1 with `!H`.
 - Depot: R4 originates a type-7 172.16.4.0 (`Options: Type 7/5 translation`, forwarding address 10.255.0.4). R3 reports `Perform type-7/type-5 LSA translation` and holds a type-5 172.16.4.0 advertised by R3. R1: `O E2 172.16.4.0 via 10.0.123.3`. R3: `O N2 172.16.4.0 via 10.0.34.4`, `O E2 198.51.100.0`.

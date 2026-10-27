@@ -1,15 +1,17 @@
 # ENCOR study pack
 
-Student copy of the ENCOR-CML curriculum for CCNP ENCOR 350-401 v1.2: 78 labs and
-5 milestones on Cisco Modeling Labs.
+Hands-on labs for CCNP ENCOR 350-401 v1.2: 78 labs and 5 milestones on Cisco
+Modeling Labs.
 
 ## How to work a lab
 Read [LAB-GUIDE.md](LAB-GUIDE.md) before your first lab. In short:
 1. Read `LAB.md` (the brief: scenario, start state, tasks, success criteria). Don't open `SOLUTION.md` yet.
 2. Import `LAB-NNN.yaml` into CML (UI: Import Lab, or `tools/cml-rest.sh import LAB-NNN.yaml`) and start it.
-3. Do the tasks, and keep written evidence (command output, measurements) for every Verification
-   Criterion (V1, V2, …) and an answer to every Analysis Question. That evidence is part of the lab.
-4. Then compare your evidence and answers with `SOLUTION.md`.
+3. Do the tasks, and write evidence (command output, measurements) for every Requirement and
+   Verification Criterion (V1, V2, …) and an answer to every Analysis Question into the lab's
+   `ANSWERS.md`. That evidence is part of the lab.
+4. Then compare your evidence and answers with `SOLUTION.md`. To have them graded, open Claude Code in
+   this folder and ask it to grade the lab (`CLAUDE.md` holds the instructions; reviews go to the lab's `GRADING.md`).
 5. A few labs have no YAML: LAB-073 is deployed with the `csdwan` tool from `BUILD.md`, and LAB-077 is paper analysis.
 
 Modules build on each other, so go in order 01 → 11. A milestone (MS-N) closes modules 03, 05, 07, 09 and 11

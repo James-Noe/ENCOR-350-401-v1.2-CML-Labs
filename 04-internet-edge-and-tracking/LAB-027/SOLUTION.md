@@ -43,7 +43,7 @@ R3 demonstration (temporary): `ip route 10.0.100.0 255.255.255.0 10.0.13.3`, the
 - **Without verify-availability** (plain `set ip next-hop`): `ping -c 40`, link stopped about 15 s before the end: 25/40 received, 37% loss = every ping after the stop (black hole); track 3 Down but ignored.
 - **Local policy:** R1's own `traceroute 10.0.100.200` uses 10.0.13.3 (probes and pings are not policy-routed; SLA 3 and track 3 unaffected). With local policy `PBR-LOCAL` (ACL host 10.0.10.2, `set ip next-hop 10.0.14.4`), `traceroute ... source Ethernet0/2` goes via 10.0.14.4 (2 matches); without `source` it stays via R3 (the source is then the egress address 10.0.13.1). `source Loopback0` fails (providers have no route to 10.255.0.1). `show ip local policy` -> "Local policy routing is enabled, using route map PBR-LOCAL"; after removal "disabled".
 - **HSRP failover** (cable pull R1 e0/0 and R3 e0/0, both `shutdown`): track 1 Down, R1 priority 90 Standby, R2 Active (preempt). PC1 and PC2 both `10.0.10.3 -> 10.0.24.4 -> 10.0.100.200`; R1's policy counter frozen at 217.
-- Restore: R1, R3, PC2 wiped and restarted; start checks matched. Re-imported YAML matched the start checks.
+- Restore: R1, R3, PC2 wiped and restarted; start-state checks matched, and so did a fresh import of the YAML.
 
 ## Answers to Analysis Questions
 

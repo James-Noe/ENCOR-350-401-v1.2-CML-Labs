@@ -3,7 +3,7 @@
 ## Summary
 Educational intent: write one traffic policy in both stacks, place it deliberately, and prove it with counters. It teaches extended and named ACLs, sequence-number editing, `log` evidence, the IPv6 implicit neighbour-discovery permits that an explicit `deny ipv6 any any` removes, why a filter on a routed interface must not catch the routing protocol, and `access-class` / `ipv6 access-class` on the VTYs. Blueprint: 5.2.a (ACLs, implementation level), IPv6:R (IPv6 ACLs, reinforcement). Builds on LAB-019 (dual stack, OSPFv3) and LAB-032 (VTY consistency). Type I: there are no intentional faults.
 
-Design decisions of the build:
+Design decisions:
 - Hosts have static IPv4 and IPv6 addresses and a static IPv6 default route via the router's `::1`; the routers suppress RAs on the LAN ports (`ipv6 nd ra suppress all`), so no SLAAC addresses appear.
 - OSPFv2 and OSPFv3 run on every interface (LAN ports and loopbacks passive; e0/0 point-to-point). This gives full reachability and one adjacency on e0/0.
 - Day-0 VTY: `login local`, `transport input ssh`, `line vty 0 4`, RSA key, `ip ssh version 2`, enable secret. Router e0/3 is shut down.
@@ -76,7 +76,7 @@ Captured on CML 2.10.0, trimmed.
 - Management: PC2 SSH (admin) to 10.0.12.0, 2001:db8:0:12::1, 10.0.99.1, 2001:db8:0:99::1 succeeded: `%SEC_LOGIN-5-LOGIN_SUCCESS ... Source: 10.0.99.99` and `Source: 2001:DB8:0:99::99`. PC1 ssh to 10.0.10.1 and 2001:db8:0:10::1: `Connection refused` (rc=255); to 10.0.50.1: `Host is unreachable`. PC3 ssh to 10.0.30.1: `Host is unreachable`. OSPFv2 and OSPFv3 FULL throughout.
 - R5: before the insert, `wget` to 10.0.50.50:443 = `Host is unreachable`. After `15 permit tcp ... host 10.0.50.50 eq 443` (no removal) = `Connection refused` (reaches SRV1, no listener), seq 15 1 match.
 - R4, fixed policy: with `permit icmp any any nd-ns sequence 35` and `nd-na sequence 36` placed before the final deny, 60 of 60 pings ok over 3 minutes (several cache aging cycles), nd-ns 12 and nd-na 12 matches.
-- Start state re-checked on the re-imported YAML: OSPFv2/v3 FULL, no ACLs, every ping 0% loss, both wgets `web-ok`.
+- Start state on a fresh import of the YAML: OSPFv2/v3 FULL, no ACLs, every ping 0% loss, both wgets `web-ok`.
 
 ## Failure / Recovery Behaviour
 Method: interface ACL experiments only. No link or node was stopped or shut down.

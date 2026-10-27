@@ -87,7 +87,7 @@ spanning-tree mode mst
 ```
 Stored on SW1 as `spanning-tree mst 0-1 priority 24576`, `spanning-tree mst 2 priority 28672`; on SW2 `mst 0-1 priority 28672`, `mst 2 priority 24576`. The Rapid PVST+ `spanning-tree vlan … priority` lines stay in the configuration but are inactive in MST mode (students may remove them).
 
-**Build note (why `mst 0` is in the solution).** The build first set only MSTI 1/2 roots. The IST/CIST root was then MAC-elected, and the lowest MAC was SW3's: SW3 and SW4 sent superior CIST BPDUs up, and root guard on SW1/SW2 blocked the downlinks **for all instances** (6 root-inconsistent entries on SW1, PC1→PC2 100 % loss). Adding `spanning-tree mst 0 root primary` on SW1 (secondary on SW2) cleared it at once. See Q5.
+**Build note (why `mst 0` is in the solution).** A first attempt set only the MSTI 1/2 roots. The IST/CIST root was then MAC-elected, and the lowest MAC was SW3's: SW3 and SW4 sent superior CIST BPDUs up, and root guard on SW1/SW2 blocked the downlinks **for all instances** (6 root-inconsistent entries on SW1, PC1→PC2 100 % loss). Adding `spanning-tree mst 0 root primary` on SW1 (secondary on SW2) cleared it at once. See Q5.
 
 ## Verification
 
@@ -99,7 +99,7 @@ VLAN0010             Et0/0
 VLAN0020             Et0/0
 VLAN0099             Et0/0
 ```
-SW4: Et0/0 Root FWD, Et0/1 Altn BLK for all VLANs. Why: SW3 wins on MAC (all priorities 32768 + VLAN). SW1 and SW2 each reach SW3 at cost 100 directly. On SW1–SW2, both advertise cost 100, so the lower sender bridge ID (SW1) wins designated and SW2 Et0/0 blocks. SW4 reaches the root at cost 200 via SW1 or SW2; equal cost, so the lower sender bridge ID (SW1) wins, SW4 Et0/1 (to SW2) is alternate. In the re-imported lab SW3 was root again (MAC aabb.cc00.6e00); students must derive their own.
+SW4: Et0/0 Root FWD, Et0/1 Altn BLK for all VLANs. Why: SW3 wins on MAC (all priorities 32768 + VLAN). SW1 and SW2 each reach SW3 at cost 100 directly. On SW1–SW2, both advertise cost 100, so the lower sender bridge ID (SW1) wins designated and SW2 Et0/0 blocks. SW4 reaches the root at cost 200 via SW1 or SW2; equal cost, so the lower sender bridge ID (SW1) wins, SW4 Et0/1 (to SW2) is alternate. On a fresh import SW3 was root again (MAC aabb.cc00.6e00); students must derive their own.
 
 **R2/R3 — Rapid PVST+.** SW1 `show spanning-tree bridge`:
 ```
@@ -169,9 +169,9 @@ Same pattern as R3 (MST1 = VLAN 10/99, MST2 = VLAN 20); costs now 2000000. Incon
 |---|---|
 | Rapid PVST+, both ends shut (SW3 Et0/0 first, then SW1 Et0/1) | `400 packets transmitted, 400 packets received, 0% packet loss`; SW3 Et0/1 Altn → Root FWD at once |
 | Rapid PVST+, restore both ends | `300 … 300 received, 0% packet loss` |
-| Rapid PVST+, only SW1 Et0/1 shut | `300 … 273 received, 9% packet loss`, one gap of 27 pings ≈ 5.4 s (validation run: 21 pings ≈ 4.2 s; accept 20–30 pings); SW3 Et0/0 stayed `up, line protocol is up` and became `Desg FWD` toward the dead port |
+| Rapid PVST+, only SW1 Et0/1 shut | `300 … 273 received, 9% packet loss`, one gap of 27 pings ≈ 5.4 s (another run: 21 pings ≈ 4.2 s; accept 20–30 pings); SW3 Et0/0 stayed `up, line protocol is up` and became `Desg FWD` toward the dead port |
 | MST, both ends shut | `400 … 400 received, 0% packet loss` |
-| MST, only SW1 Et0/1 shut | `300 … 273 received, 9% packet loss`, gap 27 pings ≈ 5.4 s (validation run: 24 pings ≈ 4.8 s; accept 20–30 pings). V8's one-ended test is asked in MST; either mode gives the same range |
+| MST, only SW1 Et0/1 shut | `300 … 273 received, 9% packet loss`, gap 27 pings ≈ 5.4 s (another run: 24 pings ≈ 4.8 s; accept 20–30 pings). V8's one-ended test is asked in MST; either mode gives the same range |
 
 Rapid PVST+ and MST behave the same (both use RSTP handshakes and alternate ports). When the switch owning the root port sees the link go down, the alternate port takes over instantly. When only the far end is shut (a CML artefact, but also what a failed transceiver or a one-way fault looks like), SW3 must miss three hellos (6 s) before it ages out the root-port information.
 
@@ -204,7 +204,7 @@ SW4 is its own region: it is regional root and root of MST1/MST2 locally, and al
 
 **Q4.** BPDU guard belongs on edge (host) ports, where no BPDU should ever arrive: a BPDU means someone connected a switch, so the port is err-disabled. Root guard belongs on the designated ports facing switches that may legitimately send BPDUs but must never become root: here the distribution downlinks. It blocks only while superior BPDUs arrive and recovers by itself. The other way round fails: BPDU guard on a distribution downlink err-disables it as soon as the access switch sends its normal BPDUs (R6 showed this on SW4 Et0/1), and root guard on a host port does nothing useful against a rogue switch that does not claim root.
 
-**Q5.** In MST, root guard acts on the port for every instance, and the decisive election for the port is the CIST's. Setting only the MSTI 1/2 roots leaves the IST root to MAC addresses. In the build, SW3 had the lowest MAC, so SW3 and SW4 sent superior CIST BPDUs to SW1/SW2, whose root guard declared both downlinks root-inconsistent for MST0, MST1 and MST2: six inconsistent entries on SW1, SW3/SW4 isolated, PC1→PC2 100 % loss. Placing `spanning-tree mst 0 root primary` on SW1 (secondary on SW2) makes the distribution layer win the CIST and releases the ports (`ROOTGUARD_UNBLOCK … on MST0`). A classmate whose import gave SW1 or SW2 the lowest MAC would not see the problem, which is exactly why the design must not rely on it.
+**Q5.** In MST, root guard acts on the port for every instance, and the decisive election for the port is the CIST's. Setting only the MSTI 1/2 roots leaves the IST root to MAC addresses. In a test run, SW3 had the lowest MAC, so SW3 and SW4 sent superior CIST BPDUs to SW1/SW2, whose root guard declared both downlinks root-inconsistent for MST0, MST1 and MST2: six inconsistent entries on SW1, SW3/SW4 isolated, PC1→PC2 100 % loss. Placing `spanning-tree mst 0 root primary` on SW1 (secondary on SW2) makes the distribution layer win the CIST and releases the ports (`ROOTGUARD_UNBLOCK … on MST0`). A classmate whose import gave SW1 or SW2 the lowest MAC would not see the problem, which is exactly why the design must not rely on it.
 
 ## Lab Info
 

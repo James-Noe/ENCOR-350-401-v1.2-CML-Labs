@@ -34,7 +34,7 @@ No faults. The method for a student who finds a tenant tunnel down or a tenant r
 
 ## Solution Configuration
 
-Applied in this order (the same script was applied to the build and to a fresh import; BR1-ACC1, hosts, PROV-* and the global WAN are unchanged). `vrf forwarding` removes the address, so each interface is re-addressed after it. The same final configs are the W3 stage (`environments/WAN/README.md`).
+Applied in this order (the same script was tested on two separate imports; BR1-ACC1, hosts, PROV-* and the global WAN are unchanged). `vrf forwarding` removes the address, so each interface is re-addressed after it. The same final configs are the W3 stage (`environments/WAN/README.md`).
 
 ### HQ-CORE1
 
@@ -258,7 +258,7 @@ line vty 0 4
 
 ## Verification
 
-Note: the first pings right after applying the solution or after a tunnel event can be briefly lossy (ARP and Tunnel adjacencies settling; seen once as 0/2 and 1/2 during the build, 100% on retest). Wait a few seconds and repeat the test before suspecting a fault.
+Note: the first pings right after applying the solution or after a tunnel event can be briefly lossy (ARP and Tunnel adjacencies settling; seen once as 0/2 and 1/2 in one test run, 100% on retest). Wait a few seconds and repeat the test before suspecting a fault.
 
 Captured on a fresh import after applying the solution (trimmed).
 

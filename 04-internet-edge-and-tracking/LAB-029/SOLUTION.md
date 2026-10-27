@@ -6,7 +6,7 @@ An implementation/integration lab with the first AI-change review. The Veridian 
 
 ## Intentional Faults
 
-None in the YAML (integration lab; the start state is E1 with no tracking). The AI proposal in LAB.md (v1.1) is the reviewed artefact. It contains none of LAB-028's pitfalls (`enable` first, every output appended, exact pattern, no self-trigger, no `wait`), so reading it against that checklist decides nothing.
+None in the YAML (integration lab; the start state is E1 with no tracking). The AI proposal in LAB.md is the reviewed artefact. It contains none of LAB-028's pitfalls (`enable` first, every output appended, exact pattern, no self-trigger, no `wait`), so reading it against that checklist decides nothing.
 
 | ID | Where | What | Symptom |
 |---|---|---|---|
@@ -88,7 +88,7 @@ The corrected applet replaces the proposal (`no event manager applet ISPA-EVIDEN
 
 ## Verification
 
-Captured on the re-imported lab after applying the solution (steady state):
+Captured on a fresh import after applying the solution (steady state):
 
 ```
 HQ-EDGE1# show track | include Reach           Reachability is Up

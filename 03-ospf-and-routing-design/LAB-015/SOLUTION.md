@@ -1,4 +1,4 @@
-# LAB-015 — Solution (instructor)
+# LAB-015 — Solution
 
 ## Summary
 
@@ -103,7 +103,7 @@ Transmit Delay is 1 sec, State DROTHER, Priority 200
 Designated Router (ID) 10.255.0.3, Interface address 10.0.123.3
 Backup Designated router (ID) 10.255.0.2, Interface address 10.0.123.2
 ```
-After R1 50 / R3 100 / R2 0, R1's neighbours: `10.255.0.2 0 FULL/DROTHER`, `10.255.0.3 100 FULL/DR` (R1 is BDR). What moves the DR: `shutdown`/`no shutdown` on R3 Et0/0 gives R1 `State DR` and R3 `FULL/BDR`; the same bounce on R1 gives R3 `State DR`, R1 `FULL/BDR` (R3: `10.255.0.1 50 FULL/BDR`). After re-import with the solution applied to R1-R3 within a few seconds of each other: R3 `Et0/0 ... DR 2/2`, R1 `FULL/BDR`, R2 `FULL/DROTHER`.
+After R1 50 / R3 100 / R2 0, R1's neighbours: `10.255.0.2 0 FULL/DROTHER`, `10.255.0.3 100 FULL/DR` (R1 is BDR). What moves the DR: `shutdown`/`no shutdown` on R3 Et0/0 gives R1 `State DR` and R3 `FULL/BDR`; the same bounce on R1 gives R3 `State DR`, R1 `FULL/BDR` (R3: `10.255.0.1 50 FULL/BDR`). On a fresh import with the solution applied to R1-R3 within a few seconds of each other: R3 `Et0/0 ... DR 2/2`, R1 `FULL/BDR`, R2 `FULL/DROTHER`.
 
 **R3 (one-sided point-to-point).** R3 Et0/1 point-to-point, R4 Et0/0 default broadcast:
 ```

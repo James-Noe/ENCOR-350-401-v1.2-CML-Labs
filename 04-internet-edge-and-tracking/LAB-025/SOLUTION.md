@@ -125,11 +125,11 @@ router bgp 65010
   neighbor 2001:db8:f002:ffff::64 route-map ISPB-IN-V6 in
 ```
 
-Apply it with the per-neighbour refresh, `clear bgp ipv6 unicast 2001:db8:f001:ffff::64 soft in` on EDGE1 and `clear bgp ipv6 unicast 2001:db8:f002:ffff::64 soft in` on EDGE2. In the re-check `clear bgp ipv6 unicast * soft in` did not apply the new filter, the per-neighbour form did. With bogus 2001:DB8:BAD1::/48 and BAD2 injected at the providers, both were installed before and gone from both edges after, the real ::/0 and /48 routes were kept (PfxRcd 3 to 2 per eBGP peer) and no session reset.
+Apply it with the per-neighbour refresh, `clear bgp ipv6 unicast 2001:db8:f001:ffff::64 soft in` on EDGE1 and `clear bgp ipv6 unicast 2001:db8:f002:ffff::64 soft in` on EDGE2. In another run `clear bgp ipv6 unicast * soft in` did not apply the new filter, the per-neighbour form did. With bogus 2001:DB8:BAD1::/48 and BAD2 injected at the providers, both were installed before and gone from both edges after, the real ::/0 and /48 routes were kept (PfxRcd 3 to 2 per eBGP peer) and no session reset.
 
 After the configuration run `clear ip bgp * soft` on both edges (re-applies the route-maps without resetting sessions). The IPv6 refresh is separate: use the per-neighbour `clear bgp ipv6 unicast <neighbor> soft in` (and `soft out`) for the IPv6 neighbours. IPv6 convergence after BGP changes takes about 1-2 minutes on the first pass.
 
-Tested in three stages (A: EDGE2 IPv4 eBGP only, to capture the leak; B: IPv4 policy; C: IPv6) and then as the merged script above, run clean on the start state of the re-imported lab.
+Tested in three stages (A: EDGE2 IPv4 eBGP only, to capture the leak; B: IPv4 policy; C: IPv6) and then as the merged script above, run clean on the start state of a fresh import.
 
 ## Verification
 

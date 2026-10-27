@@ -131,7 +131,7 @@ NAT failure: `sudo ip link set ens3 down` on AUTO-MGMT1. Result: `ping 8.8.8.8` 
 | `ip addr flush dev ens3` + `ip link set ens3 up` until `ping 8.8.8.8` succeeds (DHCP renewed through NAT) | 1146, 1090, 1092 ms (a plain down/up that keeps the address: 80 ms) | about 0.5 to 1.5 s (other runs: 1.1 s, 0.6 s) | networkd DHCP exchange; no protocol timer |
 | install times via NAT (info): `apt-get update` + `install python3-venv` 47 s; `pip install pyang==2.7.1` into a fresh venv 7 s | one run each | under 2 min | download-bound |
 
-Restore to the start state: node stop, wipe, start of AUTO-MGMT1 (booted in 52 s); the start checks matched the first run.
+Restore to the start state: node stop, wipe, start of AUTO-MGMT1 (booted in 52 s); the start-state checks matched the first run.
 
 ## Answers to Analysis Questions
 

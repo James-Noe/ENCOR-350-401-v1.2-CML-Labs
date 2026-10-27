@@ -1,9 +1,9 @@
 # LAB-072 — Solution
 
 ## Summary
-A night-shift integrated troubleshooting lab on the HQ H3 lite campus with the EDGE E3 edge and the DC segment. Three tickets, four faults (v1.3 adds F4), shared effects: a static EtherChannel mode mismatch between the distribution switches (F1) splits spanning tree and strands the Operations VLAN, a trunk VLAN omission on one access uplink (F2) is latent until F1 happens and then hides the access switch's management, and a "cleaned up" IPv6 Null0 route (F3) withdraws Veridian's IPv6 prefix from BGP. F4 (v1.3) is a security-review SGACL cell on HQ-CORE1 that drops the replies from SERVERS to OPERATIONS: SGACLs are stateless per direction, so the permitted OPS to SERVERS requests are answered but the replies never reach PC2. It stays invisible behind F1 until F1 is fixed. The student collects evidence with the automation host (netmiko script, Ansible), reads an unreachable device as evidence, and proves the fix with a cable-pull test (V4).
+A night-shift integrated troubleshooting lab on the HQ H3 lite campus with the EDGE E3 edge and the DC segment. Three tickets, four faults, shared effects: a static EtherChannel mode mismatch between the distribution switches (F1) splits spanning tree and strands the Operations VLAN, a trunk VLAN omission on one access uplink (F2) is latent until F1 happens and then hides the access switch's management, and a "cleaned up" IPv6 Null0 route (F3) withdraws Veridian's IPv6 prefix from BGP. F4 is a security-review SGACL cell on HQ-CORE1 that drops the replies from SERVERS to OPERATIONS: SGACLs are stateless per direction, so the permitted OPS to SERVERS requests are answered but the replies never reach PC2. It stays invisible behind F1 until F1 is fixed. The student collects evidence with the automation host (netmiko script, Ansible), reads an unreachable device as evidence, and proves the fix with a cable-pull test (V4).
 
-Objectives (instructor only): 3.1.a:T (trunks, VLAN 99), 3.1.b:T (EtherChannel mode mismatch), 3.2.c:T (eBGP IPv6 advertisement), IPv6:T, 3.1.c:R (root guard, loop guard, STP roots), 6.1:R (scripted evidence), 4.2:R (FNF cache as evidence), 5.1.a:R (AAA/VTY eliminated), 5.4.d:T (v1.3, group-based policy). LAB.md lists blueprint domains 3, 4, 5, 6 only.
+Objectives: 3.1.a:T (trunks, VLAN 99), 3.1.b:T (EtherChannel mode mismatch), 3.2.c:T (eBGP IPv6 advertisement), IPv6:T, 3.1.c:R (root guard, loop guard, STP roots), 6.1:R (scripted evidence), 4.2:R (FNF cache as evidence), 5.1.a:R (AAA/VTY eliminated), 5.4.d:T (group-based policy). LAB.md lists blueprint domains 3, 4, 5, 6 only.
 
 ## Intentional Faults
 
@@ -13,12 +13,12 @@ Objectives (instructor only): 3.1.a:T (trunks, VLAN 99), 3.1.b:T (EtherChannel m
 | F2 | HQ-ACC1 | `switchport trunk allowed vlan 10,20` on Et0/0 (to DIST1), VLAN 99 missing; Et0/1 keeps 10,20,99 | Latent alone. With F1: ACC1's VLAN 99 runs only to DIST2, which cannot reach CORE1: ACC1 unmanageable (TK3, ACC1). After F1 alone is fixed, ACC1 answers but loses management when Et0/1 is pulled (V4) |
 | F3 | HQ-EDGE1 | `ipv6 route 2001:DB8:10::/48 Null0` removed (IPv4 Null0 kept) | BGP `network 2001:DB8:10::/48` has no RIB match; ISP1 receives no Veridian IPv6 prefix, IPv6 replies never return (TK2); IPv4 unaffected |
 
-| F4 (v1.3) | HQ-CORE1 | `ip access-list role-based SRV-OPS` with `deny ip`, applied as `cts role-based permissions from 50 to 20 SRV-OPS` ("servers must not open sessions to Operations") | PC2 to 10.255.50.1: 100% loss while PC2 reaches its gateway and 192.0.2.200. Requests pass the 20 to 50 cell, DC-RTR1 answers, CORE1 drops each reply on the 50 to 20 cell. PC1 unaffected (no 50 to 10 cell). Masked by F1 while PC2 is cut off |
+| F4 | HQ-CORE1 | `ip access-list role-based SRV-OPS` with `deny ip`, applied as `cts role-based permissions from 50 to 20 SRV-OPS` ("servers must not open sessions to Operations") | PC2 to 10.255.50.1: 100% loss while PC2 reaches its gateway and 192.0.2.200. Requests pass the 20 to 50 cell, DC-RTR1 answers, CORE1 drops each reply on the 50 to 20 cell. PC1 unaffected (no 50 to 10 cell). Masked by F1 while PC2 is cut off |
 
-**Fault logic.** TK1 = F1 (series). TK3: DIST2 = F1; ACC1 = F1 and F2 in parallel for repair (either fix restores ACC1, the other stays latent). TK2 = F3. (v1.3) TK1 = F1 + F4 in series: after F1 alone PC2 reaches its gateway and the Internet host, but V1 still fails for PC2 to 10.255.50.1.
+**Fault logic.** TK1 = F1 (series). TK3: DIST2 = F1; ACC1 = F1 and F2 in parallel for repair (either fix restores ACC1, the other stays latent). TK2 = F3. TK1 = F1 + F4 in series: after F1 alone PC2 reaches its gateway and the Internet host, but V1 still fails for PC2 to 10.255.50.1.
 **Given design: DIST2 VLAN 10 OSPF cost 20.** HQ-DIST2 `interface Vlan10` carries `ip ospf cost 20` and `ospfv3 cost 20`; it is documented in LAB.md as the routing design, not a fault. It exists so the start state is boot-independent: under F1, DIST2 blocks VLAN 10 on Et0/2 (root-inconsistent), and without the cost CORE1 ECMPs 10.10.10.0/24 over both distribution switches. CEF's per-destination hash seed changes on every CORE1 boot, so PC1's return traffic from remote hosts could go via DIST2 and be black-holed (seen once after a CORE1 wipe, PC1 to remote hosts 100% loss). With the cost, CORE1 has a single path (via DIST1, metric 11), the return path is deterministic, and TK1 stays Operations-only. Proven by three CORE1 wipes.
-**Red herrings.** (v1.3: the 20 to 50 OPS-SRV cell counts every request, so the forward direction is fine; the EMPLOYEES to SERVERS ICMP-only cell is restrictive but documented; DC-RTR1's routes and filters are fine, it answers PC1 and its link-sourced pings reach PC2.) `ROOTGUARD_BLOCK` logs (the guard works; DIST2 also logs VLAN 10 (and 99 with F2 fixed first) root-inconsistent on Et0/2, a pure consequence of F1: ACC1 relays DIST1's superior root BPDUs to DIST2 while the interconnect is dead; it disappears when F1 is fixed); GLBP/HSRP on the distribution pair (VLAN 10 users fine); `EDGE-IN-V6` `deny ipv6 any any log` matches (only provider RA/MLD, no echo-reply denies); CoPP; OSPFv3 default on CORE1 present; RADIUS fine (console access works).
-**Wrong-fix traps.** Removing root guard from DIST1 Et0/2 (restores PC2 but breaks V5); `channel-group 1 mode on` on DIST1 too (bundle forms, protocol `-`, breaks V5); (v1.3) `no cts role-based enforcement`, removing the VLAN 20 mapping or `permit icmp` above the deny in SRV-OPS (see the trap results below); a static IPv6 default on ISP1 (not ours); `redistribute static` into BGP (advertises more than the /48, V3).
+**Red herrings.** (the 20 to 50 OPS-SRV cell counts every request, so the forward direction is fine; the EMPLOYEES to SERVERS ICMP-only cell is restrictive but documented; DC-RTR1's routes and filters are fine, it answers PC1 and its link-sourced pings reach PC2.) `ROOTGUARD_BLOCK` logs (the guard works; DIST2 also logs VLAN 10 (and 99 with F2 fixed first) root-inconsistent on Et0/2, a pure consequence of F1: ACC1 relays DIST1's superior root BPDUs to DIST2 while the interconnect is dead; it disappears when F1 is fixed); GLBP/HSRP on the distribution pair (VLAN 10 users fine); `EDGE-IN-V6` `deny ipv6 any any log` matches (only provider RA/MLD, no echo-reply denies); CoPP; OSPFv3 default on CORE1 present; RADIUS fine (console access works).
+**Wrong-fix traps.** Removing root guard from DIST1 Et0/2 (restores PC2 but breaks V5); `channel-group 1 mode on` on DIST1 too (bundle forms, protocol `-`, breaks V5); `no cts role-based enforcement`, removing the VLAN 20 mapping or `permit icmp` above the deny in SRV-OPS (see the trap results below); a static IPv6 default on ISP1 (not ours); `redistribute static` into BGP (advertises more than the /48, V3).
 
 ## Diagnosis / Methodology
 1. **Evidence first (R1).** On AUTO-MGMT1: `cd ~/auto && /home/cisco/venv/bin/python show_cmds.py --out before` (24 s with two devices down). Captured status:
@@ -67,7 +67,7 @@ ipv6 route 2001:DB8:10::/48 Null0
 ```
 no cts role-based permissions from 50 to 20
 ```
-Nothing is saved to NVRAM in the build; save in production.
+Nothing is saved to NVRAM in the lab; save in production.
 
 ## Verification
 All captured on a fresh import of the YAML.
@@ -77,7 +77,7 @@ All captured on a fresh import of the YAML.
 - **V3:** EDGE1 IPv4 advertised `Total number of prefixes 2` (192.0.2.0/26, 192.0.2.128/26), IPv6 `Total number of prefixes 1`; ISP1 receives `2001:DB8:10::/48` only.
 - **V4 / V6:** `show_cmds.py` after the fixes:
 ```
-=== STATUS (7 s) ===   (re-imported lab: 10 s)
+=== STATUS (7 s) ===   (another import: 10 s)
 HQ-CORE1   10.10.99.2     ok
 HQ-DIST1   10.10.99.11    ok
 HQ-DIST2   10.10.99.12    ok
@@ -87,7 +87,7 @@ DC-RTR1    10.50.50.1     ok
 ```
 `ansible-playbook evidence.yml` (venv): `ok=2` for ACC1, DIST1, DIST2 and EDGE1 in 11 s (before the fix: 30 s, ACC1 and DIST2 `fatal ... timed out`). Netmiko reaches ACC1 through the global VLAN 99 SVI via 10.10.99.1. The `before`/`after` diff shows Po1 state, inconsistent ports, ACC1's trunk and the IPv6 BGP summary changing.
 
-- **V1 / V7 (v1.3) captured, F1 fixed, F4 present:** PC2 to 192.0.2.200 3/3, to 10.255.50.1 `100% packet loss`; DC-RTR1 `source Loopback0` `Success rate is 0 percent (0/2)`, `source Ethernet0/0` (`10.10.255.131`) `!!`; CORE1:
+- **V1 / V7 captured, F1 fixed, F4 present:** PC2 to 192.0.2.200 3/3, to 10.255.50.1 `100% packet loss`; DC-RTR1 `source Loopback0` `Success rate is 0 percent (0/2)`, `source Ethernet0/0` (`10.10.255.131`) `!!`; CORE1:
 ```
 show cts role-based permissions
 IPv4 Role-based permissions from group 50 to group 20 (configured):

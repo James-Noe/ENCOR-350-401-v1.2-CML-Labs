@@ -2,7 +2,7 @@
 
 ## Summary
 
-Two tickets, three faults, one environment (H4 profile of LAB-056 plus the capture host HQ-PC5, 17 nodes). T1 (OPS camera wall black) is two faults in series: a port ACL on the viewer's access port drops IGMP (F2), and a typo in the join-policy ACL on the VLAN 20 DR ignores the reports that get past it (F1). T2 (depot screen black) is a static multicast route that moves the RPF interface for the RP away from the tunnel (F3). Blueprint (instructor only): 3.3.d:T (multicast: IGMP, PIM, RPF, join policy), X-IGMPSnoop:R (read on HQ-ACC1, ruled out as a cause), 4.3:R (SPAN). Earlier-module candidates ruled out by evidence: VLAN 20 trunking/STP (module 01), VRRP gateway (03), tunnel/IPsec and MTU (07). Wrong-fix traps teach that "video plays" is not the exit criterion: V3 to V6 must still hold.
+Two tickets, three faults, one environment (H4 profile of LAB-056 plus the capture host HQ-PC5, 17 nodes). T1 (OPS camera wall black) is two faults in series: a port ACL on the viewer's access port drops IGMP (F2), and a typo in the join-policy ACL on the VLAN 20 DR ignores the reports that get past it (F1). T2 (depot screen black) is a static multicast route that moves the RPF interface for the RP away from the tunnel (F3). Blueprint: 3.3.d:T (multicast: IGMP, PIM, RPF, join policy), X-IGMPSnoop:R (read on HQ-ACC1, ruled out as a cause), 4.3:R (SPAN). Earlier-module candidates ruled out by evidence: VLAN 20 trunking/STP (module 01), VRRP gateway (03), tunnel/IPsec and MTU (07). Wrong-fix traps teach that "video plays" is not the exit criterion: V3 to V6 must still hold.
 
 ## Intentional Faults
 
@@ -83,7 +83,7 @@ HQ-PC2 viewer:  0.00-5.00 sec   314 KBytes   514 Kbits/sec   0.252 ms 11459/1170
 BR1-PC1 viewer: 0/243 (0%) in every interval from 20 s on
 ```
 
-Start state at boot (re-import, both tickets): PC2 and BR1-PC1 viewers print only the header; CORE1/CORE2 `show ip igmp groups 239.10.20.1` empty; CORE2 (*,G) `SP` OIL Null, (S,G) incoming Ethernet0/2.50; `KIOSK-IN` `10 deny igmp any any (2 matches)` rising; ACC2 `show ip igmp snooping vlan 20`: Admin State Disabled; BR1 `show ip rpf 10.255.10.100`: Ethernet0/2.10, `multicast (static)`; BR1 (*,G) `SJPC`, incoming Ethernet0/2.10 "Mroute", OIL Null.
+Start state at boot (fresh import, both tickets): PC2 and BR1-PC1 viewers print only the header; CORE1/CORE2 `show ip igmp groups 239.10.20.1` empty; CORE2 (*,G) `SP` OIL Null, (S,G) incoming Ethernet0/2.50; `KIOSK-IN` `10 deny igmp any any (2 matches)` rising; ACC2 `show ip igmp snooping vlan 20`: Admin State Disabled; BR1 `show ip rpf 10.255.10.100`: Ethernet0/2.10, `multicast (static)`; BR1 (*,G) `SJPC`, incoming Ethernet0/2.10 "Mroute", OIL Null.
 
 Build-time observations (hostnames as above; times are from the first fixed run):
 - F2 alone: ACC1 snooping `20 239.10.20.1 I v2 Et0/1` after 21 s; CORE1 lists the group (reporter 10.10.20.102), CORE1 (*,G) OIL Null; CORE2 empty; PC2 black. F1 alone: no change after 100 s. Both fixed: CORE2 group and (*,G) `SJC` OIL Ethernet0/2.20; PC2 19 consecutive intervals `0/243 (0%)`.

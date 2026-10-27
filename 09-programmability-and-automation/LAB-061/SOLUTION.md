@@ -2,7 +2,7 @@
 
 ## Summary
 
-Instructor view. The lab turns LAB-060's read/write knowledge into a real change: objects are written only through RESTCONF (IETF and native models) and NETCONF `<edit-config>`, the student sees how PATCH, PUT and `operation="delete"` act on list entries and leaves, reads a natural 400 error path, and then hardens the API (dedicated account, HTTPS only, source restriction, connection limit, a certificate with a SAN that the client trusts). Blueprint: 4.6:P (REST/NETCONF/RESTCONF), 5.3:I (device access control and API security), 6.2:P (configuration management via models), 6.5:P (API based management). The end state is **stage A1** (`environments/AUTO/A1/`), written by this lab.
+The lab turns LAB-060's read/write knowledge into a real change: objects are written only through RESTCONF (IETF and native models) and NETCONF `<edit-config>`, the student sees how PATCH, PUT and `operation="delete"` act on list entries and leaves, reads a natural 400 error path, and then hardens the API (dedicated account, HTTPS only, source restriction, connection limit, a certificate with a SAN that the client trusts). Blueprint: 4.6:P (REST/NETCONF/RESTCONF), 5.3:I (device access control and API security), 6.2:P (configuration management via models), 6.5:P (API based management). The end state is **stage A1** (`environments/AUTO/A1/`), written by this lab.
 
 Measured platform behaviour (all on cat8000v 17.16.1a):
 1. **IETF PUT without `ietf-ip:ipv4` keeps the address** (only the containers the body names are replaced); the same PUT with `"ietf-ip:ipv4":{}` removes it, and the **native PUT** on `native/interface/Loopback=101` removes it (the list entry is replaced). R4 therefore uses both and Q2 explains the difference.

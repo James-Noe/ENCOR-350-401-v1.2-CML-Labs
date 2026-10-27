@@ -1,4 +1,4 @@
-# LAB-019 — Solution (instructor)
+# LAB-019 — Solution
 
 ## Summary
 

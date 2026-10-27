@@ -219,9 +219,9 @@ Clock is unsynchronized, stratum 16, no reference clock
 R3# show clock
 *02:12:10.109 UTC Sun Sep 27 2026
 ```
-(captured on the re-imported lab about 2.5 hours after boot). R2 first selects R1 (`*`, reach 7) about 15–17 minutes after boot. For a few more minutes `show ntp status` still reports `Clock is unsynchronized, stratum 4` with loopfilter `FREQ` while the drift is measured; it later changes to `Clock is synchronized`. `show ntp associations detail` on R3 shows `authenticated (' ' reject) ... insane, invalid, unsynced, stratum 16`.
+(captured on a fresh import, about 2.5 hours after boot). R2 first selects R1 (`*`, reach 7) about 15–17 minutes after boot. For a few more minutes `show ntp status` still reports `Clock is unsynchronized, stratum 4` with loopfilter `FREQ` while the drift is measured; it later changes to `Clock is synchronized`. `show ntp associations detail` on R3 shows `authenticated (' ' reject) ... insane, invalid, unsynced, stratum 16`.
 
-Optional change: on R3, `ntp trusted-key 1`. In the build, R3 selected R2 (`*~10.255.0.2 10.255.0.1 4 ...`) and reported stratum 5 about 13 minutes after the change, because R2 serves time only once its own loop filter has left `FREQ`. This proves the missing trusted key was the only thing stopping R3.
+Optional change: on R3, `ntp trusted-key 1`. In a test run, R3 selected R2 (`*~10.255.0.2 10.255.0.1 4 ...`) and reported stratum 5 about 13 minutes after the change, because R2 serves time only once its own loop filter has left `FREQ`. This proves the missing trusted key was the only thing stopping R3.
 
 ## Failure / Recovery Behaviour
 

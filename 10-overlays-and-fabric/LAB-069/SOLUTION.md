@@ -76,7 +76,7 @@ show lisp instance-id 4097 ipv4 map-cache
   Locator 10.255.60.12 ... up 1/100
 show ip route vrf CORP     -> only C 10.60.10.0/24 and L 10.60.10.1/32 (no covering route)
 ```
-(During the build, `show ip cef vrf CORP 10.50.51.53 detail` on XTR1: `LISP remote EID: 46 packets fwd action encap, nexthop 10.255.60.21 LISP0.4097`.) BDR1 `show lisp service ipv4`: ITR/ETR disabled, `Proxy-ITR Router (PITR): enabled RLOCs: 10.255.60.21`, `Proxy-ETR Router (PETR): enabled`.
+(In a test run, `show ip cef vrf CORP 10.50.51.53 detail` on XTR1: `LISP remote EID: 46 packets fwd action encap, nexthop 10.255.60.21 LISP0.4097`.) BDR1 `show lisp service ipv4`: ITR/ETR disabled, `Proxy-ITR Router (PITR): enabled RLOCs: 10.255.60.21`, `Proxy-ETR Router (PETR): enabled`.
 
 R3/V4, border and fusion:
 ```

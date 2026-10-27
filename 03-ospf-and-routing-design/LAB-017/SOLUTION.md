@@ -97,7 +97,7 @@ PC1 pinging 10.0.4.1 with `-i 0.2`. Cable pull = `shutdown` on both ends, fired 
 
 EIGRP hold time is 15 s (3 × 5 s hello); OSPF dead interval on these broadcast links is 40 s (4 × 10 s hello). Outage is the hold/dead time minus the time since the last hello, plus negligible SPF/DUAL time, so the silent-failure numbers (12.6 s and 36.6 s) are dominated by those timers, not by the algorithms. The cable-pull numbers are dominated by interface-down detection (both react at once).
 
-Notes: shutting EIGRP down on R1 with `shutdown` under the process removes EIGRP completely from R1 (neighbours down: shutdown) and R1 falls back to OSPF at once; `no shutdown` re-forms the adjacencies in about a minute. After restoring a link, wait about a minute for OSPF to elect a DR before measuring again. Run CLI calls on the routers one at a time: a configuration sent in parallel with others was lost once during the build (R4).
+Notes: shutting EIGRP down on R1 with `shutdown` under the process removes EIGRP completely from R1 (neighbours down: shutdown) and R1 falls back to OSPF at once; `no shutdown` re-forms the adjacencies in about a minute. After restoring a link, wait about a minute for OSPF to elect a DR before measuring again. Run CLI calls on the routers one at a time: a configuration sent in parallel with others was lost once in testing (R4).
 
 ## Answers to Analysis Questions
 

@@ -55,7 +55,7 @@ SSM (all four routers): `ip pim ssm default`. PC2: `iperf -s -u -B 232.1.1.1 -H 
 
 ## Verification
 
-Start state (identical on the exported-and-reimported lab): every router `Acl: MC, Static / RP: 10.255.0.2`, `Acl: RPBD, Static, Bidir Mode / RP: 10.255.0.22`, `Acl: RPAC, Static / RP: 10.255.0.100`; R3 and R4 `show ip msdp peer`: `State: Up`; R1 route to 10.255.0.100 via 10.0.13.2 metric 11, R2 via 10.0.24.2 metric 31, R3/R4 connected; R4 e0/2 `Current IGMP router version is 3`.
+Start state (identical on a fresh import): every router `Acl: MC, Static / RP: 10.255.0.2`, `Acl: RPBD, Static, Bidir Mode / RP: 10.255.0.22`, `Acl: RPAC, Static / RP: 10.255.0.100`; R3 and R4 `show ip msdp peer`: `State: Up`; R1 route to 10.255.0.100 via 10.0.13.2 metric 11, R2 via 10.0.24.2 metric 31, R3/R4 connected; R4 e0/2 `Current IGMP router version is 3`.
 
 V1/V2 Auto-RP, R4: `Group(s) 239.1.0.0/16 RP 10.255.0.3, v2v1, elected via Auto-RP, info source 10.255.0.1`; R1 lists R3 (elected) and R2; RPBD and RPAC static entries still listed. Removing `send-rp-announce` on R3 is withdrawn at R4 within the first poll (1-5 s).
 

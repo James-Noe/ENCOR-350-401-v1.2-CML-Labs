@@ -168,7 +168,7 @@ PC1: traceroute -n 10.50.51.53:  10.60.10.1, 10.200.60.2, 10.50.255.0, 10.50.51.
 PC2: traceroute -n 10.50.51.53:  10.60.20.1, 10.200.60.4, 10.50.255.0, 10.50.51.53
 ```
 
-R4 (build run): after the seq 20 line, BDR1 vrf IOT gained `B 10.50.52.0/24 via 10.200.60.4` within 3 s; PC2 pinged 10.50.52.1 (64 bytes, ttl 42); PC1's first ping was lost during propagation and it reached the address a few seconds later. Nothing else in any table changed. The leaked Loopback0 10.255.50.1 is in SHARED (OSPF) but is never in CORP or IOT (blocked by SHARED-EXP).
+R4 (test run): after the seq 20 line, BDR1 vrf IOT gained `B 10.50.52.0/24 via 10.200.60.4` within 3 s; PC2 pinged 10.50.52.1 (64 bytes, ttl 42); PC1's first ping was lost during propagation and it reached the address a few seconds later. Nothing else in any table changed. The leaked Loopback0 10.255.50.1 is in SHARED (OSPF) but is never in CORP or IOT (blocked by SHARED-EXP).
 
 Observed side effect: the traceroute shows DC-FUS1's CORP-side address (10.200.60.2) as hop 2 and DC-RTR1's fusion-link address as hop 3; the fusion router appears with the Aster-facing address.
 

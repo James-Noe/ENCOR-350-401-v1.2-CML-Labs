@@ -6,7 +6,7 @@ This is a Foundation (F), guided (G3) lab teaching HSRP (v1 and v2), VRRPv3, pri
 
 ## Diagnosis / Methodology
 
-Not applicable in the troubleshooting sense (no fault to diagnose). The build/verification order used, and expected for students, is strictly sequential: R1 (HSRPv1 election) → R2 (priority + preempt) → R3 (HSRPv2 migration) → R4 (VRRPv3) → R5 (tracking on both groups) → R6 (failure tests on the fully-configured bench). Each step's `show` output and log lines were captured before moving to the next, and PC1/PC2 pings were used to confirm the *host-visible* effect of every router-side change, not just the router's own state.
+Not applicable in the troubleshooting sense (no fault to diagnose). The configuration/verification order used, and expected for students, is strictly sequential: R1 (HSRPv1 election) → R2 (priority + preempt) → R3 (HSRPv2 migration) → R4 (VRRPv3) → R5 (tracking on both groups) → R6 (failure tests on the fully-configured bench). Each step's `show` output and log lines were captured before moving to the next, and PC1/PC2 pings were used to confirm the *host-visible* effect of every router-side change, not just the router's own state.
 
 ## Solution Configuration
 

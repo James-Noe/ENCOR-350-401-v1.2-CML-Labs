@@ -2,7 +2,7 @@
 
 Every lab in this pack follows the same pattern. This guide explains what each part of a lab is for, what you are expected to produce, and how to use `SOLUTION.md` without spoiling the lab.
 
-The short version: **a lab is finished when your notes hold text evidence for every Verification Criterion and an answer to every Analysis Question** (what that looks like is under "Your lab notes" below). Configuring the devices is only part of the work. The `show` output, measurements and pings that prove the result are part of what the lab asks for, and `SOLUTION.md` shows the expected version of exactly that evidence.
+The short version: **a lab is finished when its `ANSWERS.md` holds text evidence for every Requirement and Verification Criterion and an answer to every Analysis Question** (what that looks like is under "Your answer file" below). Configuring the devices is only part of the work. The `show` output, measurements and pings that prove the result are part of what the lab asks for, and `SOLUTION.md` shows the expected version of exactly that evidence.
 
 ## What is in a lab folder
 
@@ -13,6 +13,8 @@ The short version: **a lab is finished when your notes hold text evidence for ev
 | `LAB-NNN.yaml` | The CML topology with the start state already configured | Import it into CML |
 | `SOLUTION.md` | Reference answer: configuration, expected output, answers | Only after you have finished (see below) |
 | `*.pcap`, `BUILD.md` | Packet captures or a build procedure, in the few labs that use them | When LAB.md points to them |
+| `ANSWERS.md` | Your answer file: one blank section per R item and per Q item, which you fill in | As you work |
+| `GRADING.md` | Feedback on your answers, written when you have Claude Code grade them (see "Grading your answers"); not there until then | After grading |
 
 ## Reading the LAB.md header
 
@@ -44,7 +46,7 @@ Some labs mix tiers, for example G3 for the first device and G2 for the rest; th
 
 ## The sections of LAB.md, and what you produce for each
 
-Some sections are only for reading. The others each ask you to write something in your lab notes (next section).
+Some sections are only for reading. The others each ask you to write something in your `ANSWERS.md` (next section).
 
 | Section | What it gives you | What you produce |
 |---|---|---|
@@ -58,16 +60,18 @@ Some sections are only for reading. The others each ask you to write something i
 | Verification Criteria (V1, V2, …) | What must be true, and the evidence you must show | **Per V item:** the proof (command and output, or measurements), and one sentence on why it proves the item |
 | Analysis Questions (Q1, Q2, …) | Questions about what you saw and why | **Per Q item:** a written answer of a few sentences that cites your own evidence |
 
-## Your lab notes: the work you produce
+## Your answer file: the work you produce
 
 The Verification Criteria are the step that is easiest to miss. A V item is not just "check it works": the evidence that proves it is part of the lab, and it is what you compare with `SOLUTION.md`.
 
 ### Where to keep them
 
-- **One Markdown or plain-text file per lab**, for example `LAB-017-notes.md`, kept in your own folder (for example `my-work/LAB-017/`). Don't write into `LAB.md`: keep the brief clean so you can redo the lab, and so a newer copy of the pack can replace it without losing your work.
+- **Write your work into the lab's `ANSWERS.md`.** It has one section per requirement (**Commands used**, **Command output**, **Explanation**) and one per Analysis Question (**Answer**). Keep those headings as they are; grading follows them. Don't write into `LAB.md`: keep the brief clean so you can redo the lab.
+- **Sections you add yourself.** Verification Criteria have no section of their own: put each V item's evidence in the R section that delivers it, and name it in the Explanation (`V2: met, because …`). Add `## Baseline` at the top for the Starting State output, and in troubleshooting labs and milestones a `## T1`, `## T2`, … section per ticket with the same three headings.
+- **When you get a newer copy of the pack**, its `ANSWERS.md` files are blank again. Keep your `ANSWERS.md`, `GRADING.md`, screenshots and captures: copy them into the new pack's lab folders (replacing the blank `ANSWERS.md`), or keep your old copy of the pack next to the new one.
 - **Text, not pictures.** Everything on a router, a switch or a Linux host is text, so copy the command output from the console and paste it in. Text is searchable, it can be compared line by line with `SOLUTION.md`, and it is what you would paste into a change record or a ticket at work.
-- **Screenshots only where the evidence exists only on screen:** the CML UI (node settings, link states), a web dashboard such as the SD-WAN Manager, or a Wireshark window. Save them next to your notes (`my-work/LAB-017/v3-capture.png`), link them from the V item, and add a sentence on what the picture shows. Never take a photo of terminal text; copy the text.
-- **Packet captures:** keep the `.pcap` file in the same folder, and paste the few decoded lines that matter (from `tshark` or Wireshark) into your notes.
+- **Screenshots only where the evidence exists only on screen:** the CML UI (node settings, link states), a web dashboard such as the SD-WAN Manager, or a Wireshark window. Save them in the lab folder next to `ANSWERS.md` (`LAB-017/v3-capture.png`), link them from the section they prove, and add a sentence on what the picture shows. Never take a photo of terminal text; copy the text.
+- **Packet captures:** keep your `.pcap` file in the lab folder too, named so it can't be confused with a capture the lab ships (`my-v3.pcap`), and paste the few decoded lines that matter (from `tshark` or Wireshark) into `ANSWERS.md`.
 
 ### How to write each piece of evidence
 
@@ -78,70 +82,56 @@ The Verification Criteria are the step that is easiest to miss. A V item is not 
 - **Every device, direction or site** that the V item names gets its own output.
 - **One sentence of reasoning** under each block: what in the output proves the item. "Output above" on its own is not proof.
 
-### A notes skeleton
+### A filled-in answer file
 
-Copy it for each lab and delete the parts the lab doesn't have. Number the headings after the lab's own R, T, V and Q items.
+Part of one, to show what goes where. The R and Q sections come with the file; `## Baseline` and the `V1:` lines are yours.
 
 ````markdown
-# LAB-NNN notes
+# LAB-NNN — Answers
 
-## Baseline (Starting State)
+## Baseline
 ```
 R1# show ip ospf neighbor
 ...
 ```
 Matches Starting State: all four neighbours FULL.
 
-## Work done
-### R1: <short title>
-Changed R1 and R2:
+## R1 — <title from LAB.md>
+**Commands used:**
 ```
-router ospf 1
- ...
+R1(config)# router ospf 1
+R1(config-router)# ...
+R1# show ip ospf interface brief
 ```
-Choice: <what you chose, and why>.
-
-## Tickets (troubleshooting and milestone labs)
-### T1
-- Symptom (before): <output reproducing the problem>
-- Diagnosis: hypothesis → command → result → conclusion, one line each
-- Root cause: <device, what was wrong>
-- Fix: <exact commands>
-- After: <output showing it fixed>
-
-## Verification
-### V1: met (or: partly met, not met, and why)
+**Command output:**
 ```
-R1# show ...
+R1# show ip ospf interface brief
 ...
 ```
-Proves V1 because <the line or value that shows it>.
+**Explanation:**
+Changed R1 and R2 as above. Choice: <what you chose, and why>.
+V1: met, because <the line or value in the output that shows it>.
 
-### V2: met (measurements)
-| Case | Trigger | Lost | Outage | Detected by |
-|---|---|---|---|---|
-| 1 | ... | ... | ... | ... |
-
-## Analysis
-### Q1
-<answer in a few sentences, citing V1 and V2>
-
-## Compared with SOLUTION.md (after you finish)
-<what matched, what you missed, what you did differently>
+## Q1
+**Answer:**
+<a few sentences, citing your output under R1>
 ````
 
-A lab is complete when every R item (or ticket) and every V item has its evidence in your notes and every Q item has an answer. A typical lab's notes run to one or two screens per V item, not pages of raw output.
+For a ticket (`## T1`): the symptom output and your diagnosis commands go under **Commands used** and **Command output**, one hypothesis → command → result step at a time; the **Explanation** gives the root cause (device, what was wrong), the exact fix, and the "after" output that shows it fixed. Measurements go in the Explanation as a small table.
+
+A lab is complete when every R item (or ticket) and every V item has its evidence in `ANSWERS.md` and every Q item has an answer. A typical lab's answers run to one or two screens per V item, not pages of raw output.
 
 ## Working the lab, step by step
 
 1. **Read the whole LAB.md first**, including the Verification Criteria and Analysis Questions, so you know what evidence to collect as you go. Don't open `SOLUTION.md`.
 2. **Import and start the lab.** CML UI: *Import Lab* and select `LAB-NNN.yaml`; or `tools/cml-rest.sh import LAB-NNN.yaml`. Start it and wait until every node has booted. Each lab's YAML holds its full start state, so labs don't depend on your previous lab.
-3. **Confirm the Starting State** with `show` commands and save the output as your baseline.
+3. **Confirm the Starting State** with `show` commands and save the output under `## Baseline` in `ANSWERS.md`.
 4. **Do the work:** the Requirements in a build lab, the tickets in a troubleshooting lab, the questions in an analysis lab. Save evidence as you go, not afterwards.
-5. **Prove every V item** and write it into your notes.
+5. **Prove every V item** and write the evidence into the R section it belongs to.
 6. **Answer every Analysis Question** in writing, using your own output as the argument.
 7. **Now open `SOLUTION.md`** and compare (next section).
-8. **Clean up.** Stop the lab when you're done. Wipe or delete it if you need the server resources; you can always import a fresh copy.
+8. **Optionally, have your answers graded** (see "Grading your answers").
+9. **Clean up.** Stop the lab when you're done. Wipe or delete it if you need the server resources; you can always import a fresh copy.
 
 ## Using SOLUTION.md
 
@@ -159,6 +149,10 @@ Open it only after steps 1–6. Reading it earlier turns the lab into copying, e
 | Lab Info | Last-modified date, CML version and node images |
 
 Your output won't match the captured output character for character. Counters, uptimes, timestamps, MAC addresses, hash-based choices and measured times vary between runs. What must match is the state: the neighbours, routes, roles, next hops and pass/fail results. Output marked `(derived)` was worked out rather than captured.
+
+## Grading your answers
+
+The pack root holds a `CLAUDE.md`: grading instructions for Claude Code. Open Claude Code in the pack folder and ask it to grade a lab, for example "grade LAB-017". It reads the lab's `ANSWERS.md` (or, if that is blank, other notes in the lab folder, and says which file it graded) and writes its review to `GRADING.md` in the same folder, newest review at the top under a dated heading, older reviews kept. It grades by what would help or hurt on the exam, not by how closely you followed `SOLUTION.md`, which it doesn't treat as automatically right. The review lists, in order: what would cost exam marks (each rated High, Medium or Low and tied to a blueprint objective), gaps to study, what is already exam-ready, and briefly, any skipped steps or missing output.
 
 ## Troubleshooting labs (T) and milestones (M)
 

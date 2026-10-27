@@ -131,7 +131,7 @@ ip route vrf BLUE 10.0.1.0 255.255.255.0 10.0.213.0 200
 ```
 
 ## Verification
-Captured during the build (CML 2.10.0, iol-xe); lines trimmed.
+Captured in a test run (CML 2.10.0, iol-xe); lines trimmed.
 - R1 `show ip ospf 2 neighbor`: FULL on Ethernet0/0.10 and Ethernet0/3.10; global `show ip ospf neighbor`: FULL on Ethernet0/0 and Ethernet0/3 (coexistence of global and per-VRF OSPF on one port).
 - R1 `show ip route vrf RED`: `O 10.0.3.0/24 [110/30] via 10.0.112.1, Ethernet0/0.10`. `show ip route vrf BLUE`: `S 10.0.3.0/24 [1/0] via 10.0.212.1`. `show ip route | include 10.0.[13].0/24`: empty.
 - Pings PC1-PC3, PC2-PC4, PC3-PC1, PC4-PC2 all answered (ttl 42).

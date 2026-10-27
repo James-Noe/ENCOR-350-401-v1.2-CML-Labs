@@ -1,6 +1,6 @@
 # LAB-073 BUILD.md - recorded `csdwan` build (no YAML)
 
-SD-WAN labs are not exported or re-imported (the export carries a non-empty `smart_annotations` PATty tag). Run this procedure from scratch. Reference build: CML 2.10.0, csdwan 3.2.1, SD-WAN 20.16.1.
+This lab has no YAML to import (CML cannot re-import an exported SD-WAN lab), so you build it from scratch with this procedure. Tested with: CML 2.10.0, csdwan 3.2.1, SD-WAN 20.16.1.
 
 ## 0. Preconditions
 ```

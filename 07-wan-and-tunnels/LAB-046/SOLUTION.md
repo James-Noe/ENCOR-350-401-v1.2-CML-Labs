@@ -56,7 +56,7 @@ Cleanup / end state: R2 `no ip mtu` on Ethernet0/1 and `ip unreachables` on Ethe
 
 ## Verification
 
-Captured on the re-imported lab (statics stage, then OSPF stage):
+Captured on a fresh import (statics stage, then OSPF stage):
 
 ```
 R1# show interfaces tunnel0 | include Tunnel0 is|Tunnel protocol|transport MTU|Tunnel source
@@ -78,11 +78,11 @@ Tunnel0 is up, line protocol is up
 ```
 Capture on R3 Ethernet0/0 (decoded): `10.0.12.0 > 10.0.23.0 proto=47 len=108 off=0 GRE[inner 10.0.1.101 > 10.0.3.101 proto=1 len=84 DF]`; reply `10.0.23.0 > 10.0.12.0 proto=47 len=108`.
 
-MTU (R5), from the build:
+MTU (R5), from a test run:
 - Baseline: R1 DF ping from Ethernet0/1 size 1476 works, 1477 fails; 1500 non-DF works (fragmented).
 - R2 `ip mtu 1300`, no PMTUD: capture shows R2 fragmenting the GRE packets (`len=172 MF off=0` then `len=1300 off=152`), PC1 `-s 1400` 3/3.
 - With PMTUD: outer header has DF; R2 sends `ICMP type=3 code=4`; R1 DF ping 1276 works, 1277 fails; TCP 100 kB works.
-- Black hole (`no ip unreachables` on R2 Ethernet0/0, PMTU reset, PC1 cache flushed): PC1 `ping -s 56` 3/3, `-s 1200` 3/3, `-s 1250` 0/3, `-s 1400` 0/3; 100000-byte nc transfer: `0 /tmp/rx1` at the receiver after 20 s (reproduced on the re-imported lab: 3/3, 0/3, 0 bytes). Boundary: inner IP 1276 passes, 1277 does not.
+- Black hole (`no ip unreachables` on R2 Ethernet0/0, PMTU reset, PC1 cache flushed): PC1 `ping -s 56` 3/3, `-s 1200` 3/3, `-s 1250` 0/3, `-s 1400` 0/3; 100000-byte nc transfer: `0 /tmp/rx1` at the receiver after 20 s (reproduced on a fresh import: 3/3, 0/3, 0 bytes). Boundary: inner IP 1276 passes, 1277 does not.
 - Fixes on a 1300 path: `ip mtu 1400` + MSS 1360: TCP stalls; MSS 1260: TCP stalls; `ip mtu 1400` + MSS 1236: TCP works but `-s 1250` 0/3; `ip mtu 1276` + MSS 1236: TCP 100000 bytes OK, `-s 1250` 2/3 (first lost) and `-s 1400` 3/3 (R1 fragments before encapsulation), R1 DF 1276 OK, 1277 fails.
 - Final state (R2 restored, PMTUD removed, 1400/1360): PC1 `-s 1400` 2/3 (first lost), `-s 1472` 3/3; R1 DF ping 1400 3/3, 1401 0/3.
 

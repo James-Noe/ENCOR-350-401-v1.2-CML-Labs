@@ -4,7 +4,7 @@
 
 Closes module 07 on one network: the lite HQ campus (H3 lite, 6 nodes), the data centre (DC min, 2), the edge (E3 min, 2), the WAN (W4 with BR1 collapsed, 7) and a cabled but unconfigured BR3 (1): 18 nodes. Three change requests (CR1 onboard BR3 behind a carrier PAT, CR2 AAA and time over MGMT, CR3 eBGP replacing static provider routing) and three multi-cause tickets (TK1 OPS cannot reach the branches, TK2 voice and the NOC's path complaint, TK3 BR2 SSH from MGMT) are worked inside one 240-minute window.
 
-Blueprint mapping (instructor only): 2.2.a (VRF-lite, MGMT), 2.2.b (GRE/IPsec site-to-site, NAT-T), 3.1.a (802.1Q allowed-VLAN list, found through the STP path, 3.1.c), 3.2.b (OSPF filtering, ABR), 3.2.c (eBGP CE–PE), 3.2.d (policy routing with tracking), 3.3.b (NAT/PAT), 4.1 (logs, EEM evidence), 4.4 (IP SLA), 1.4 (QoS: shaping and queuing, F5 and TK2), 5.1.b (AAA), 5.2.a (VTY access control).
+Blueprint mapping: 2.2.a (VRF-lite, MGMT), 2.2.b (GRE/IPsec site-to-site, NAT-T), 3.1.a (802.1Q allowed-VLAN list, found through the STP path, 3.1.c), 3.2.b (OSPF filtering, ABR), 3.2.c (eBGP CE–PE), 3.2.d (policy routing with tracking), 3.3.b (NAT/PAT), 4.1 (logs, EEM evidence), 4.4 (IP SLA), 1.4 (QoS: shaping and queuing, F5 and TK2), 5.1.b (AAA), 5.2.a (VTY access control).
 
 **Build notes:**
 - Tunnel mode fails across BR3's PAT (`Failed to find a matching policy`, line protocol down). Tunnel23 and BR3's MGMT tunnel Tunnel93 use the transport-mode profile `VPN-PROF-NAT` at both ends (as in LAB-053). LAB.md does not say which mode: the student finds it.
@@ -225,9 +225,9 @@ BR1 and BR2 also `no ntp server 203.0.113.129 key 1`; HQ-WAN1 last: `no ntp mast
 
 ## Verification
 
-Captured from the re-imported `ENCOR MS-3` lab (start state, then the solution scripts above applied) and from the build.
+Captured on a fresh import of the lab (start state, then the solution scripts above applied) and in an earlier test run.
 
-**Start state (V-symptoms at boot, re-imported lab):**
+**Start state (V-symptoms at boot, fresh import):**
 ```
 HQ-WAN1# show ip route 10.10.20.0
 % Subnet not in table
@@ -327,7 +327,7 @@ V9 in LAB.md uses 30 s to drop and 60 s to return (worst measured 26.1 s and 26.
 
 **Q4.** The call (EF, 300 kb/s) must be tested against the saturating upload (UDP 3 Mb/s against a 2 Mb/s circuit): without it the loss is invisible (0.2 % conditioning). Before the fixes: calls on the tunnel, 30-70 % lost under the upload; after F4: on the provider line; after F5: queued correctly (priority class). The shaper/queue on the Internet circuit, the SLA target and the track state are visible only when the provider path fails (the drill): the call must move to the Internet path in at most 25 s and then lose at most 5 %.
 
-**Q5.** The branches take time from HQ-WAN1 (`ntp master 3`); if HQ-WAN1 stops being the master or repoints before it is synchronised to DC-RTR1, the branches are left with a stratum-16 source. So the branches are repointed to 10.50.50.1 through MGMT first, HQ-WAN1 last (the build's order). Any order that keeps every branch on a synchronised source (`sys.peer`) until its new source is selected is accepted, for example HQ-WAN1 syncing to DC-RTR1 first while keeping `ntp master`, the branches adding DC-RTR1 as a second source, and `no ntp master` last; the check is last because a router needs minutes to select a new source (`show ntp associations` `sys.peer`, 36 minutes in the build, up to 45 minutes allowed in LAB.md). AAA is checked with `test aaa group RADGRP …` and the DC-AAA1 log, plus the local fallback.
+**Q5.** The branches take time from HQ-WAN1 (`ntp master 3`); if HQ-WAN1 stops being the master or repoints before it is synchronised to DC-RTR1, the branches are left with a stratum-16 source. So the branches are repointed to 10.50.50.1 through MGMT first, HQ-WAN1 last (the order used in testing). Any order that keeps every branch on a synchronised source (`sys.peer`) until its new source is selected is accepted, for example HQ-WAN1 syncing to DC-RTR1 first while keeping `ntp master`, the branches adding DC-RTR1 as a second source, and `no ntp master` last; the check is last because a router needs minutes to select a new source (`show ntp associations` `sys.peer`, 36 minutes in testing, up to 45 minutes allowed in LAB.md). AAA is checked with `test aaa group RADGRP …` and the DC-AAA1 log, plus the local fallback.
 
 **Q6.** HQ-WAN1 announces 10.10.0.0/16 and 10.50.0.0/16 (Null0 anchors and `network` statements, PE1 accepts exactly these) and redistributes the BGP-learned 10.21.0.0/16 into OSPF 1 with the route map `PROV-ROUTES` (E2); BR1 announces 10.21.0.0/16. The statics that the sessions replace are removed; the probe /31s and defaults stay. Proof: with the tunnels up users use OSPF /24s (longest match); with Tunnel21 down the BGP /16s carry traffic (AD 20 against the removed static AD 1); the EF traceroute is still 100.64.21.0 -> 100.64.10.1 and the track still follows the SLA to 100.64.10.1.
 

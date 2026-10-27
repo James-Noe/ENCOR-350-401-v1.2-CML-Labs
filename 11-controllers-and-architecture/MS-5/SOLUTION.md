@@ -2,14 +2,14 @@
 
 ## Summary
 
-The final challenge runs the whole Veridian network at once (19 nodes with the NAT connector): HQ single-core H5 lite, the E3 edge, the W3 lite WAN (hub, provider, depot), the DC block with its services, DC-FUS1 and Aster's border, and AUTO-MGMT1. Three tickets (eight faults) and four change requests that interact with them, plus a scripted compliance report. Blueprint mapping (instructor only): IPv6 first-hop security and 3.1.a, 3.1.c (TK1), 3.2.b, 3.2.c, 1.3.b, 2.2.a, 5.4.d (TK2, CR1), 5.1.b, 6.6, 4.1 (TK3), 4.4, 3.3.b, 5.2.a (CR2), 5.2.b (CR3), 1.4, 2.2.b (CR4), 6.1 (compliance script).
+The final challenge runs the whole Veridian network at once (19 nodes with the NAT connector): HQ single-core H5 lite, the E3 edge, the W3 lite WAN (hub, provider, depot), the DC block with its services, DC-FUS1 and Aster's border, and AUTO-MGMT1. Three tickets (eight faults) and four change requests that interact with them, plus a scripted compliance report. Blueprint mapping: IPv6 first-hop security and 3.1.a, 3.1.c (TK1), 3.2.b, 3.2.c, 1.3.b, 2.2.a, 5.4.d (TK2, CR1), 5.1.b, 6.6, 4.1 (TK3), 4.4, 3.3.b, 5.2.a (CR2), 5.2.b (CR3), 1.4, 2.2.b (CR4), 6.1 (compliance script).
 
 Design decisions (all in favour of teaching ENCOR):
 - **F7 is an RA-guard host policy, not an IPv6 ACL.** ioll2-xe rejects `ipv6 traffic-filter` on trunk and access ports (`% Invalid input`). It accepts and enforces `ipv6 nd raguard policy HOST-RA-BLOCK` (`device-role host`) with `ipv6 nd raguard attach-policy` on L2 ports, which is IPv6 first-hop security and in the blueprint's reach. F7 is that policy on all five HQ-ACC1 ports including the uplinks e0/0 and e0/1. **There are no drop counters** (`show ipv6 nd raguard policy` lists the targets only), so TK1's evidence path is the host capture, the policy's target list and the port configuration, not an ACL deny count. LAB.md says "RA guard policy HOST-RA-BLOCK".
 - **The destination group comes from the ingress VRF's mapping (F8).** DC-FUS1 looks up the source and the destination group in the VRF the packet arrives in. Measured: removing the SHARED copy of 10.50.51.0/24 leaves office 10 to 50 permitted; removing the CORP and IOT copies (SHARED kept) makes the ping pass with no cell counted (destination unknown). So the CORP and IOT copies matter, SHARED's is idle; all three are kept in the start state.
 - **Causality of F7-only and F8-only is derived, not run.** F1-only-fixed was run (IPv4 back, no IPv6 default). F7-only-fixed with F1 present was not re-run: root guard still blocks VLAN 10 (derived; the start state shows 100 % IPv4 loss). F8-only-fixed was not run: before F3 and F4 VRF IOT has no route to 10.50.51.1 (derived); F3 and F4 were each shown alone, and F8 with F3 and F4 fixed.
 - **F3 is the absence of `no passive-interface Ethernet0/2`** under OSPF 1 (the E3 DC-RTR1 already runs `passive-interface default`); same effect as an added `passive-interface` line and a more natural production mistake.
-- **`capability vrf-lite` on `router ospf 50 vrf SHARED` (FUS1) belongs in DC-FUS1's start configuration.** The student is not expected to know this knob: CR1 is about the restricted route-target leak, not about OSPF-in-VRF PE behaviour. The line is in DC-FUS1's start config in `MS-5.yaml` (` capability vrf-lite` under `router ospf 50 vrf SHARED`); the line survives day-0 (confirmed at every boot of the v1.5 build: `capability vrf-lite` in `show running-config` on the cold-booted lab). It was first validated as a manual CR1 step. MS-5's start config therefore deliberately differs from the FAB F-H/F3 stage file `environments/FAB/.../DC-FUS1.cfg` by this one line (the stage file is unchanged). Background (why the line is needed, measured on the original build): With F3 fixed, the VRF OSPF process still ignores Veridian's inter-area prefixes: `show ip ospf 50 database summary 10.10.10.0` still lists the LSA (`Options: (No TOS-capability, DC, Upward)`; `Upward` means the DN bit is clear), but the process does not use it: an OSPF process in a VRF acts as a PE, i.e. as an ABR attached to the MPLS VPN superbackbone, and an ABR does not use type-3 summary LSAs learned in a non-backbone area (FUS1 has only area 50). Intra-area 10.50.51.0/24 is installed, the inter-area Veridian prefixes are not. `capability vrf-lite` turns these PE checks off. LAB.md gives no hint and, with the line in the start config, needs none; the `show ip ospf 50` header lines ("Connected to MPLS VPN Superbackbone", area border router) are the trail. Measured on DC-FUS1 (only F3 fixed):
+- **`capability vrf-lite` on `router ospf 50 vrf SHARED` (FUS1) belongs in DC-FUS1's start configuration.** The student is not expected to know this knob: CR1 is about the restricted route-target leak, not about OSPF-in-VRF PE behaviour. The line is in DC-FUS1's start config in `MS-5.yaml` (` capability vrf-lite` under `router ospf 50 vrf SHARED`); the line survives day-0 (confirmed at every boot: `capability vrf-lite` in `show running-config` on the cold-booted lab). It was first validated as a manual CR1 step. MS-5's start config therefore deliberately differs from the FAB F-H/F3 stage file `environments/FAB/.../DC-FUS1.cfg` by this one line (the stage file is unchanged). Background (why the line is needed, measured on the original build): With F3 fixed, the VRF OSPF process still ignores Veridian's inter-area prefixes: `show ip ospf 50 database summary 10.10.10.0` still lists the LSA (`Options: (No TOS-capability, DC, Upward)`; `Upward` means the DN bit is clear), but the process does not use it: an OSPF process in a VRF acts as a PE, i.e. as an ABR attached to the MPLS VPN superbackbone, and an ABR does not use type-3 summary LSAs learned in a non-backbone area (FUS1 has only area 50). Intra-area 10.50.51.0/24 is installed, the inter-area Veridian prefixes are not. `capability vrf-lite` turns these PE checks off. LAB.md gives no hint and, with the line in the start config, needs none; the `show ip ospf 50` header lines ("Connected to MPLS VPN Superbackbone", area border router) are the trail. Measured on DC-FUS1 (only F3 fixed):
 
 ```
 Before capability vrf-lite:
@@ -65,7 +65,7 @@ Wrong fixes: removing root guard or lowering the DIST priorities below 4096 (V2)
 
 ## Solution Configuration
 
-Each block is a config block (no `configure terminal`), proven on the original lab and again on the re-imported lab.
+Each block is a config block (no `configure terminal`), proven on two separate imports of the lab.
 
 ### TK1 / TK2 / TK3 fixes
 
@@ -327,7 +327,7 @@ Run it before the fixes (`deviation_count 1`: BR1-RTR1, login at privilege 1; th
 
 ## Verification
 
-Captured on the v1.3 build (v1.3 items) and on the v1.4/v1.5 build (F7, F8, CR4, V9, V10, V5 and AAA timings; the same configuration otherwise). Outputs marked (derived) were not run.
+Captured in two test runs: run A (most items) and run B (F7, F8, CR4, V9, V10, V5 and AAA timings; the same configuration otherwise). Outputs marked (derived) were not run.
 
 **Tickets (V1, V2, V3).**
 ```
@@ -340,7 +340,7 @@ FAB-BDR1: show ip route vrf CORP|IOT | include ^B -> B 10.50.51.0/24 [20/0] via 
 HQ-CORE1: show ip route 10.60.10.0 -> Known via "ospf 1" ... type extern 2, Last update from 10.10.255.131 on Ethernet1/1
 BR1-PC1: ping 10.50.51.1 -> 0% packet loss (66-70 ms: the conditioned circuit)
 ```
-**F7 and F8 (v1.4/v1.5 build).**
+**F7 and F8 (run B).**
 ```
 Start state: HQ-PC1 ping 10.10.10.1 -> 100% packet loss ; ip -6 route -> 2001:db8:10:10::/64, fe80::/64 only
 HQ-ACC1: show ipv6 nd raguard policy -> HOST-RA-BLOCK (device-role host) on Et0/0, Et0/1, Et0/3, Et1/0, Et1/1
@@ -353,7 +353,7 @@ F8 fixed: ping vrf IOT 3/3 ; telnet 10.50.51.1 22 /vrf IOT /source-interface Loo
 ```
 (ping -6 and tcpdump are the evidence for F7: there is no drop counter. IOT-only checks use Loopback20 as source.)
 
-Each fix cleared its own symptom when applied alone (F1: 0 % loss after 11 s on the v1.3 build, 25 s on the v1.4/v1.5 build; F2: no more CDP mismatch; F3: FUS1 FULL in 8 s and the Veridian route 10.60.10.0/24 back on CORE1; F4: `B 10.50.51.0/24` on BDR1 CORP and IOT after 18 s).
+Each fix cleared its own symptom when applied alone (F1: 0 % loss after 11 s in run A, 25 s in run B; F2: no more CDP mismatch; F3: FUS1 FULL in 8 s and the Veridian route 10.60.10.0/24 back on CORE1; F4: `B 10.50.51.0/24` on BDR1 CORP and IOT after 18 s).
 
 **TK3.**
 ```
@@ -370,7 +370,7 @@ FAB-BDR1 CORP: B 10.10.10.0/24 [20/0] via 10.200.60.2 ; B 10.50.51.0/24 [20/0] v
 FAB-BDR1 IOT : B 10.50.51.0/24 [20/0] via 10.200.60.4        (nothing of 10.10.10.0/24)
 DC-FUS1: show bgp vpnv4 unicast all 10.10.10.0/24 -> Extended Community: RT:65010:10 (only)
 HQ-PC1: ping 10.60.10.1 -> 0% packet loss ; nc -z -w 3 10.60.10.1 22 -> OPEN ; nc 10.60.10.1 23 -> Host is unreachable
-v1.4/v1.5 build (group policy present): the same results; BDR1 CORP B 10.10.10.0/24 in 5 s; helpdesk traffic leaves the cells unchanged (0->50 denied stays 6, 10->50 permitted 4): helpdesk is an unknown source for the office group (no cell, default permit) and 10.50.51.1 stays inside SHARED, not crossing FUS1's enforcement. IOT ping to 10.50.51.1 still works
+Run B (group policy present): the same results; BDR1 CORP B 10.10.10.0/24 in 5 s; helpdesk traffic leaves the cells unchanged (0->50 denied stays 6, 10->50 permitted 4): helpdesk is an unknown source for the office group (no cell, default permit) and 10.50.51.1 stays inside SHARED, not crossing FUS1's enforcement. IOT ping to 10.50.51.1 still works
 HQ-PC1: ping 10.60.20.1 -> 100% packet loss ; ping 10.50.51.1 -> 0% packet loss
 DC-FUS1: CR1-ASTER-OUT  20 permit icmp ... echo (matches)  30 permit tcp ... eq 22 (matches)  40 deny ip any any log (matches)
 DC-FUS1: show bgp vpnv4 unicast all summary -> 10.200.60.3 and 10.200.60.5 Established after 11 and 24 minutes (ACEs 5/6 in place)
@@ -395,14 +395,14 @@ HQ-WAN1: OSPF FULL 5 ; IKEv2 READY 3 ; NTP *~10.50.50.1 reach 7
 ```
 (An earlier measurement mid-flood: ICMP exceeded 1217-3891 packets; CM-SSH 72-78 packets conformed while a netadmin SSH session from AUTO-MGMT1 to 10.10.254.11 stayed at privilege 15; CM-NTP stays 0 until the second poll; ESP is not counted separately.) The flood saturates the shared 2 Mb/s depot uplink, so a BR1-PC1 to HQ-PC1 ping during it is lost (the pipe, not the hub).
 
-**CR4 (V7 (a)), both directions at once, 60 s (EF `-S 0xb8 -b 300k -l 200`, AF31 `-S 0x68 -b 400k -l 1200`, bulk `-b 3m -l 1200`; receivers `iperf -s -u -p 5001/5002/5003 -i 30`), receiver side, v1.4/v1.5 build:**
+**CR4 (V7 (a)), both directions at once, 60 s (EF `-S 0xb8 -b 300k -l 200`, AF31 `-S 0x68 -b 400k -l 1200`, bulk `-b 3m -l 1200`; receivers `iperf -s -u -p 5001/5002/5003 -i 30`), receiver side, run B:**
 ```
 At HQ-PC1 (from BR1-PC1): EF 17/11253 lost (0.15 %), AF31 4/2503 (0.16 %), bulk 930 kb/s, 68 % loss (the shaper's share)
 At BR1-PC1 (from HQ-PC1): EF 20/11253 lost (0.18 %), AF31 4/2503 (0.16 %), bulk 930 kb/s, 68 % loss
 HQ-WAN1 CM-DEPOT: shape 2000000; CM-VOICE priority 25 %, exceed drops 0; CM-SCANNER 0 drops; child class-default 12834 drops (the bulk); parent class-default 0 drops
 BR1 PM-WAN-SHAPE: class-default 12834 drops (identical), voice and scanner 0 ; #recv errors 0 on all three SAs on both ends, no PKT_REPLAY_ERR
 ```
-Before the hub policy: HQ-PC1 to BR1-PC1 EF 56 % lost, AF31 52 %, bulk 44 % (the provider's shaper drops blindly; EF reaches the hub unchanged). Hub policy without the replay window on BR1: EF 0.13 %, AF31 0.16 %, bulk 100 % lost (9352/9378), `%CRYPTO-4-PKT_REPLAY_ERR` on BR1, `#recv errors 2949` on Tunnel21's SA. With `replay window-size 1024` on BR1 and new SAs: EF 0.21 %, AF31 0.08 %, bulk 932 kb/s, `#recv errors` 0. Packet length matters for EF: the 25 % LLQ counts wire bytes after GRE/ESP overhead, so a smaller `-l` loses more (v1.3 build: `-l 160` lost about 10 %, `-l 200` 0.25 %).
+Before the hub policy: HQ-PC1 to BR1-PC1 EF 56 % lost, AF31 52 %, bulk 44 % (the provider's shaper drops blindly; EF reaches the hub unchanged). Hub policy without the replay window on BR1: EF 0.13 %, AF31 0.16 %, bulk 100 % lost (9352/9378), `%CRYPTO-4-PKT_REPLAY_ERR` on BR1, `#recv errors 2949` on Tunnel21's SA. With `replay window-size 1024` on BR1 and new SAs: EF 0.21 %, AF31 0.08 %, bulk 932 kb/s, `#recv errors` 0. Packet length matters for EF: the 25 % LLQ counts wire bytes after GRE/ESP overhead, so a smaller `-l` loses more (run A: `-l 160` lost about 10 %, `-l 200` 0.25 %).
 
 **CR4 (V7 (b)), edge-path failure active, load toward the depot running (HQ-PC1 EF/AF31/bulk for 100 s, EDGE1-ISP1 `link stop`, CORE1 default from 10.255.10.41 within 17 s):**
 ```
@@ -414,9 +414,9 @@ The trap is removed and PM-HUB-OUT restored after the test.
 
 **V8.** `compliance` after: 0 deviations on 8 devices (netadmin at privilege 15 everywhere); before: `deviation_count 1` (BR1-RTR1: `login succeeds at privilege 1: running configuration unreadable ...`), 7 devices compliant, DC-FUS1 and FAB-BDR1 out of scope. The count goes from 1 to 0 with the F5 fix. DC-AAA1 stopped: `admin` / `Cisco123!` logs in on BR1, HQ-WAN1 and HQ-CORE1 after the RADIUS dead-criteria (first login 12-13 s, later logins 2-3 s while the server stays marked dead); DC-AAA1 started: `netadmin` works again on CORE1 and BR1 within 9 s of the poll start, HQ-WAN1 one poll later (all three by about 30 s).
 
-**V9 (v1.4/v1.5 build).** CORE1 e0/3 + EDGE1 e0/1 `shutdown`, then `no shutdown`: `more unix:/gw-evidence.txt` holds `Track 11 Reachability is Down` / `Timeout`, then after `no shutdown` `Up` / `OK` (return to Up 7-13 s). Delete the file with `delete /force unix:/gw-evidence.txt` before each run (the `unix:/` form: `unix:gw-evidence.txt` is "No such file", and a leftover file makes `--until` match at once).
+**V9 (run B).** CORE1 e0/3 + EDGE1 e0/1 `shutdown`, then `no shutdown`: `more unix:/gw-evidence.txt` holds `Track 11 Reachability is Down` / `Timeout`, then after `no shutdown` `Up` / `OK` (return to Up 7-13 s). Delete the file with `delete /force unix:/gw-evidence.txt` before each run (the `unix:/` form: `unix:gw-evidence.txt` is "No such file", and a leftover file makes `--until` match at once).
 
-**End state (v1.4/v1.5 build).** HQ-PC1 ping 10.10.10.1, `ping -6` Internet host, 192.0.2.200, 10.50.51.1 and BR1-PC1: 0 % loss; DIST1/DIST2 inconsistent ports 0; DIST1 RAs every 4 s, lifetime 12 s; ACC1 native 999 on both uplinks, `ipv6 nd raguard attach-policy` on Et0/3, Et1/0, Et1/1 only; no new NATIVE_VLAN_MISMATCH lines; FUS1 cells 0->50 denied 6, 10->50 permitted 4, 20->50 denied 4 / permitted 5.
+**End state (run B).** HQ-PC1 ping 10.10.10.1, `ping -6` Internet host, 192.0.2.200, 10.50.51.1 and BR1-PC1: 0 % loss; DIST1/DIST2 inconsistent ports 0; DIST1 RAs every 4 s, lifetime 12 s; ACC1 native 999 on both uplinks, `ipv6 nd raguard attach-policy` on Et0/3, Et1/0, Et1/1 only; no new NATIVE_VLAN_MISMATCH lines; FUS1 cells 0->50 denied 6, 10->50 permitted 4, 20->50 denied 4 / permitted 5.
 
 ## Failure / Recovery Behaviour
 
@@ -426,10 +426,10 @@ Failure methods: V5 is a **silent failure** (`link stop` on HQ-EDGE1 e0/0 to PRO
 
 | Scenario (trigger -> end condition) | Runs (raw) | Documented range | Basis |
 |---|---|---|---|
-| V5 `link stop` EDGE1-ISP1 -> HQ-PC1 reaches 192.0.2.200 again (ping -i 1, lost pings = seconds) | lost 17, 16, 16 s (v1.3 build: 18, 17, 14) | 12-22 s (requirement: 30 s) | EDGE1 SLA 10 freq 5 + track `delay down 5`, then OSPF flush; CORE1 re-learns the hub default |
-| V5 return: `link start` -> CORE1 default `from 10.255.10.31` again (no loss) | 45 (first call includes the session start), 33, 33 s (v1.3 build: 30-35, 33, 33) | 24-50 s, measured from the end of the `link start` call | EDGE1 track `delay up 30`: the 30 s timer starts at the first good probe, which can precede the end of the REST call (other runs: 25, 31, 24 s) |
+| V5 `link stop` EDGE1-ISP1 -> HQ-PC1 reaches 192.0.2.200 again (ping -i 1, lost pings = seconds) | lost 17, 16, 16 s (run A: 18, 17, 14) | 12-22 s (requirement: 30 s) | EDGE1 SLA 10 freq 5 + track `delay down 5`, then OSPF flush; CORE1 re-learns the hub default |
+| V5 return: `link start` -> CORE1 default `from 10.255.10.31` again (no loss) | 45 (first call includes the session start), 33, 33 s (run A: 30-35, 33, 33) | 24-50 s, measured from the end of the `link start` call | EDGE1 track `delay up 30`: the 30 s timer starts at the first good probe, which can precede the end of the REST call (other runs: 25, 31, 24 s) |
 | CR2 hub path failed (`link stop` WAN1-INET1) -> `show track 20` Down / `link start` -> Up (a scripted CLI poll every 2 s) | Down after 5, 3, 3 s; Up after 8, 8, 8 s (include one poll interval) | Down about 14-15 s (range about 10-20 s), Up about 16-18 s (about 10-25 s); take the times from the router's `%TRACK-6-STATE` timestamps, not from a polling session whose connect time hides the delay (other runs: Down 14, 15, 14 s; Up 16, 18, 16 s) | SLA 20 freq 5 with the default 5 s timeout, `delay down 5 up 10` |
-| V9 cable pull CORE1 e0/3 + EDGE1 e0/1 `shutdown` -> `unix:/gw-evidence.txt` exists | 2, 2, 4 s (an 8 s run was discarded: stale file; v1.3 measured 7 s) | 2-10 s | SLA 11 frequency and the EEM trigger; return to Up 7-13 s after `no shutdown` |
+| V9 cable pull CORE1 e0/3 + EDGE1 e0/1 `shutdown` -> `unix:/gw-evidence.txt` exists | 2, 2, 4 s (an 8 s run was discarded: stale file; run A measured 7 s) | 2-10 s | SLA 11 frequency and the EEM trigger; return to Up 7-13 s after `no shutdown` |
 | V10 DIST1 (GLBP AVG, VLAN 10 root) silent total loss (`link stop` x4 in parallel) -> PC1 IPv4 gateway ping restored | lost 4, 4, 5 s | 3-8 s | ACC1 RSTP ages the silent uplink BPDU; failback loses about 1 ping |
 | V10 DIST1 same trigger -> PC1 `ping -6 -i 1 2001:db8:f001:200::200` restored | lost 11, 12, 9 s | 8-14 s | the preferred default router's 12 s RA lifetime must expire; the surviving default is DIST2's (the F7 trap never recovers) |
 | V10 DIST2 silent total loss -> IPv4 and IPv6 | IPv4 0, 0, 0 s; IPv6 3, 4, 0 s | IPv4 0-1 s; IPv6 0-4 s | **IPv4, CML artefact:** the VLAN 10 STP root DIST1 routes frames addressed to either GLBP MAC (CML platform behaviour, see LAB-075). On hardware a host holding DIST2's forwarder MAC would lose connectivity until DIST1 takes over that forwarder, about the GLBP hold time `(derived)`, so 0 s is not a hardware expectation. **IPv6, ECMP return path:** HQ-CORE1 holds two OSPFv3 paths to the user /64 (via DIST1 and via DIST2), so the Internet host's return traffic hashes onto either; flows returning via the lost DIST2 stay broken until OSPFv3 declares it dead, so the loss depends on the hash (0 s if the flow hashes to DIST1) |
@@ -437,7 +437,7 @@ Failure methods: V5 is a **silent failure** (`link stop` on HQ-EDGE1 e0/0 to PRO
 
 V9 takes 2-4 s after the second shutdown. Failure of both stacks is timed because the RA lifetime, not the STP time, sets the IPv6 outage.
 
-The student's flood run must not overlap CR2's backup. The hub path was also failed on its own (CR2 branch above) with exactly one syslog message per change on DC-SYSLOG1 (v1.4/v1.5 build: 7 lines in all, `HUB-BACKUP-ON` at install 05:46:30 then OFF/ON pairs at 06:21:30 / 06:21:50 and so on, all through VRF MGMT).
+The student's flood run must not overlap CR2's backup. The hub path was also failed on its own (CR2 branch above) with exactly one syslog message per change on DC-SYSLOG1 (run B: 7 lines in all, `HUB-BACKUP-ON` at install 05:46:30 then OFF/ON pairs at 06:21:30 / 06:21:50 and so on, all through VRF MGMT).
 
 ## Answers to Analysis Questions
 
@@ -451,7 +451,7 @@ The student's flood run must not overlap CR2's backup. The hub path was also fai
 
 **Q5.** Pre-change: record `show spanning-tree inconsistentports`, BGP prefix counts per VRF, the compliance report, the track table. Post-change: the same set plus an end-to-end test from each user VLAN and a source-specific ping to the shared service from both Aster VRFs; run the compliance script as a gate; check the log for `%CDP-4-NATIVE_VLAN_MISMATCH` and `%SPANTREE-2-ROOTGUARD_BLOCK` after every switch replacement.
 
-**Instructor debrief.** *Why TK2 needed two fixes:* the shared service reaches Aster by OSPF (DC-RTR1 to FUS1), then BGP redistribution with an export map; the adjacency (F3) and the prefix filter (F4) are different stages of the same path, and the second symptom only appears when the first clears. *Why IPv4 came back after the STP fix and IPv6 did not (TK1):* the router advertisement is the IPv6 gateway mechanism; the host-port RA guard was applied to the uplinks too, so the DISTs' RAs were dropped on entry to ACC1. *Why the F7 shortcut fails only for DIST1:* removing the guard on the forwarding uplink still lets DIST2's RAs through, so PC1 has two default routers; when DIST1 dies ACC1 forwards on the guarded alternate and the surviving router's RAs no longer arrive. *Why the office came back and the scanners did not (TK2):* the group lookup uses the ingress VRF's mapping, so scanner traffic entered VRF IOT unclassified and met the unknown-source cell (the unknown-source case of the group policy turned into a deny). *Why CR4 needs the hub:* the provider's shaper at INET1 drops blindly, so the priority queue has to exist upstream, per depot, without taking HQ's backup Internet into the queue; the shaper's reordering then needs the replay window on the receiver. *Why an ISP-side failure does not move the core's track:* track 11 probes EDGE1's core-facing address, which stays up when EDGE1's provider link fails; EDGE1's own track 10 and the OSPF default handle that failure, and only a core-to-edge cable pull moves track 11.
+**Debrief.** *Why TK2 needed two fixes:* the shared service reaches Aster by OSPF (DC-RTR1 to FUS1), then BGP redistribution with an export map; the adjacency (F3) and the prefix filter (F4) are different stages of the same path, and the second symptom only appears when the first clears. *Why IPv4 came back after the STP fix and IPv6 did not (TK1):* the router advertisement is the IPv6 gateway mechanism; the host-port RA guard was applied to the uplinks too, so the DISTs' RAs were dropped on entry to ACC1. *Why the F7 shortcut fails only for DIST1:* removing the guard on the forwarding uplink still lets DIST2's RAs through, so PC1 has two default routers; when DIST1 dies ACC1 forwards on the guarded alternate and the surviving router's RAs no longer arrive. *Why the office came back and the scanners did not (TK2):* the group lookup uses the ingress VRF's mapping, so scanner traffic entered VRF IOT unclassified and met the unknown-source cell (the unknown-source case of the group policy turned into a deny). *Why CR4 needs the hub:* the provider's shaper at INET1 drops blindly, so the priority queue has to exist upstream, per depot, without taking HQ's backup Internet into the queue; the shaper's reordering then needs the replay window on the receiver. *Why an ISP-side failure does not move the core's track:* track 11 probes EDGE1's core-facing address, which stays up when EDGE1's provider link fails; EDGE1's own track 10 and the OSPF default handle that failure, and only a core-to-edge cable pull moves track 11.
 
 ## Lab Info
 

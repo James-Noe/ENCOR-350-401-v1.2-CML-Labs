@@ -21,7 +21,7 @@ T2. Partner announces: R2 holds 10.0.52-55.0/24, 10.0.48.0/24 and 10.0.59.0/24 a
 
 Causality: fix F1 only (`no ip mtu` on R4 e0/0): R4 FULL, PC2 <-> PC1 work, PC1 and PC2 -> 10.0.52.1 fail (T1 half open, T2 open). Fix F2 only: R1 gets `O IA 10.0.52.0/22 [110/21]` 1-2 s later, PC1 -> 10.0.52.1 and 10.0.55.1 work, PC1 -> 10.0.48.1 fails, PC2 still isolated.
 
-Wrong fixes (instructor, each tried once):
+Wrong fixes (each tried once):
 - `ip ospf mtu-ignore` on R4 e0/0 (F1 left at 1400): FULL at once, small PC2 -> PC1 ping works, but `ping 10.0.34.3 size 1500 df-bit` and `ping 10.0.1.101 size 1500 df-bit` from R4 are 0/3. Fails V3. PC pings carry no DF bit (busybox ping has none; `-s 1472` fragments), so the full-size test must be a router DF ping.
 - Thursday's list (only `deny 10.0.59.0/24`): R1 holds the 10.0.48.0/24 type-3 but its HQ-IN keeps it out of the RIB; PC1 -> 10.0.48.1 fails (every HQ test passes), but R3/R4 get `O IA 10.0.48.0/24` and PC2 -> 10.0.48.1 works: fails V1/V3 from the branch.
 - Removing `area 2 filter-list prefix PARTNER-LAB out`: /22 appears at once, but R1, R3, R4 also get 10.0.59.0/24 and the 10.0.48.0/24 type-3; PC1 -> 10.0.59.1 and PC2 -> 10.0.48.1/10.0.59.1 work: leaks, fails V1/V2.

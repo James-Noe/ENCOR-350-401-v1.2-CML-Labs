@@ -47,7 +47,7 @@ policy-map PM-COPP
 control-plane
  service-policy input PM-COPP
 ```
-If the measuring policy from step (1) is still attached (called `PM-MEAS` in the build), remove it first: under `control-plane` enter `no service-policy input PM-MEAS`, then `service-policy input PM-COPP`. Only one input policy can be attached, and attaching on top gives `Policy map PM-MEAS is already attached`.
+If the measuring policy from step (1) is still attached (called `PM-MEAS` here), remove it first: under `control-plane` enter `no service-policy input PM-MEAS`, then `service-policy input PM-COPP`. Only one input policy can be attached, and attaching on top gives `Policy map PM-MEAS is already attached`.
 
 Class order is the match order (routing, management, undesirable, ICMP, default). Notes: `drop` is not accepted as a class action on iol-xe (`% Invalid input`); `police ... conform-action drop exceed-action drop` is the form. The routing class transmits both ways so it has counters but is never dropped. SSH needs burst: `cir 32000` with the default bc (1000 B) dropped the RSA key-exchange packets and every login timed out; `bc 8000` fixed it.
 

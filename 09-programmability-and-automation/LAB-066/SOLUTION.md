@@ -54,11 +54,11 @@ R2/V2 hex of one copy (`-XX`, frame 148 bytes; the outer frame is RTR3's L2 wire
 0x0030: 0000 5254 0045 aef9 5254 008c 3f5b 0800   index 0; inner Ethernet dst 5254.0045.aef9 (PC2), src 5254.008c.3f5b (RTR4 Gi2)
 0x0040: 4500 0054 6b9d 4000 3d01 8a8d 0a5a 0a65   inner IP, ICMP, 10.90.10.101 > 10.90.40.102, TTL 61
 ```
-Overhead = IP 20 + GRE 8 (flags, type, sequence) + ERSPAN II 8 = 36 bytes, plus the outer Ethernet 14 on the wire: a 98-byte inner frame (84-byte IP echo) becomes 134 bytes of IP and a 148-byte frame (matches). tshark 4.2.2 (build lab) shows `ERSPAN Type II`, Vlan 1, SpanID 66, Truncated 0. ERSPAN type III is not configurable on this platform.
+Overhead = IP 20 + GRE 8 (flags, type, sequence) + ERSPAN II 8 = 36 bytes, plus the outer Ethernet 14 on the wire: a 98-byte inner frame (84-byte IP echo) becomes 134 bytes of IP and a 148-byte frame (matches). tshark 4.2.2 (test run) shows `ERSPAN Type II`, Vlan 1, SpanID 66, Truncated 0. ERSPAN type III is not configurable on this platform.
 
-R3/V3 (build lab, 3 pings): both directions give 6 ICMP copies (3 requests, 3 replies); `rx` gives 3, all type 0 echo replies, because the port faces PC2 and what the router receives on it is what PC2 sends (replies, DHCP, its own SYN-ACK). Requests to PC2 leave Gi2, so they are `tx`. V4: with `permit tcp any host 10.90.40.102 eq 22` on `both`, one `nc 10.90.40.102 22` from PC1 gave 5 copies, all TCP 22, none for ping or port 80.
+R3/V3 (test run, 3 pings): both directions give 6 ICMP copies (3 requests, 3 replies); `rx` gives 3, all type 0 echo replies, because the port faces PC2 and what the router receives on it is what PC2 sends (replies, DHCP, its own SYN-ACK). Requests to PC2 leave Gi2, so they are `tx`. V4: with `permit tcp any host 10.90.40.102 eq 22` on `both`, one `nc 10.90.40.102 22` from PC1 gave 5 copies, all TCP 22, none for ping or port 80.
 
-R4/V5 (build lab; ping payloads 1372 / 1422 / 1472 = IP 1400 / 1450 / 1500):
+R4/V5 (test run; ping payloads 1372 / 1422 / 1472 = IP 1400 / 1450 / 1500):
 
 | IP size | Copy wire size | State |
 |---|---|---|
@@ -78,7 +78,7 @@ Method: a one-ended failure at the analyser (`ip link set ens2 down` on MGMT1); 
 | MGMT1 `ip link set ens2 up` -> first GRE copy in `tcpdump -tt` on MGMT1 (same host clock) | 3.9, 2.5, 5.5 s (server busy); 0.9, 1.8, 1.5 s (quieter); 0.94, 0.57, 0.08 s | 0.1-6 s | link settle plus up to about 1 s until the next PC1-PC2 packet (ping interval 1 s); measured on a loaded server, so the upper bound is generous |
 | Loss of PC1 to PC2 pings during the analyser outage (3 runs, ping at 1 s) | 0, 0, 0 lost | 0 | mirroring is stateless: the source keeps sending, the data path is separate |
 
-During the outage RTR4's session stays Admin Enabled, its Gi1 output counter keeps rising and nothing is reported to the source (GRE has no feedback). RTR3's ARP entry for 10.90.50.31 stayed cached (27 min age), so copies keep being forwarded into the void; an incomplete ARP appears only after the entry is cleared (`clear ip arp` on RTR3 coincided with a console hang in the build: avoid). One observation from the build lab, not reproduced: a 10-minute PC1-PC2 outage with OSPF loss on RTR3 and 94 % QFP load while LAB-065 was running on the same server (host contention, not a lab behaviour). Q4 (CPU) was measured separately: see the answer.
+During the outage RTR4's session stays Admin Enabled, its Gi1 output counter keeps rising and nothing is reported to the source (GRE has no feedback). RTR3's ARP entry for 10.90.50.31 stayed cached (27 min age), so copies keep being forwarded into the void; an incomplete ARP appears only after the entry is cleared (`clear ip arp` on RTR3 coincided with a console hang in testing: avoid). One observation from a test run, not reproduced: a 10-minute PC1-PC2 outage with OSPF loss on RTR3 and 94 % QFP load while LAB-065 was running on the same server (host contention, not a lab behaviour). Q4 (CPU) was measured separately: see the answer.
 
 ## Answers to Analysis Questions
 

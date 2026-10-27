@@ -193,7 +193,7 @@ Method: stopping a node is a silent failure (no interface down on the neighbour)
 | Scenario (trigger -> end condition) | Runs (raw) | Documented range | Basis |
 |---|---|---|---|
 | `no snmp-server location` on RTR1 (config block) -> line back on RTR1 (device clock) | 32.7 s, 41.8 s, 41.8 s; 21 s, 27 s, 46 s | 1-65 s | watchdog ticks every 60 s, so repair = uniformly 0-60 s after removal plus 1-2 s run time (not 60-120 s) |
-| RTR1 node stop -> `std.yml` ends with `failed=1 "timed out"` | 1 run: about 15 s (15:25:07 -> 15:25:22, build lab; the re-run here ended 16:12:30, start time not recorded) | 10-30 s | paramiko connect timeout; failure is `failed=1`, not `unreachable=1` |
+| RTR1 node stop -> `std.yml` ends with `failed=1 "timed out"` | 1 run: about 15 s (15:25:07 -> 15:25:22, first run; a second run ended 16:12:30, start time not recorded) | 10-30 s | paramiko connect timeout; failure is `failed=1`, not `unreachable=1` |
 | RTR1 node start -> BOOTED | 13 s, 12 s | 10-20 s | image boot; applet survives because it is in the saved startup config |
 
 Q4 (CPU busy) was not measured; it is answered from the EEM design (below). The applet survives a node stop only if the configuration was saved first.

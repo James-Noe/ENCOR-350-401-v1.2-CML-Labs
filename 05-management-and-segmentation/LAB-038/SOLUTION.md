@@ -12,7 +12,7 @@
 | F4 | HQ-CORE2 | `logging trap warnings` | with F3 fixed, no login (`%SEC_LOGIN-5`, `%SSH-5`) or config events |
 | F5 | HQ-ACC3 | `ntp trusted-key 2` (key 1 is the one in use) | `10.50.50.1 configured ... authenticated (' ' reject) ... insane, invalid, unsynced, stratum 16`, `assoc in/out packets 0` |
 
-Platform notes: `line vty 0 4` (this platform rejects `0 15`; IOL only: IOS-XE routers and switches have lines 0-15 by default, so configure `line vty 0 15` there), and F1 refuses at TCP connect instead of closing before authentication; T1 therefore says "refuses the connection". The v1.1 F1 ACL loaded as entered (no normalisation, no fallback needed).
+Platform notes: `line vty 0 4` (this platform rejects `0 15`; IOL only: IOS-XE routers and switches have lines 0-15 by default, so configure `line vty 0 15` there), and F1 refuses at TCP connect instead of closing before authentication; T1 therefore says "refuses the connection". The F1 ACL loaded as entered (no normalisation, no fallback needed).
 
 ## Diagnosis / Methodology
 **T1.** NMS1 pings both management addresses and `show ip route vrf MGMT` is complete on both cores: path eliminated. Logins on the other devices work and DC-AAA1's console shows the auditors' successful logins: server and account eliminated as a common cause.
@@ -66,7 +66,7 @@ End state (all five fixed):
 Start state (restored; identical on a fresh import): CORE1 `Connection refused`, `20 permit 10.50.50.48, wildcard bits 0.0.0.7`, `snmpget` to CORE1 `Timeout: No Response` (CORE2 answers), `show running-config | section line vty` has `vrf-also`; CORE2/DIST1/ACC1/2/3 privilege 1; DIST2 netops `Connection closed`, admin privilege 15; DIST2 `State: current DEAD`; CORE2 `Trap logging: level warnings`, no `(MGMT)`; no 10.10.99.3 lines at the collector; ACC3 `~10.50.50.1 .INIT./.TIME. 16 ... reach 0`, `ntp trusted-key 2`.
 
 ## Failure / Recovery Behaviour
-Failure method: DC-AAA1 and DC-SYSLOG1 node stops are silent failures for the routers (the link stays up; only timeouts detect them). Timings below were measured in v1.1 (CML 2.10.0, 3 runs unless noted; clock = a scripted CLI poll with `show clock` or the outer wall clock).
+Failure method: DC-AAA1 and DC-SYSLOG1 node stops are silent failures for the routers (the link stays up; only timeouts detect them). Timings below were measured on CML 2.10.0 (, 3 runs unless noted; clock = a scripted CLI poll with `show clock` or the outer wall clock).
 
 | Scenario (trigger, end condition) | Runs (raw) | Documented range | Basis |
 |---|---|---|---|
@@ -86,7 +86,7 @@ Q2. Compare the same stanza on every device: `section aaa group server`, `loggin
 Q3. DC-AAA1's console shows whether requests arrived and the result (`Login OK`, `ACCT Start nas=...`), and the collector shows what really arrived; a device only shows what it sent or timed out.
 Q4. Pings in `vrf MGMT`, SNMP to CORE2 and local `admin` on DIST2 worked: the routing and the fallback were fine; only the services' own VRF binding was wrong.
 Q5. After any change: SSH as `netops` and `admin` to every device from DC-NMS1, from HQ-PC1 expect refusal, `show aaa servers` state, a `send log 5` test seen at the collector, `show ntp associations` with `*` and `authenticated`.
-Instructor debrief: the auditors' CORE1 sessions match line 40 (`deny any log`): line 20 as written covers 10.50.50.48-.55 (DC-SYSLOG1 .51, DC-AAA1 .52), not NMS1 at .60. The poller failed through the same change because the SNMP group `access MGMT-HOSTS` uses the same ACL. Checking `vrf-also` (LAB-037's case) does not explain the ticket: it is present, SNMP also fails, and the counter moves (without `vrf-also` the counter stays still). Wrong fix 2 above shows the VTY binding alone never covered the SNMP half. SNMP works on CORE2 because replies leave in the VRF the request arrived in, while syslog is initiated by the device and uses the global table unless told otherwise. DIST2 accepted `admin` because with the server marked dead the method list fell back to local. A trusted-key mismatch is harder to spot than a wrong key string because the key is present and the client simply never sends (no packets in/out). 
+Debrief: the auditors' CORE1 sessions match line 40 (`deny any log`): line 20 as written covers 10.50.50.48-.55 (DC-SYSLOG1 .51, DC-AAA1 .52), not NMS1 at .60. The poller failed through the same change because the SNMP group `access MGMT-HOSTS` uses the same ACL. Checking `vrf-also` (LAB-037's case) does not explain the ticket: it is present, SNMP also fails, and the counter moves (without `vrf-also` the counter stays still). Wrong fix 2 above shows the VTY binding alone never covered the SNMP half. SNMP works on CORE2 because replies leave in the VRF the request arrived in, while syslog is initiated by the device and uses the global table unless told otherwise. DIST2 accepted `admin` because with the server marked dead the method list fell back to local. A trusted-key mismatch is harder to spot than a wrong key string because the key is present and the client simply never sends (no packets in/out). 
 
 ## Lab Info
 

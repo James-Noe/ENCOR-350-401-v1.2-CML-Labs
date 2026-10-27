@@ -61,15 +61,15 @@ Silent failure (link stop, 06:03:07): `%TRACK-6-STATE: 1 ip sla 1 reachability U
 
 On-demand: `event manager run MANUAL-EVIDENCE` wrote `unix:evidence-manual.txt`; log `%HA_EM-6-LOG: MANUAL-EVIDENCE: ...saved to unix:evidence-manual.txt`.
 
-Watchdog: `RTT-WATCH` logged at 06:06:14 (RTT 3), 06:07:14 (RTT 11), 06:08:14 (RTT 3), every 60 s; after `no event manager applet RTT-WATCH` no more lines. A watchdog timer also fires once immediately when the applet is configured (first run at configuration time), then every 60 s. In the validation 4 cycles were observed in total; the full 5 minutes was not observed, so the exact count is not claimed. Remove the applet when done, as it keeps running.
+Watchdog: `RTT-WATCH` logged at 06:06:14 (RTT 3), 06:07:14 (RTT 11), 06:08:14 (RTT 3), every 60 s; after `no event manager applet RTT-WATCH` no more lines. A watchdog timer also fires once immediately when the applet is configured (first run at configuration time), then every 60 s. In one run 4 cycles were observed in total; the full 5 minutes was not observed, so the exact count is not claimed. Remove the applet when done, as it keeps running.
 
-Start state (re-imported YAML): track 1 Up, default static distance 1 via R3, HSRP Active 110 with standby 10.0.10.3, SLA 1 OK, no EEM policies, no evidence files, PC1 pings 10.0.100.3.
+Start state (fresh import): track 1 Up, default static distance 1 via R3, HSRP Active 110 with standby 10.0.10.3, SLA 1 OK, no EEM policies, no evidence files, PC1 pings 10.0.100.3.
 
 ## Failure / Recovery Behaviour
 
 - Silent failure R1 e0/0 – R3 e0/0: track Down within about 10 s (frequency 5, timeout 2 s; taken from the LAB-026 measurement for the same SLA, not timed again in this lab); both applets ran once.
 - Link start: track 1 Up at 06:04:32 (`delay up 30`); no further run, files unchanged (applets are keyed to `state down`, no duplicate capture).
-- R1 was wiped and restarted afterwards; start checks matched.
+- R1 was wiped and restarted afterwards; start-state checks matched.
 
 ## Answers to Analysis Questions
 

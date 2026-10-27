@@ -75,7 +75,7 @@ Captured in CML (MACs in that build: SW1 aabb.cc00.7400, SW2 .7500; they differ 
    Bpdu filter is enabled by default
    BPDU: sent 57, received 0
 ```
-The sent counter was still 57 at the next check (the edge port stopped sending BPDUs). The uplink Ethernet0/1 has no filter line and keeps exchanging BPDUs: on an access uplink the **received** counter rises while sent stays flat (`BPDU: sent 12, received 75`; validation: sent 12, received 87 → 128). SW3 Et1/0: `Bpdu filter is enabled by default`, `BPDU: sent 94, received 0`. Explanation expected from the student: the global filter applies only to ports that are operationally PortFast ("by default"); such a port sends a few BPDUs at link-up, then stops. If it receives a BPDU, it stops the default filtering and processes BPDUs normally (normal spanning tree); on this platform it keeps its `portfast mode` / Edge label (here BPDU guard, also configured on the port, would err-disable it first). The behaviour on BPDU receipt was captured on SW4 Et0/1 (`spanning-tree portfast trunk`, no port bounce).
+The sent counter was still 57 at the next check (the edge port stopped sending BPDUs). The uplink Ethernet0/1 has no filter line and keeps exchanging BPDUs: on an access uplink the **received** counter rises while sent stays flat (`BPDU: sent 12, received 75`; another run: sent 12, received 87 → 128). SW3 Et1/0: `Bpdu filter is enabled by default`, `BPDU: sent 94, received 0`. Explanation expected from the student: the global filter applies only to ports that are operationally PortFast ("by default"); such a port sends a few BPDUs at link-up, then stops. If it receives a BPDU, it stops the default filtering and processes BPDUs normally (normal spanning tree); on this platform it keeps its `portfast mode` / Edge label (here BPDU guard, also configured on the port, would err-disable it first). The behaviour on BPDU receipt was captured on SW4 Et0/1 (`spanning-tree portfast trunk`, no port bounce).
 
 **R2.** SW3 `show spanning-tree interface Ethernet0/1 detail`:
 ```
@@ -102,8 +102,8 @@ VLAN0020  Et0/0  Root FWD 100  128.1  P2p
           Et0/1  Root BKN*100  128.2  P2p *LOOP_Inc
 ```
 
-Which VLANs get a `LOOPGUARD_BLOCK` log line varies between runs (the validation run logged VLAN0020 and VLAN0099); expect one or more lines. `show spanning-tree inconsistentports` is the authoritative evidence (3 entries).
-In the run captured above only the VLAN0010 line appeared in the log buffer although three VLANs were blocked (in the validation run it was VLAN0020 and VLAN0099), which is why the inconsistent-ports table, not the log, is the evidence to quote. VLAN 20, whose root port was Et0/1, failed over to Et0/0 (via SW1). SW2 Et0/1 for every VLAN: `designated forwarding`, `Bpdu filter is enabled`, sent counter frozen: SW2 forwards on its side, so only SW3's loop guard stops a loop. PC1 continuous ping across the test: `400 packets transmitted, 400 packets received, 0% packet loss`. After removing the filter: `%SPANTREE-2-LOOPGUARD_UNBLOCK: Loop guard unblocking port Ethernet0/1 on VLAN0010.`, inconsistent 0, blocked ports back to the start pattern.
+Which VLANs get a `LOOPGUARD_BLOCK` log line varies between runs (another run logged VLAN0020 and VLAN0099); expect one or more lines. `show spanning-tree inconsistentports` is the authoritative evidence (3 entries).
+In the run captured above only the VLAN0010 line appeared in the log buffer although three VLANs were blocked (in another run it was VLAN0020 and VLAN0099), which is why the inconsistent-ports table, not the log, is the evidence to quote. VLAN 20, whose root port was Et0/1, failed over to Et0/0 (via SW1). SW2 Et0/1 for every VLAN: `designated forwarding`, `Bpdu filter is enabled`, sent counter frozen: SW2 forwards on its side, so only SW3's loop guard stops a loop. PC1 continuous ping across the test: `400 packets transmitted, 400 packets received, 0% packet loss`. After removing the filter: `%SPANTREE-2-LOOPGUARD_UNBLOCK: Loop guard unblocking port Ethernet0/1 on VLAN0010.`, inconsistent 0, blocked ports back to the start pattern.
 
 **R4.** SW3 right after configuration listed both neighbours as `Unknown` (`Total number of bidirectional entries displayed: 0`), about a minute later:
 ```
@@ -135,7 +135,7 @@ Afterwards `show interfaces status err-disabled` is empty and the blocked ports 
 
 **R3** is the failure test (above): loop guard blocked SW3 Et0/1 for all three VLANs; no loop, no ping loss; automatic release when BPDUs returned.
 
-**V6 — one-sided shutdown of SW1 Ethernet0/1** (SW3 Et0/0 stays up/up): with a ping already running, PC1 loses about 4–6 s of pings right after the shutdown (validation: 24 pings at 0.2 s) while BPDUs age out; after that there is no further loss.
+**V6 — one-sided shutdown of SW1 Ethernet0/1** (SW3 Et0/0 stays up/up): with a ping already running, PC1 loses about 4–6 s of pings right after the shutdown (another run: 24 pings at 0.2 s) while BPDUs age out; after that there is no further loss.
 ```
 SW1 21:55:35.501 %LINK-5-CHANGED: Interface Ethernet0/1, changed state to administratively down
 SW3 21:55:38.201 %SPANTREE-2-LOOPGUARD_BLOCK: Loop guard blocking port Ethernet0/0 on VLAN0010.
